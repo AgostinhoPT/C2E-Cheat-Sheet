@@ -204,10 +204,6 @@
         \addplot[thick, blue!90] {x^2 - 1};
         \addplot[thick, blue!90] {x^2};
         \addplot[thick, blue!90] {x^2 + 1};
-        \node[above right, blue!90, font=\tiny] at (axis cs:1.1, -0.79) {$C=-2$};
-        \node[above right, blue!90, font=\tiny] at (axis cs:1.1, 0.21) {$C=-1$};
-        \node[above right, blue!90, font=\tiny] at (axis cs:1.1, 1.21) {$C=0$};
-        \node[above right, blue!90, font=\tiny] at (axis cs:1.1, 2.21) {$C=1$};
       \end{axis}
     \end{tikzpicture}
   \end{center}
@@ -241,50 +237,35 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
 \subsection{Resolução de EDOs de 1.ª Ordem}
 
 \begin{theorembox}{EDO Linear de 1.ª Ordem}
-  EDO da forma $y' + g(x) y = f(x)$ onde $g$ e $f$ são contínuas. Resolve-se pelo \textbf{Método do Fator Integrante}:
+  EDO da forma $y' + g(x) y = f(x)$ onde $g$ e $f$ são contínuas. \\ Resolve-se pelo \textbf{Método do Fator Integrante}:
   \begin{enumerate}
     \item Fator integrante: $\mu(x) = e^{G(x)} = e^{\int g(x) \dx}$ onde $G(x) = \int g(x) \dx$.
     \item Multiplica-se a EDO por $\mu(x)$: $(\mu(x) y)' = \mu(x) f(x)$.
-    \item Solução geral:
-    \[
-      y(x) = \frac{1}{\mu(x)} \left[ \int \mu(x) f(x) \dx + C \right]
-    \]
+    \item Solução geral: $y(x) = \frac{1}{\mu(x)} \left[ \int \mu(x) f(x) \dx + C \right]$.
   \end{enumerate}
   \textbf{Exemplo Prático (Slide 1):} $t y' + (1+t)y = 2$ para $t > 0$.
   \begin{enumerate}
     \item Forma padrão: $y' + \frac{1+t}{t}y = \frac{2}{t} \implies g(t) = 1 + \frac{1}{t}$ e $f(t) = \frac{2}{t}$.
     \item Fator integrante: $\mu(t) = e^{\int \left(1 + \frac{1}{t}\right) \dd t} = e^{t + \ln t} = t e^t$.
-    \item Multiplicar por $\mu(t)$: $(t e^t y)' = t e^t \cdot \frac{2}{t} = 2 e^t$.
-    \item Integrando: $t e^t y = \int 2 e^t \dd t + C = 2 e^t + C \implies y(t) = \frac{2}{t} + \frac{C}{t} e^{-t}$.
+    \item Multiplicar por $\mu(t)$: $(t e^t y)' = 2 e^t$.
+    \item Integrando: $t e^t y = 2 e^t + C \implies y(t) = \frac{2}{t} + \frac{C}{t} e^{-t}$.
   \end{enumerate}
 \end{theorembox}
 
 \begin{theorembox}{EDO de Variáveis Separáveis}
-  EDO da forma $h(y) \frac{\dd y}{\dd x} = g(x)$ (ou escrito sob a forma do slide $\frac{\dd y}{h(y)\dd x} = g(x)$), onde $g$ e $h$ são contínuas:
-  \[
-    \int h(y) \dd y = \int g(x) \dx + C \implies H(y) = G(x) + C
-  \]
-  \textbf{Aviso de Perda de Soluções:} No processo de divisão para separar variáveis, assumindo $h(y) \neq 0$, podem perder-se soluções constantes (singulares).
+  EDO da forma $h(y) \frac{\dd y}{\dd x} = g(x)$, onde $g$ e $h$ são contínuas: $\int h(y) \dd y = \int g(x) \dx + C \implies H(y) = G(x) + C$.
   
-  \textbf{Exemplo Prático  (Slide 1):} Resolver a EDO $y' - 3y = 0$:
+  \textbf{Aviso de Perda de Soluções:} 
+  
+  No processo de divisão para separar variáveis, assumindo $h(y) \neq 0$, podem perder-se soluções constantes (singulares).
+  
+  \textbf{Exemplo Prático (Slide 1):} Resolver a EDO $y' - 3y = 0$:
   \begin{enumerate}
-    \item \textbf{Separar as variáveis}: Escrevemos $y' = 3y \implies \frac{\dd y}{\dd x} = 3y$. Assumimos $y \neq 0$ ao dividir por $y$:
-    \[
-      \frac{1}{y} \dd y = 3 \dd x
-    \]
-    \item \textbf{Integrar ambos os membros}:
-    \[
-      \int \frac{1}{y} \dd y = \int 3 \dd x \implies \ln|y| = 3x + C_1 \quad (C_1 \in \R)
-    \]
-    \item \textbf{Resolver em ordem a $y$}: Aplicamos a exponencial a ambos os membros:
-    \[
-      |y| = e^{3x + C_1} = e^{C_1} e^{3x} \implies y(x) = \pm e^{C_1} e^{3x}
-    \]
-    \item \textbf{Definir a constante geral}: Sendo $e^{C_1}$ sempre positivo, a constante $C_0 = \pm e^{C_1}$ nunca se anula ($C_0 \neq 0$). A solução geral obtida pelo método é:
-    \[
-      y(x) = C_0 e^{3x} \quad (\text{com } C_0 \neq 0)
-    \]
-    \item \textbf{Análise da Solução Perdida}: A função constante $y(x) = 0$ é solução da EDO original (pois $0' - 3(0) = 0$), mas foi perdida no Passo 1 ao assumirmos $y \neq 0$. Ela é uma \textbf{solução singular} do método (pois não provém da fórmula geral restringida a $C_0 \neq 0$). No entanto, se alargarmos a constante para $C_0 \in \R$, a solução singular fica englobada na expressão geral.
+    \item Separar as variáveis: $y' = 3y \implies \frac{1}{y} \dd y = 3 \dd x$.
+    \item Integrar ambos os membros: $\int \frac{1}{y} \dd y = \int 3 \dd x \implies \ln|y| = 3x + C_1$.
+    \item Resolver em ordem a $y$: $|y| = e^{C_1} e^{3x} \implies y(x) = \pm e^{C_1} e^{3x}$.
+    \item Definir a constante geral: $y(x) = C_0 e^{3x}$ (com $C_0 \neq 0$).
+    \item Análise da Solução Perdida: A função constante $y(x) = 0$ é solução da EDO original, mas foi perdida ao assumirmos $y \neq 0$. Ela é uma \textbf{solução singular}. Se alargarmos a constante para $C_0 \in \R$, a solução singular fica englobada na expressão geral.
   \end{enumerate}
 \end{theorembox}
 
@@ -297,8 +278,10 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
     \item $k < 0$: Decaimento exponencial (ex: decaimento radioativo).
     \item \textbf{Meia-vida ($T_{1/2}$):} Tempo necessário para a quantidade decair para metade da inicial:
     \begin{align*}
-      y(T_{1/2}) = \frac{1}{2}y(0) &\iff y(0)e^{k T_{1/2}} = \frac{1}{2}y(0) \iff e^{k T_{1/2}} = \frac{1}{2} \\
-      &\iff k T_{1/2} = \ln\left(\frac{1}{2}\right) = -\ln 2 \iff k = - \frac{\ln 2}{T_{1/2}}
+      y(T_{1/2}) = \frac{1}{2}y(0) &\iff y(0)e^{k T_{1/2}} = \frac{1}{2}y(0) \\
+      &\iff e^{k T_{1/2}} = \frac{1}{2} \\
+      &\iff k T_{1/2} = \ln\left(\frac{1}{2}\right) = -\ln 2 \\
+      &\iff k = - \frac{\ln 2}{T_{1/2}}
     \end{align*}
   \end{itemize}
   \textbf{Exemplo 1 (Plutónio-239):} Sabendo que $T_{1/2} = 24100$ anos, quanto tempo demoram $10$\,gr a decair para $1$\,gr?
@@ -323,6 +306,8 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
     \item $T(t) = 51 \implies 51 = 21 + 74 e^{kt} \implies e^{kt} = \frac{30}{74} = \frac{15}{37} \implies t = \frac{\ln(15/37)}{\ln(32/37)} \approx 6.2 \text{ minutos}$.
   \end{enumerate}
 \end{formulabox}
+
+\newpage
 
 \subsection{Campos de Direções e Métodos Numéricos}
 \begin{itemize}
@@ -435,6 +420,8 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
     \end{tikzpicture}
   \end{center}
 \end{theorembox}
+
+\newpage
 
 
 % ==========================================
