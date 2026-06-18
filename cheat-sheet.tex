@@ -19,6 +19,9 @@
 \usepackage{physics}    % Útil para diferenciais (dx, dy), derivadas, gradientes, etc.
 \usepackage{cancel}     % Para simplificações de frações e termos
 \usepackage{bm}         % Negrito em símbolos matemáticos
+\usepackage{pgfplots}   % Criação de gráficos matemáticos
+\pgfplotsset{compat=1.18}
+
 
 % ==========================================
 % Layout, Margens e Multicolunas
@@ -182,6 +185,32 @@
   \textbf{Ordem:} É a ordem da maior derivada envolvida na equação.\\
   \textbf{Solução:} Função que satisfaz a EDO num certo aberto $I$ (pode ser explícita ou implícita).\\
   \textbf{Curva Integral:} O gráfico de uma solução da EDO. Uma solução geral produz uma família de curvas integrais.
+  \begin{center}
+    \begin{tikzpicture}[scale=1]
+      \begin{axis}[
+        domain=-2:2,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        title={\small Família de Curvas Integrais: $y' = 2x \implies y = x^2 + C$},
+        width=5.5cm, height=5cm,
+        tick label style={font=\tiny},
+        label style={font=\tiny},
+        title style={font=\tiny\bfseries\color{primaryColor}},
+        axis line style={gray, -stealth},
+        ymin=-3, ymax=3
+      ]
+        \addplot[thick, blue!90] {x^2 - 2};
+        \addplot[thick, blue!90] {x^2 - 1};
+        \addplot[thick, blue!90] {x^2};
+        \addplot[thick, blue!90] {x^2 + 1};
+        \node[above right, blue!90, font=\tiny] at (axis cs:1.1, -0.79) {$C=-2$};
+        \node[above right, blue!90, font=\tiny] at (axis cs:1.1, 0.21) {$C=-1$};
+        \node[above right, blue!90, font=\tiny] at (axis cs:1.1, 1.21) {$C=0$};
+        \node[above right, blue!90, font=\tiny] at (axis cs:1.1, 2.21) {$C=1$};
+      \end{axis}
+    \end{tikzpicture}
+  \end{center}
 \end{definitionbox}
 
 \begin{definitionbox}{Classificação das Soluções}
@@ -192,6 +221,8 @@
     \item \textbf{Solução Estável ou de Equilíbrio:} Solução constante da EDO (i.e., $y(t) = c \implies y' = 0$).
   \end{itemize}
 \end{definitionbox}
+
+\newpage
 
 \subsection{Problema de Valor Inicial (PVI)}
 A solução geral de uma EDO de ordem $n$ apresenta $n$ constantes arbitrárias. Para concretizar uma solução particular, define-se um PVI:
@@ -207,7 +238,7 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
   Se $f(x, y)$ e $\frac{\partial f}{\partial y}$ forem contínuas num retângulo aberto contendo $(x_0, y_0)$, então o PVI tem uma única solução $y(x)$ definida numa vizinhança de $x_0$.
 \end{theorembox}
 
-\subsection{Resolução Analítica de EDOs de 1.ª Ordem}
+\subsection{Resolução de EDOs de 1.ª Ordem}
 
 \begin{theorembox}{EDO Linear de 1.ª Ordem}
   EDO da forma $y' + g(x) y = f(x)$ onde $g$ e $f$ são contínuas. Resolve-se pelo \textbf{Método do Fator Integrante}:
@@ -235,7 +266,26 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
   \]
   \textbf{Aviso de Perda de Soluções:} No processo de divisão para separar variáveis, assumindo $h(y) \neq 0$, podem perder-se soluções constantes (singulares).
   
-  \textbf{Exemplo Prático (Slide 1):} $y' - 3y = 0 \implies \frac{1}{y} \dd y = 3 \dd x \implies \ln|y| = 3x + C \implies y(x) = \pm e^C e^{3x} = C_0 e^{3x}$ (com $C_0 \neq 0$). Contudo, $y(x) = 0$ é também solução da EDO original, tendo sido perdida ao dividir por $y$. Esta é uma solução singular (não incluída na geral para $C_0 \neq 0$, a menos que $C_0 \in \R$).
+  \textbf{Exemplo Prático  (Slide 1):} Resolver a EDO $y' - 3y = 0$:
+  \begin{enumerate}
+    \item \textbf{Separar as variáveis}: Escrevemos $y' = 3y \implies \frac{\dd y}{\dd x} = 3y$. Assumimos $y \neq 0$ ao dividir por $y$:
+    \[
+      \frac{1}{y} \dd y = 3 \dd x
+    \]
+    \item \textbf{Integrar ambos os membros}:
+    \[
+      \int \frac{1}{y} \dd y = \int 3 \dd x \implies \ln|y| = 3x + C_1 \quad (C_1 \in \R)
+    \]
+    \item \textbf{Resolver em ordem a $y$}: Aplicamos a exponencial a ambos os membros:
+    \[
+      |y| = e^{3x + C_1} = e^{C_1} e^{3x} \implies y(x) = \pm e^{C_1} e^{3x}
+    \]
+    \item \textbf{Definir a constante geral}: Sendo $e^{C_1}$ sempre positivo, a constante $C_0 = \pm e^{C_1}$ nunca se anula ($C_0 \neq 0$). A solução geral obtida pelo método é:
+    \[
+      y(x) = C_0 e^{3x} \quad (\text{com } C_0 \neq 0)
+    \]
+    \item \textbf{Análise da Solução Perdida}: A função constante $y(x) = 0$ é solução da EDO original (pois $0' - 3(0) = 0$), mas foi perdida no Passo 1 ao assumirmos $y \neq 0$. Ela é uma \textbf{solução singular} do método (pois não provém da fórmula geral restringida a $C_0 \neq 0$). No entanto, se alargarmos a constante para $C_0 \in \R$, a solução singular fica englobada na expressão geral.
+  \end{enumerate}
 \end{theorembox}
 
 \subsection{Modelos de Crescimento, Decaimento e Temperatura}
@@ -245,7 +295,11 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
   \begin{itemize}
     \item $k > 0$: Crescimento exponencial (ex: juros, populações, vírus).
     \item $k < 0$: Decaimento exponencial (ex: decaimento radioativo).
-    \item \textbf{Meia-vida ($T_{1/2}$):} Tempo para decair a metade: $y(T_{1/2}) = \frac{1}{2}y(0) \implies k = - \frac{\ln 2}{T_{1/2}}$.
+    \item \textbf{Meia-vida ($T_{1/2}$):} Tempo necessário para a quantidade decair para metade da inicial:
+    \begin{align*}
+      y(T_{1/2}) = \frac{1}{2}y(0) &\iff y(0)e^{k T_{1/2}} = \frac{1}{2}y(0) \iff e^{k T_{1/2}} = \frac{1}{2} \\
+      &\iff k T_{1/2} = \ln\left(\frac{1}{2}\right) = -\ln 2 \iff k = - \frac{\ln 2}{T_{1/2}}
+    \end{align*}
   \end{itemize}
   \textbf{Exemplo 1 (Plutónio-239):} Sabendo que $T_{1/2} = 24100$ anos, quanto tempo demoram $10$\,gr a decair para $1$\,gr?
   \[
@@ -275,6 +329,61 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
   \item \textbf{Campo de Direções:} Representação gráfica em malha bidimensional dos declives (inclinações) das curvas integrais dados por $y' = f(x, y)$ nos pontos $(x, y)$. Permite visualizar qualitativamente as soluções. Exemplo: $y' = y - x$.
 \end{itemize}
 
+\begin{center}
+  \begin{minipage}{0.5\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.9]
+      \begin{axis}[
+        view={0}{90},
+        domain=-2:2,
+        y domain=-2:2,
+        samples=9,
+        axis lines=middle,
+        xlabel={$x$},
+        ylabel={$y$},
+        title={\small Campo de Direções: $y' = y - x$},
+        width=6.5cm, height=6.5cm,
+        tick label style={font=\tiny},
+        label style={font=\small},
+        title style={font=\small\bfseries\color{primaryColor}},
+        axis line style={gray, -stealth}
+      ]
+        \addplot3[
+          blue!80!black,
+          quiver={
+            u={1/sqrt(1 + (y-x)^2)},
+            v={(y-x)/sqrt(1 + (y-x)^2)},
+            scale arrows=0.2
+          },
+          -stealth,
+          samples=9
+        ] {0};
+      \end{axis}
+    \end{tikzpicture}
+  \end{minipage}%
+  \begin{minipage}{0.5\textwidth}
+    \centering
+    \small
+    \textbf{Tabela de Declives ($y' = y - x$):}
+    \vspace{0.5em}
+    
+    \begin{tabular}{cc|c}
+      \hline
+      $x$ & $y$ & $y' = y - x$ \\
+      \hline
+      $0$ & $0$ & $0$ \\
+      $1$ & $0$ & $-1$ \\
+      $-1$ & $0$ & $1$ \\
+      $0$ & $1$ & $1$ \\
+      $0$ & $-1$ & $-1$ \\
+      $1$ & $1$ & $0$ \\
+      $2$ & $1$ & $-1$ \\
+      $1$ & $2$ & $1$ \\
+      \hline
+    \end{tabular}
+  \end{minipage}
+\end{center}
+
 \begin{theorembox}{Método de Euler}
   Método numérico iterativo para aproximar a solução de um PVI $y' = f(x, y), y(x_0) = y_0$ em pontos distanciados entre si uma quantidade fixa $h > 0$ (passo):
   \begin{align*}
@@ -282,6 +391,49 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
     y_{n+1} &= y_n + h f(x_n, y_n)
   \end{align*}
   \textbf{Nota:} A qualidade da aproximação melhora progressivamente à medida que o tamanho do passo $h$ é reduzido.
+  
+  \begin{center}
+    \begin{tikzpicture}[scale=1.0]
+      % Axes
+      \draw[-stealth, thick, gray] (-0.5,0) -- (4,0) node[right, black] {\tiny $x$};
+      \draw[-stealth, thick, gray] (0,-0.5) -- (0,3.5) node[above, black] {\tiny $y$};
+      
+      % Exact curve (smooth curve)
+      \draw[blue, thick] (0.5,0.8) to[out=20, in=250] (2,2.0) to[out=70, in=200] (3.5,3.2);
+      \node[blue, right] at (3.5,3.2) {\tiny Exata $y(x)$};
+      
+      % Euler points and lines
+      \coordinate (P0) at (0.5,0.8);
+      \coordinate (P1) at (1.5,1.1);
+      \coordinate (P2) at (2.5,1.8);
+      \coordinate (P3) at (3.5,2.9);
+      
+      \draw[red, thick, mark=*] (P0) -- (P1) -- (P2) -- (P3);
+      
+      % Points labels
+      \fill[red] (P0) circle (1.5pt) node[below right, black] {\tiny $(x_0, y_0)$};
+      \fill[red] (P1) circle (1.5pt) node[below right, black] {\tiny $(x_1, y_1)$};
+      \fill[red] (P2) circle (1.5pt) node[below right, black] {\tiny $(x_2, y_2)$};
+      \fill[red] (P3) circle (1.5pt) node[below right, black] {\tiny $(x_3, y_3)$};
+      
+      % Step size labels (dashed lines)
+      \draw[dashed, gray] (0.5,0) -- (0.5,0.8);
+      \draw[dashed, gray] (1.5,0) -- (1.5,1.1);
+      \draw[dashed, gray] (2.5,0) -- (2.5,1.8);
+      \draw[dashed, gray] (3.5,0) -- (3.5,2.9);
+      
+      \node[below] at (0.5,0) {\tiny $x_0$};
+      \node[below] at (1.5,0) {\tiny $x_1$};
+      \node[below] at (2.5,0) {\tiny $x_2$};
+      \node[below] at (3.5,0) {\tiny $x_3$};
+      
+      % Horizontal arrows for step h
+      \draw[cyan, -stealth] (0.5, -0.3) -- (1.5, -0.3) node[midway, below] {\tiny $h$};
+      \draw[cyan, -stealth] (1.5, -0.3) -- (2.5, -0.3) node[midway, below] {\tiny $h$};
+      
+      \node[red, above left] at (2.5,1.8) {\tiny Euler};
+    \end{tikzpicture}
+  \end{center}
 \end{theorembox}
 
 
