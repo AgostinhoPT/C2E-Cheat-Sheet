@@ -1,0 +1,307 @@
+\documentclass[11pt,a4paper]{article}
+
+% ==========================================
+% Pacotes de Idioma e Codificação
+% ==========================================
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype} % Melhora a justificação e espaçamento do texto
+
+% ==========================================
+% Pacotes de Matemática
+% ==========================================
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{esint}      % Integrais duplos, triplos e de linha especiais
+\usepackage{physics}    % Útil para diferenciais (dx, dy), derivadas, gradientes, etc.
+\usepackage{cancel}     % Para simplificações de frações e termos
+\usepackage{bm}         % Negrito em símbolos matemáticos
+
+% ==========================================
+% Layout, Margens e Multicolunas
+% ==========================================
+\usepackage[margin=1.5cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{multicol}   % Permite organizar partes do texto em colunas
+\usepackage{enumitem}   % Controle refinado de listas (itemize/enumerate)
+\setlist{nosep}         % Remove espaços excessivos nas listas para manter compacto
+
+% ==========================================
+% Cores e Estilo Visual (Aesthetics)
+% ==========================================
+\usepackage{xcolor}
+% Cores principais (Paleta moderna, profissional e harmoniosa)
+\definecolor{primaryColor}{RGB}{20, 60, 110}   % Azul Escuro Clássico
+\definecolor{secondaryColor}{RGB}{40, 110, 95} % Verde Petróleo / Teal
+\definecolor{accentColor}{RGB}{180, 40, 30}    % Vermelho Terracota
+\definecolor{darkGray}{RGB}{60, 60, 60}
+\definecolor{lightGray}{RGB}{245, 247, 250}
+
+% ==========================================
+% Configuração de Cabeçalhos e Rodapés
+% ==========================================
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhead[L]{\small\color{darkGray}\textbf{Cálculo II} --- Folha de Resumos}
+\fancyhead[R]{\small\color{darkGray}Daniel Agostinho (n.º 65330)}
+\fancyfoot[C]{\thepage}
+
+% ==========================================
+% Formatação de Secções e Subsecções (com linhas horizontais)
+% ==========================================
+\usepackage{titlesec}
+
+% Secções (Capítulos da matéria)
+\titleformat{\section}[hang]
+  {\normalfont\Large\bfseries\color{primaryColor}}{Capítulo \thesection:}{0.5em}{}
+\titlespacing*{\section}{0pt}{15pt}{10pt}
+
+% Subsecções (separadas automaticamente por uma linha horizontal)
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{primaryColor}}{\thesubsection}{1em}{}[\vspace{0.2em}\hrule]
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+
+% Sub-subsecções
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{secondaryColor}}{\thesubsubsection}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{8pt}{4pt}
+
+% ==========================================
+% Caixas Coloridas Estruturadas (Theorems, Definitions, Rules)
+% ==========================================
+\usepackage[most]{tcolorbox}
+
+% Caixa para Definições (Teal/Greenish border)
+\newtcolorbox{definitionbox}[2][]{
+  colback=lightGray,
+  colframe=secondaryColor,
+  fonttitle=\bfseries,
+  title={Definição: #2},
+  arc=3pt,
+  left=6pt,
+  right=6pt,
+  top=6pt,
+  bottom=6pt,
+  boxrule=1.2pt,
+  #1
+}
+
+% Caixa para Teoremas / Propriedades (Blue border)
+\newtcolorbox{theorembox}[2][]{
+  colback=lightGray,
+  colframe=primaryColor,
+  fonttitle=\bfseries,
+  title={Teorema/Propriedade: #2},
+  arc=3pt,
+  left=6pt,
+  right=6pt,
+  top=6pt,
+  bottom=6pt,
+  boxrule=1.2pt,
+  #1
+}
+
+% Caixa para Fórmulas Cruciais (Red border, centered math)
+\newtcolorbox{formulabox}[2][]{
+  colback=white,
+  colframe=accentColor,
+  fonttitle=\bfseries\color{white},
+  colbacktitle=accentColor,
+  title={Fórmula Chave: #2},
+  arc=2pt,
+  left=6pt,
+  right=6pt,
+  top=6pt,
+  bottom=6pt,
+  boxrule=1pt,
+  halign=center,
+  #1
+}
+
+% ==========================================
+% Hiperligações (Carregar por último)
+% ==========================================
+\usepackage[colorlinks=true, linkcolor=primaryColor, citecolor=secondaryColor, urlcolor=secondaryColor]{hyperref}
+
+% ==========================================
+% Atalhos de Comandos Personalizados
+% ==========================================
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\dx}{\dd x}
+\newcommand{\dy}{\dd y}
+\newcommand{\dz}{\dd z}
+
+
+% ==========================================
+% Início do Documento
+% ==========================================
+\begin{document}
+
+% ------------------------------------------
+% Cabeçalho de Título Compacto
+% ------------------------------------------
+\begin{center}
+  {\Huge\bfseries\color{primaryColor} Cálculo II}\\[0.4cm]
+  {\large\bfseries Autor: Daniel Agostinho --- n.º 65330}\\[0.2cm]
+  {\large\color{darkGray} Universidade Nova de Lisboa --- FCT \quad | \quad \today}\\[0.4cm]
+  \rule{\linewidth}{1.5pt}
+\end{center}
+
+\vspace{0.5em}
+\tableofcontents
+\newpage
+
+
+% ==========================================
+% Capítulo 1: Equações Diferenciais Ordinárias
+% ==========================================
+\section{Equações Diferenciais Ordinárias}
+\label{chap:edo}
+
+\subsection{Introdução às EDOs}
+Aqui será inserida a matéria introdutória sobre Equações Diferenciais Ordinárias (definições, ordem, linearidade).
+
+\begin{definitionbox}{Equação Diferencial Ordinária (EDO)}
+  Uma Equação Diferencial Ordinária é uma equação que envolve uma função desconhecida de uma única variável independente e as suas derivadas.
+  \[
+    F\left(x, y, y', y'', \dots, y^{(n)}\right) = 0
+  \]
+\end{definitionbox}
+
+\subsection{EDOs de 1.ª Ordem}
+Espaço reservado para as equações de variáveis separáveis, lineares de 1.ª ordem, homogéneas e exatas.
+
+\begin{theorembox}{Existência e Unicidade (Teorema de Picard-Lindelöf)}
+  Seja o problema de valor inicial (PVI):
+  \[
+    \begin{cases}
+      y' = f(x, y) \\
+      y(x_0) = y_0
+    \end{cases}
+  \]
+  Se $f(x, y)$ e $\frac{\partial f}{\partial y}$ forem contínuas numa vizinhança de $(x_0, y_0)$, então o PVI tem uma solução única numa vizinhança de $x_0$.
+\end{theorembox}
+
+\begin{formulabox}{EDO Linear de 1.ª Ordem}
+  Para a EDO na forma padrão: $y' + p(x)y = q(x)$, o fator integrante é:
+  \[
+    \mu(x) = e^{\int p(x) \dx}
+  \]
+  E a solução geral é dada por:
+  \[
+    y(x) = \frac{1}{\mu(x)} \left[ \int \mu(x)q(x) \dx + C \right]
+  \]
+\end{formulabox}
+
+
+% ==========================================
+% Capítulo 2: Cónicas e Quádricas
+% ==========================================
+\section{Cónicas e Quádricas}
+\label{chap:conicas_quadricas}
+
+\subsection{Cónicas}
+Espaço para as equações gerais da elipse, hipérbole e parábola, incluindo translações e rotações de eixos.
+
+\subsection{Quádricas}
+Espaço para superfícies tridimensionais (elipsoides, hiperboloides, paraboloides, cones e cilindros).
+
+
+% ==========================================
+% Capítulo 3: Curvas e Funções Vetoriais de 1 Parâmetro
+% ==========================================
+\section{Curvas e Funções Vetoriais de 1 Parâmetro}
+\label{chap:curvas_funcoes_vetoriais}
+
+\subsection{Definição e Parametrização}
+Definições de limites, continuidade, derivadas e integrais de funções vetoriais.
+
+\subsection{Geometria Diferencial de Curvas}
+Vetor tangente unitário, vetor normal, curvatura, torção e comprimento de arco.
+
+
+% ==========================================
+% Capítulo 4: Limites e Continuidade em $\R^n$
+% ==========================================
+\section{Limites e Continuidade em \texorpdfstring{$\R^n$}{R\textasciicircum n}}
+\label{chap:limites_continuidade}
+
+\subsection{Topologia em \texorpdfstring{$\R^n$}{R\textasciicircum n}}
+Conjuntos abertos, fechados, limitados, fronteira e pontos de acumulação.
+
+\subsection{Limites Multivariáveis}
+Definição de limite, limites direcionais, limites iterados e mudança para coordenadas polares.
+
+
+% ==========================================
+% Capítulo 5: Cálculo Diferencial em $\R^n$
+% ==========================================
+\section{Cálculo Diferencial em \texorpdfstring{$\R^n$}{R\textasciicircum n}}
+\label{chap:calculo_diferencial}
+
+\subsection{Derivadas Parciais e Direcionais}
+Cálculo de derivadas parciais e a definição geral de derivada segundo um vetor.
+
+\subsection{Diferenciabilidade}
+Definição de função diferenciável, plano tangente, matriz Jacobiana e aproximações lineares.
+
+
+% ==========================================
+% Capítulo 6: Extremos Relativos e Condicionados
+% ==========================================
+\section{Extremos Relativos e Condicionados}
+\label{chap:extremos}
+
+\subsection{Extremos Livres}
+Pontos críticos, matriz Hessiana e classificação de pontos (máximo, mínimo ou sela).
+
+\subsection{Extremos Condicionados (Multiplicadores de Lagrange)}
+Otimização com restrições de igualdade utilizando multiplicadores de Lagrange.
+
+
+% ==========================================
+% Capítulo 7: Teorema da Função Implícita e Inversa
+% ==========================================
+\section{Teorema da Função Implícita e Inversa}
+\label{chap:funcao_implicita_inversa}
+
+\subsection{Teorema da Função Inversa}
+Condições para a invertibilidade local de funções de $\R^n \to \R^n$ e cálculo da derivada da inversa.
+
+\subsection{Teorema da Função Implícita}
+Existência e diferenciação de funções definidas implicitamente por sistemas de equações.
+
+
+% ==========================================
+% Capítulo 8: Integrais Duplos
+% ==========================================
+\section{Integrais Duplos}
+\label{chap:integrais_duplos}
+
+\subsection{Integração em Retângulos e Regiões Gerais}
+Definição de integral duplo e Teorema de Fubini.
+
+\subsection{Mudança de Variáveis (Coordenadas Polares)}
+Transformação de coordenadas e aplicação do Jacobiano em integrais duplos.
+
+
+% ==========================================
+% Capítulo 9: Integrais Triplos
+% ==========================================
+\section{Integrais Triplos}
+\label{chap:integrais_triplos}
+
+\subsection{Integração em Regiões Tridimensionais}
+Definição, ordem de integração e cálculo de volumes.
+
+\subsection{Mudanças de Variáveis}
+Coordenadas cilíndricas e esféricas com os respetivos Jacobianos.
+
+\end{document}
