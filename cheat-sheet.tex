@@ -175,14 +175,18 @@
 \label{chap:edo}
 
 \subsection{Introdução e Definições}
+
+Seja uma função real de variável real: $\begin{aligned}[t] y: \R &\to \R, t &\mapsto y(t) \end{aligned}$ \\
 \begin{itemize}
-  \item Seja uma função real de variável real: $\begin{aligned}[t] y: \R &\to \R \\ t &\mapsto y(t) \end{aligned}$
-  \item \textbf{Taxa de variação média} (entre $t$ e $t+h$): $\frac{y(t+h) - y(t)}{h}$ (ex: velocidade, temperatura ou concentração médias).
-  \item \textbf{Taxa de variação instantânea} (no ponto $t$): $y'(t) = \lim\limits_{h\to 0} \frac{y(t+h) - y(t)}{h}$ (ex: velocidade, temperatura ou concentração instantâneas).
+  \item \textbf{Taxa de variação média} (entre $t$ e $t+h$): \\ \centerline{$\frac{y(t+h) - y(t)}{h}$ (ex: velocidade, temperatura ou concentração médias).}
+  \vspace {1em}
+  \item \textbf{Taxa de variação instantânea} (no ponto $t$): \\ \centerline{$y'(t) = \lim\limits_{h\to 0} \frac{y(t+h) - y(t)}{h}$ (ex: velocidade, temperatura ou concentração instantâneas).}
 \end{itemize}
 
+\vspace {1em}
+
 \begin{definitionbox}{Equação Diferencial Ordinária (EDO)}
-  Uma Equação Diferencial é uma equação onde a incógnita é uma função dependente de uma ou mais variáveis ($y = y(t)$) e que envolve uma ou mais derivadas desta função.
+  Uma Equação Diferencial é uma equação onde a incógnita é uma função dependente de uma ou mais variáveis ($y = y(t)$) e que envolve uma ou mais derivadas desta função.  \\
   
   Diz-se \textbf{Ordinária (EDO)} quando a função incógnita depende de apenas uma variável independente:
   \[
@@ -190,7 +194,11 @@
   \]
   \textbf{Ordem:} É a ordem da maior derivada envolvida na equação.\\
   \textbf{Solução:} Função que satisfaz a EDO num certo aberto $I$ (pode ser explícita ou implícita).\\
-  \textbf{Curva Integral:} O gráfico de uma solução da EDO. Uma solução geral produz uma família de curvas integrais.
+  \textbf{Curva Integral:} O gráfico de uma solução da EDO.
+  
+  \vspace {0.5em}
+  
+  Uma solução geral produz uma família de curvas integrais.
   \begin{center}
     \begin{tikzpicture}[scale=1]
       \begin{axis}[
@@ -218,33 +226,44 @@
 \begin{definitionbox}{Classificação das Soluções}
   \begin{itemize}
     \item \textbf{Solução Geral:} Expressão com constantes arbitrárias que engloba todas as soluções (exceto, no máximo, um número finito). Para ordem $n$, apresenta $n$ constantes arbitrárias.
+    \vspace {0.5em}
     \item \textbf{Solução Particular:} Solução concreta obtida a partir da solução geral especificando valores para as constantes.
+    \vspace {0.5em}
     \item \textbf{Solução Singular:} Solução que não pode ser obtida a partir da geral por particularização das constantes.
-    \item \textbf{Solução Estável ou de Equilíbrio:} Solução constante da EDO (i.e., $y(t) = c \implies y' = 0$).
+    \vspace {0.5em}
+    \item \textbf{Solução Estável ou de Equilíbrio:} Solução constante da EDO (i.e. $y(t) = c \implies y' = 0$).
   \end{itemize}
 \end{definitionbox}
 
 \newpage
 
 \subsection{Problema de Valor Inicial (PVI)}
-A solução geral de uma EDO de ordem $n$ apresenta $n$ constantes arbitrárias. Para concretizar uma solução particular, define-se um PVI:
+A solução geral de uma EDO de ordem $n$ apresenta $n$ constantes arbitrárias. \\ Para concretizar uma solução particular, define-se um PVI:
 \[
   \begin{cases}
     y' = f(x, y) \\
     y(x_0) = y_0
   \end{cases}
 \]
-Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas específicas para certos tipos.
 
 \subsection{Resolução de EDOs de 1.ª Ordem}
 
-\begin{theorembox}{EDO Linear de 1.ª Ordem}
-  EDO da forma $y' + g(x) y = f(x)$ onde $g$ e $f$ são contínuas. \\ Resolve-se pelo \textbf{Método do Fator Integrante}:
+Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas específicas para certos tipos. \\
+
+\noindent\begin{theorembox}{EDO Linear de 1.ª Ordem}
+  EDO da forma $y' + g(x) y = f(x)$ onde $g$ e $f$ são contínuas.
+  
+  \vspace {1em}
+
+  Resolve-se pelo \textbf{Método do Fator Integrante}:
   \begin{enumerate}
     \item Fator integrante: $\mu(x) = e^{G(x)} = e^{\int g(x) \dx}$ onde $G(x) = \int g(x) \dx$.
     \item Multiplica-se a EDO por $\mu(x)$: $(\mu(x) y)' = \mu(x) f(x)$.
     \item Solução geral: $y(x) = \frac{1}{\mu(x)} \left[ \int \mu(x) f(x) \dx + C \right]$.
   \end{enumerate}
+
+  \vspace {1em}
+
   \textbf{Exemplo Prático:} $t y' + (1+t)y = 2$ para $t > 0$.
   \begin{enumerate}
     \item Forma padrão: $y' + \frac{1+t}{t}y = \frac{2}{t} \implies g(t) = 1 + \frac{1}{t}$ e $f(t) = \frac{2}{t}$.
@@ -255,12 +274,17 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
 \end{theorembox}
 
 \noindent\begin{theorembox}{EDO de Variáveis Separáveis}
-  EDO da forma $h(y) \frac{\dd y}{\dd x} = g(x)$, onde $g$ e $h$ são contínuas: $\int h(y) \dd y = \int g(x) \dx + C \implies H(y) = G(x) + C$.
+  EDO da forma $h(y) \frac{\dd y}{\dd x} = g(x)$, onde $g$ e $h$ são contínuas:
+
+  \centerline{$\int h(y) \dd y = \int g(x) \dx + C \implies H(y) = G(x) + C$.}
   
-  \textbf{Aviso de Perda de Soluções:} 
+  \vspace {1em}
+
+  \textbf{Aviso de Perda de Soluções:} \\
+  No processo de divisão para separar variáveis, assumindo $h(y) \neq 0$, podem perder-se soluções singulares.
   
-  No processo de divisão para separar variáveis, assumindo $h(y) \neq 0$, podem perder-se soluções constantes (singulares).
-  
+  \vspace {1em}
+
   \textbf{Exemplo Prático:} Resolver a EDO $y' - 3y = 0$:
   \begin{enumerate}
     \item Separar as variáveis: $y' = 3y \implies \frac{1}{y} \dd y = 3 \dd x$.
@@ -273,41 +297,51 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
 
 \subsection{Modelos de Crescimento, Decaimento e Temperatura}
 
-\begin{formulabox}{Modelos Exponenciais}
-  Taxa de variação proporcional à quantidade atual: $\frac{\dd y}{\dd x} = k y$ ($k \neq 0$). Solução geral: $y(x) = C e^{kx}$.
+\begin{theorembox}{Modelos Exponenciais}
+  Taxa de variação proporcional à quantidade atual: $\frac{\dd y}{\dd x} = k y$ ($k \neq 0$). \\ Solução geral: $y(x) = C e^{kx}$.
   \begin{itemize}
     \item $k > 0$: Crescimento exponencial (ex: juros, populações, vírus).
     \item $k < 0$: Decaimento exponencial (ex: decaimento radioativo).
-    \item \textbf{Meia-vida ($T_{1/2}$):} Tempo necessário para a quantidade decair para metade da inicial:
+  \end{itemize}
+
+  \vspace{1em}
+
+  \textbf{Meia-vida ($T_{1/2}$):} Tempo necessário para a quantidade decair para metade da inicial:
     \begin{align*}
       y(T_{1/2}) = \frac{1}{2}y(0) &\iff y(0)e^{k T_{1/2}} = \frac{1}{2}y(0) \\
       &\iff e^{k T_{1/2}} = \frac{1}{2} \\
       &\iff k T_{1/2} = \ln\left(\frac{1}{2}\right) = -\ln 2 \\
       &\iff k = - \frac{\ln 2}{T_{1/2}}
     \end{align*}
-  \end{itemize}
+
   \textbf{Exemplo 1 (Plutónio-239):} Sabendo que $T_{1/2} = 24100$ anos, quanto tempo demoram $10$\,gr a decair para $1$\,gr?
   \[
     k = - \frac{\ln 2}{24100} \implies 1 = 10 e^{kt} \implies \ln(0.1) = kt \implies t = \frac{\ln 0.1}{-\frac{\ln 2}{24100}} = 24100 \frac{\ln 10}{\ln 2} \approx 80058 \text{ anos}.
   \]
+
+  \vspace{1em}
+
   \textbf{Exemplo 2 (Carbono-14):} Fóssil retém $15\%$ do C-14 atual. Meia-vida $T_{1/2} = 5730$ anos. Idade da amostra:
   \[
     k = - \frac{\ln 2}{5730} \implies 0.15 = 1 \cdot e^{kt} \implies t = \frac{\ln 0.15}{k} = 5730 \frac{\ln(1/0.15)}{\ln 2} \approx 15683 \text{ anos}.
   \]
-\end{formulabox}
+\end{theorembox}
 
-\noindent\begin{formulabox}{Lei da Variação de Temperatura de Newton}
+\noindent\begin{theorembox}{Lei da Variação de Temperatura de Newton}
   A taxa de variação da temperatura $T(t)$ de um objeto é proporcional à diferença entre a sua temperatura e a temperatura constante do ambiente $T_a$:
   \[
     \frac{\dd T}{\dd t} = k(T - T_a) \implies \int \frac{\dd T}{T-T_a} = \int k \dd t \implies T(t) = T_a + C e^{kt}
   \]
-  \textbf{Exemplo 3 (Copo de Água):} Copo a $95^\circ$ em sala a $21^\circ$. Ao fim de $1$\,min, o copo está a $85^\circ$. Tempo para atingir $51^\circ$:
+
+  \vspace{1em}
+
+  \textbf{Exemplo 3 (Copo de Água):} Copo a $95^\circ$ em sala a $21^\circ$. Ao fim de $1$\,min, o copo está a $85^\circ$. Quanto tempo demora a atingir $51^\circ$:
   \begin{enumerate}
     \item $T(t) = 21 + C e^{kt} \implies T(0) = 95 \implies C = 95 - 21 = 74 \implies T(t) = 21 + 74 e^{kt}$.
     \item $T(1) = 85 \implies 85 = 21 + 74 e^{k} \implies e^k = \frac{64}{74} = \frac{32}{37} \implies k = \ln(32/37) \approx -0.145$.
     \item $T(t) = 51 \implies 51 = 21 + 74 e^{kt} \implies e^{kt} = \frac{30}{74} = \frac{15}{37} \implies t = \frac{\ln(15/37)}{\ln(32/37)} \approx 6.2 \text{ minutos}$.
   \end{enumerate}
-\end{formulabox}
+\end{theorembox}
 
 \newpage
 
