@@ -91,6 +91,8 @@
   top=6pt,
   bottom=6pt,
   boxrule=1.2pt,
+  before=\vspace{3pt},
+  after=\vspace{3pt},
   #1
 }
 
@@ -106,6 +108,8 @@
   top=6pt,
   bottom=6pt,
   boxrule=1.2pt,
+  before=\vspace{3pt},
+  after=\vspace{3pt},
   #1
 }
 
@@ -123,6 +127,8 @@
   bottom=6pt,
   boxrule=1pt,
   halign=center,
+  before=\vspace{3pt},
+  after=\vspace{3pt},
   #1
 }
 
@@ -431,11 +437,484 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
 \label{chap:conicas_quadricas}
 
 \subsection{Cónicas}
-Espaço para as equações gerais da elipse, hipérbole e parábola, incluindo translações e rotações de eixos.
 
-\subsection{Quádricas}
-Espaço para superfícies tridimensionais (elipsoides, hiperboloides, paraboloides, cones e cilindros).
+\begin{definitionbox}{Secção Cónica}
+  Uma \textbf{secção cónica} é a curva obtida através da interseção de um plano bidimensional com um cone circular reto duplo. 
+  Analiticamente, qualquer cónica no plano $xOy$ é definida por uma equação geral de segundo grau:
+  \begin{equation}
+    Ax^2 + By^2 + Cxy + Dx + Ey + F = 0 \label{eq:conica_geral}
+  \end{equation}
+  \textbf{Classificação por Termos:}
+  \begin{itemize}
+    \item \textbf{Figuras Normais ($C = 0$):} Os eixos da cónica são paralelos aos eixos coordenados. O centro ou vértice está na origem se $D = E = 0$.
+    \item \textbf{Figuras Rodadas ($C \neq 0$):} A presença do termo misto $Cxy$ indica uma rotação dos eixos da cónica em relação ao sistema $xOy$.
+  \end{itemize}
+\end{definitionbox}
 
+\subsubsection{Elipse}
+\begin{minipage}{0.58\textwidth}
+  \begin{definitionbox}{Elipse}
+    Conjunto dos pontos do plano cuja soma das distâncias a dois pontos fixos $F_1$ e $F_2$ (focos), distanciados de $2c$, é constante e igual a $2a$, com $a > c$.
+    
+    \textbf{Relação Fundamental:}
+    \begin{equation}
+      a^2 = b^2 + c^2 \label{eq:elipse_rel}
+    \end{equation}
+    Onde $a$ e $b$ são os semi-eixos maior e menor.
+    
+    \textbf{Equação Normal (Centro na Origem $O(0,0)$):}
+    \begin{equation}
+      \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1 \quad (\text{Eixo maior ao longo de } OX)
+    \end{equation}
+    \textbf{Equação Geral (Centro em $C(h,k)$):}
+    \begin{equation}
+      \frac{(x-h)^2}{a^2} + \frac{(y-k)^2}{b^2} = 1
+    \end{equation}
+    \textit{Nota:} Se $b > a$, o eixo maior é vertical ($OY$), os focos são $(h, k \pm c)$, e a relação é $b^2 = a^2 + c^2$.
+  \end{definitionbox}
+\end{minipage}
+\hfill
+\begin{minipage}{0.38\textwidth}
+  \centering
+  \begin{tikzpicture}[scale=1.1]
+    % Draw axes
+    \draw[-stealth, gray] (-2.3,0) -- (2.3,0) node[right, black] {\tiny $x$};
+    \draw[-stealth, gray] (0,-1.5) -- (0,1.5) node[above, black] {\tiny $y$};
+    
+    % Draw ellipse: a=1.8, b=1.1 => c = sqrt(3.24 - 1.21) = sqrt(2.03) \approx 1.42
+    \draw[thick, primaryColor] (0,0) ellipse (1.8cm and 1.1cm);
+    
+    % Foci
+    \coordinate (F1) at (-1.42,0);
+    \coordinate (F2) at (1.42,0);
+    \fill[accentColor] (F1) circle (1.5pt) node[below] {\tiny $F_1$};
+    \fill[accentColor] (F2) circle (1.5pt) node[below] {\tiny $F_2$};
+    
+    % Vertices
+    \fill (1.8,0) circle (1pt) node[above right] {\tiny $V_2(a,0)$};
+    \fill (-1.8,0) circle (1pt) node[above left] {\tiny $V_1$};
+    \fill (0,1.1) circle (1pt) node[above left] {\tiny $V_3(0,b)$};
+    \fill (0,-1.1) circle (1pt) node[below left] {\tiny $V_4$};
+    
+    % Right triangle representing a^2 = b^2 + c^2
+    \draw[dashed, darkGray] (0,0) -- (0,1.1) node[midway, left] {\tiny $b$};
+    \draw[dashed, darkGray] (0,0) -- (1.42,0) node[midway, below] {\tiny $c$};
+    \draw[thick, secondaryColor] (0,1.1) -- (1.42,0) node[midway, above right] {\tiny $a$};
+    
+    % Center
+    \node[below left] at (0,0) {\tiny $O$};
+  \end{tikzpicture}
+  \\[0.2cm]
+  \small\textbf{Figura 2.1:} Elementos da Elipse.
+\end{minipage}
+
+\subsubsection{Hipérbole}
+\begin{minipage}{0.58\textwidth}
+  \begin{definitionbox}{Hipérbole}
+    Conjunto dos pontos do plano cuja diferença absoluta das distâncias a dois pontos fixos $F_1$ e $F_2$ (focos), distanciados de $2c$, é constante e igual a $2a$, com $a < c$.
+    
+    \textbf{Relação Fundamental:}
+    \begin{equation}
+      c^2 = a^2 + b^2 \label{eq:hiperbole_rel}
+    \end{equation}
+    Onde $a$ é o semi-eixo real e $b$ o semi-eixo imaginário.
+    
+    \textbf{Equação Normal (Centro na Origem $O(0,0)$):}
+    \begin{equation}
+      \frac{x^2}{a^2} - \frac{y^2}{b^2} = 1 \quad (\text{Abertura horizontal, eixo real } OX)
+    \end{equation}
+    \textbf{Assíntotas:} $y = \pm \frac{b}{a} x$.
+    
+    \textbf{Equação Geral (Centro em $C(h,k)$):}
+    \begin{equation}
+      \frac{(x-h)^2}{a^2} - \frac{(y-k)^2}{b^2} = 1
+    \end{equation}
+    \textit{Nota:} Se a abertura for vertical, a equação normal é $\frac{y^2}{b^2} - \frac{x^2}{a^2} = 1$, com assíntotas $y = \pm \frac{b}{a} x$ e focos em $(0, \pm c)$.
+  \end{definitionbox}
+\end{minipage}
+\hfill
+\begin{minipage}{0.38\textwidth}
+  \centering
+  \begin{tikzpicture}[scale=1.0]
+    % Draw axes
+    \draw[-stealth, gray] (-2.5,0) -- (2.5,0) node[right, black] {\tiny $x$};
+    \draw[-stealth, gray] (0,-1.8) -- (0,1.8) node[above, black] {\tiny $y$};
+    
+    % Asymptotes: y = +/- (b/a)x. Let a=1.1, b=0.9 => c = sqrt(1.21+0.81) = sqrt(2.02) \approx 1.42
+    \draw[dashed, gray] (-2.0,-1.63) -- (2.0,1.63);
+    \draw[dashed, gray] (-2.0,1.63) -- (2.0,-1.63);
+    
+    % Auxiliary rectangle: 2a x 2b
+    \draw[dotted, darkGray] (-1.1,-0.9) rectangle (1.1,0.9);
+    \fill (1.1,0) circle (1pt) node[below right] {\tiny $V_2$};
+    \fill (-1.1,0) circle (1pt) node[below left] {\tiny $V_1$};
+    
+    % Foci
+    \coordinate (F1) at (-1.42,0);
+    \coordinate (F2) at (1.42,0);
+    \fill[accentColor] (F1) circle (1.5pt) node[below] {\tiny $F_1$};
+    \fill[accentColor] (F2) circle (1.5pt) node[below] {\tiny $F_2$};
+    
+    % Hyperbola curves
+    \draw[thick, primaryColor, domain=-50:50, samples=100] 
+      plot ({1.1/cos(\x)}, {0.9*tan(\x)});
+    \draw[thick, primaryColor, domain=-50:50, samples=100] 
+      plot ({-1.1/cos(\x)}, {0.9*tan(\x)});
+    
+    % Triangle for c^2 = a^2 + b^2
+    \draw[thick, secondaryColor] (0,0) -- (1.1,0.9) node[midway, above left] {\tiny $c$};
+    \draw[dashed, darkGray] (0,0) -- (1.1,0) node[midway, below] {\tiny $a$};
+    \draw[dashed, darkGray] (1.1,0) -- (1.1,0.9) node[midway, right] {\tiny $b$};
+  \end{tikzpicture}
+  \\[0.2cm]
+  \small\textbf{Figura 2.2:} Elementos da Hipérbole.
+\end{minipage}
+
+\subsubsection{Parábola}
+\begin{minipage}{0.58\textwidth}
+  \begin{definitionbox}{Parábola}
+    Conjunto dos pontos do plano equidistantes de um ponto fixo $F$ (foco) e de uma reta fixa $d$ (diretriz) que não contém $F$: $d(P,F) = d(P,d)$.
+    
+    \textbf{Foco e Diretriz:} A distância do vértice ao foco é $p = \frac{1}{4a}$.
+    
+    \textbf{Equação Normal (Vértice na Origem $V(0,0)$, Eixo Vertical):}
+    \begin{equation}
+      y = ax^2 \quad \left(F\left(0, \frac{1}{4a}\right), \quad d: y = -\frac{1}{4a}\right)
+    \end{equation}
+    \begin{itemize}
+      \item $a > 0$: Concavidade voltada para cima.
+      \item $a < 0$: Concavidade voltada para baixo.
+    \end{itemize}
+    \textbf{Equações Gerais (Vértice em $V(h,k)$):}
+    \begin{align}
+      \text{Eixo Vertical:} \quad & y - k = a(x-h)^2 \\
+      \text{Eixo Horizontal:} \quad & x - h = a(y-k)^2
+    \end{align}
+  \end{definitionbox}
+\end{minipage}
+\hfill
+\begin{minipage}{0.38\textwidth}
+  \centering
+  \begin{tikzpicture}[scale=1.1]
+    % Draw axes
+    \draw[-stealth, gray] (-2.0,0) -- (2.0,0) node[right, black] {\tiny $x$};
+    \draw[-stealth, gray] (0,-0.8) -- (0,2.2) node[above, black] {\tiny $y$};
+    
+    % Parabola: y = a x^2. Let a = 0.5 => p = 0.5
+    \draw[thick, primaryColor, domain=-1.8:1.8, samples=50] plot (\x, {0.5*\x*\x});
+    
+    % Focus
+    \coordinate (F) at (0,0.5);
+    \fill[accentColor] (F) circle (1.5pt) node[left] {\tiny $F(0,p)$};
+    
+    % Directrix line: y = -0.5
+    \draw[thick, dashed, secondaryColor] (-1.9,-0.5) -- (1.9,-0.5) node[right] {\tiny $d$};
+    
+    % Point P on parabola: P = (1.2, 0.5 * 1.2^2) = (1.2, 0.72)
+    \coordinate (P) at (1.2,0.72);
+    \fill (P) circle (1.5pt) node[above right] {\tiny $P(x,y)$};
+    
+    % Distances to focus and directrix
+    \draw[dotted, darkGray, thick] (P) -- (F);
+    \draw[dotted, darkGray, thick] (P) -- (1.2,-0.5);
+    \fill (1.2,-0.5) circle (1pt);
+  \end{tikzpicture}
+  \\[0.2cm]
+  \small\textbf{Figura 2.3:} Elementos da Parábola.
+\end{minipage}
+
+\newpage
+
+\subsection{Espaço Tridimensional e Quádricas}
+
+\subsubsection{Espaço Tridimensional \texorpdfstring{$\mathbb{R}^3$}{R\textasciicircum 3} e Secções}
+No espaço $\mathbb{R}^3$, pontos são representados por triplos ordenados $(x,y,z)$.
+\begin{itemize}
+  \item \textbf{Planos Gerais:} $Ax + By + Cz + D = 0$.
+  \item \textbf{Planos de Secção:} Planos paralelos aos planos coordenados são obtidos fixando variáveis: $x = a$ (paralelo a $yOz$), $y = b$ (paralelo a $xOz$) e $z = c$ (paralelo a $xOy$).
+\end{itemize}
+
+\begin{center}
+  \begin{tikzpicture}[x={(-0.5cm,-0.5cm)}, y={(1.0cm,0cm)}, z={(0cm,1.0cm)}, scale=1.1]
+    % --- Plano x = a ---
+    \begin{scope}[shift={(0,0,0)}]
+      % Axes
+      \draw[-stealth, gray] (0,0,0) -- (0,2.0,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,0,0) -- (0,0,2.0) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0,0,0) -- (2.0,0,0) node[below left, black] {\tiny $x$};
+      
+      % Plane x = 1.0 (parallel to yOz)
+      \filldraw[fill=primaryColor!15, draw=primaryColor!80, opacity=0.75, thick] 
+        (1.0, 0, 0) -- (1.0, 1.8, 0) -- (1.0, 1.8, 1.8) -- (1.0, 0, 1.8) -- cycle;
+      
+      \fill[black] (1.0,0,0) circle (1.5pt) node[below left] {\tiny $(a,0,0)$};
+      \node[above] at (1.0,0.9,1.8) {\small Plano $x = a$};
+    \end{scope}
+
+    % --- Plano y = b ---
+    \begin{scope}[shift={(0,3.5,0)}]
+      % Axes
+      \draw[-stealth, gray] (0,0,0) -- (0,2.0,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,0,0) -- (0,0,2.0) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0,0,0) -- (2.0,0,0) node[below left, black] {\tiny $x$};
+      
+      % Plane y = 1.0 (parallel to xOz)
+      \filldraw[fill=secondaryColor!15, draw=secondaryColor!80, opacity=0.75, thick] 
+        (0, 1.0, 0) -- (1.8, 1.0, 0) -- (1.8, 1.0, 1.8) -- (0, 1.0, 1.8) -- cycle;
+      
+      \fill[black] (0,1.0,0) circle (1.5pt) node[below right] {\tiny $(0,b,0)$};
+      \node[above] at (0.9,1.0,1.8) {\small Plano $y = b$};
+    \end{scope}
+
+    % --- Plano z = c ---
+    \begin{scope}[shift={(0,7.0,0)}]
+      % Axes
+      \draw[-stealth, gray] (0,0,0) -- (0,2.0,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,0,0) -- (0,0,2.0) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0,0,0) -- (2.0,0,0) node[below left, black] {\tiny $x$};
+      
+      % Plane z = 1.0 (parallel to xOy)
+      \filldraw[fill=accentColor!10, draw=accentColor!80, opacity=0.75, thick] 
+        (0, 0, 1.0) -- (1.8, 0, 1.0) -- (1.8, 1.8, 1.0) -- (0, 1.8, 1.0) -- cycle;
+      
+      \fill[black] (0,0,1.0) circle (1.5pt) node[left] {\tiny $(0,0,c)$};
+      \node[above] at (0.9,0.9,1.0) {\small Plano $z = c$};
+    \end{scope}
+  \end{tikzpicture}
+\end{center}
+
+\subsubsection{Superfícies Quádricas}
+Uma \textbf{superfície quádrica} é definida analiticamente por uma equação tridimensional de segundo grau:
+\begin{equation}
+  Ax^2 + By^2 + Cz^2 + Dxy + Exz + Fyz + Gx + Hy + Iz + J = 0 \label{eq:quadrica_geral}
+\end{equation}
+\textbf{Formas Normais ($D = E = F = 0$):} A superfície tem eixos paralelos aos eixos cartesianos e centro ou vértice na origem.
+
+\begin{formulabox}[top=2pt, bottom=2pt, left=4pt, right=4pt]{1. Superfície Esférica (Esfera)}
+  \begin{minipage}{0.72\textwidth}
+    \textbf{Forma Normal:} $x^2 + y^2 + z^2 = r^2$ \\
+    \textbf{Translada em $C(h,j,l)$:} $(x-h)^2 + (y-j)^2 + (z-l)^2 = r^2$ \\
+    \textbf{Características:} Centro $C(0,0,0)$ e raio $r$. As secções por planos $x=k$, $y=k$ ou $z=k$ são circunferências de raio $\sqrt{r^2-k^2}$ (para $|k| < r$).
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.24\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.52]
+      \draw[-stealth, gray] (-1.5,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.5) -- (0,1.8) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, primaryColor] (0,0) circle (1.1);
+      \draw[dashed, secondaryColor] (1.1,0) arc (0:180:1.1 and 0.35);
+      \draw[thick, secondaryColor] (-1.1,0) arc (180:360:1.1 and 0.35);
+      \draw[dashed, secondaryColor] (0,1.1) arc (90:270:0.35 and 1.1);
+      \draw[thick, secondaryColor] (0,-1.1) arc (-90:90:0.35 and 1.1);
+    \end{tikzpicture}
+  \end{minipage}
+\end{formulabox}
+
+\begin{formulabox}[top=2pt, bottom=2pt, left=4pt, right=4pt]{2. Elipsóide}
+  \begin{minipage}{0.72\textwidth}
+    \textbf{Forma Normal:} $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} + \dfrac{z^2}{c^2} = 1$ \\
+    \textbf{Translada em $C(h,j,l)$:} $\dfrac{(x-h)^2}{a^2} + \dfrac{(y-j)^2}{b^2} + \dfrac{(z-l)^2}{c^2} = 1$ \\
+    \textbf{Características:} Simétrica em relação a todos os planos coordenados. As secções por planos paralelos aos eixos ($x=k$, $y=k$, $z=k$) são elipses ou circunferências.
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.24\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.52]
+      \draw[-stealth, gray] (-1.7,0) -- (2.0,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.3) -- (0,1.6) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, primaryColor] (0,0) ellipse (1.4 and 0.9);
+      \draw[dashed, secondaryColor] (1.4,0) arc (0:180:1.4 and 0.3);
+      \draw[thick, secondaryColor] (-1.4,0) arc (180:360:1.4 and 0.3);
+    \end{tikzpicture}
+  \end{minipage}
+\end{formulabox}
+
+\begin{formulabox}[top=2pt, bottom=2pt, left=4pt, right=4pt]{3. Parabolóide Elíptico}
+  \begin{minipage}{0.72\textwidth}
+    \textbf{Forma Normal (eixo $OZ$):} $z = \dfrac{x^2}{a^2} + \dfrac{y^2}{b^2}$ \\
+    \textbf{Translada em $V(h,j,k_0)$:} $z-k_0 = \dfrac{(x-h)^2}{a^2} + \dfrac{(y-j)^2}{b^2}$ \\
+    \textbf{Características:} O vértice é $V(0,0,0)$. 
+    As secções $x=k$ e $y=k$ são parábolas. As secções $z=k$ são elipses para $k>0$ (nulas se $k<0$). \\
+    \textit{Permutações:} Se a variável linear for $x$ (eixo $OX$) ou $y$ (eixo $OY$), o parabolóide abre-se ao longo desse eixo.
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.24\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.52]
+      \draw[-stealth, gray] (-1.5,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-0.2) -- (0,2.0) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, primaryColor] (-1.0,1.4) to[out=-80, in=180] (0,0) to[out=0, in=-100] (1.0,1.4);
+      \draw[thick, secondaryColor] (0,1.4) ellipse (1.0 and 0.3);
+      \draw[dashed, gray] (-0.5,0.5) to[out=-60, in=180] (0,0.1) to[out=0, in=-120] (0.5,0.5);
+    \end{tikzpicture}
+  \end{minipage}
+\end{formulabox}
+
+\begin{formulabox}[top=2pt, bottom=2pt, left=4pt, right=4pt]{4. Parabolóide Hiperbólico (Sela)}
+  \begin{minipage}{0.72\textwidth}
+    \textbf{Forma Normal (eixo $OZ$):} $z = \dfrac{x^2}{a^2} - \dfrac{y^2}{b^2}$ \\
+    \textbf{Translada em $V(h,j,k_0)$:} $z-k_0 = \dfrac{(x-h)^2}{a^2} - \dfrac{(y-j)^2}{b^2}$ \\
+    \textbf{Características:} O ponto de sela (máximo numa direção e mínimo noutra) é $V(0,0,0)$. \\
+    As secções $x=k$ e $y=k$ são parábolas (uma com concavidade para cima, outra para baixo). As secções $z=k$ são hipérboles.
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.24\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.52]
+      \draw[-stealth, gray] (-1.5,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.4) -- (0,1.8) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, primaryColor] (-1.2,-0.6) to[out=60, in=180] (0,0.4) to[out=0, in=120] (1.2,-0.6);
+      \draw[thick, primaryColor] (-0.8,0.6) to[out=-45, in=180] (0,-0.4) to[out=0, in=-135] (0.8,0.6);
+      \draw[dashed, secondaryColor] (-1.2,-0.6) -- (-0.8,0.6);
+      \draw[thick, secondaryColor] (1.2,-0.6) -- (0.8,0.6);
+    \end{tikzpicture}
+  \end{minipage}
+\end{formulabox}
+
+\begin{formulabox}[top=2pt, bottom=2pt, left=4pt, right=4pt]{5. Cone Elíptico}
+  \enlargethispage{1.8cm}
+  \begin{minipage}{0.72\textwidth}
+    \textbf{Forma Normal (eixo $OZ$):} $z^2 = \dfrac{x^2}{a^2} + \dfrac{y^2}{b^2}$ \\
+    \textbf{Translada em $V(h,j,l)$:} $(z-l)^2 = \dfrac{(x-h)^2}{a^2} + \dfrac{(y-j)^2}{b^2}$ \\
+    \textbf{Características:} Vértice $V(0,0,0)$. As secções $z=k$ (com $k \neq 0$) são elipses. As secções $x=k$ ou $y=k$ (com $k \neq 0$) são hipérboles. Se $k=0$, as secções no vértice são retas concorrentes.
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.24\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.52]
+      \draw[-stealth, gray] (-1.5,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.6) -- (0,1.8) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, primaryColor] (-1.0,1.3) -- (1.0,-1.3);
+      \draw[thick, primaryColor] (1.0,1.3) -- (-1.0,-1.3);
+      \draw[thick, secondaryColor] (0,1.3) ellipse (1.0 and 0.35);
+      \draw[thick, secondaryColor] (0,-1.3) ellipse (1.0 and 0.35);
+    \end{tikzpicture}
+  \end{minipage}
+\end{formulabox}
+
+\begin{formulabox}[top=2pt, bottom=2pt, left=4pt, right=4pt]{6. Hiperbolóide de 1 folha}
+  \enlargethispage{1.8cm}
+  \begin{minipage}{0.72\textwidth}
+    \textbf{Forma Normal (eixo $OZ$):} $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} - \dfrac{z^2}{c^2} = 1$ \\
+    \textbf{Translada em $C(h,j,l)$:} $\dfrac{(x-h)^2}{a^2} + \dfrac{(y-j)^2}{b^2} - \dfrac{(z-l)^2}{c^2} = 1$ \\
+    \textbf{Características:} Eixo de simetria paralelo ao eixo correspondente ao termo negativo ($OZ$ neste caso). 
+    As secções $z=k$ são elipses para todo o $k$. As secções $x=k$ ou $y=k$ são hipérboles. É uma superfície regrada.
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.24\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.52]
+      \draw[-stealth, gray] (-1.5,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.6) -- (0,1.8) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, primaryColor] (-1.0,1.3) to[out=-60, in=120] (-0.6,0) to[out=-120, in=60] (-1.0,-1.3);
+      \draw[thick, primaryColor] (1.0,1.3) to[out=-120, in=60] (0.6,0) to[out=-60, in=120] (1.0,-1.3);
+      
+      \draw[thick, secondaryColor] (0,1.3) ellipse (1.0 and 0.3);
+      \draw[thick, secondaryColor] (0,0) ellipse (0.6 and 0.18);
+      \draw[thick, secondaryColor] (0,-1.3) ellipse (1.0 and 0.3);
+    \end{tikzpicture}
+  \end{minipage}
+\end{formulabox}
+
+\begin{formulabox}[top=2pt, bottom=2pt, left=4pt, right=4pt]{7. Hiperbolóide de 2 folhas}
+  \begin{minipage}{0.72\textwidth}
+    \textbf{Forma Normal (eixo $OZ$):} $\dfrac{z^2}{c^2} - \dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = 1$ \\
+    \textbf{Translada em $C(h,j,l)$:} $\dfrac{(z-l)^2}{c^2} - \dfrac{(x-h)^2}{a^2} - \dfrac{(y-j)^2}{b^2} = 1$ \\
+    \textbf{Características:} Eixo de simetria paralelo ao eixo do termo positivo ($OZ$ neste caso).
+    As secções $x=k$ e $y=k$ são hipérboles. As secções $z=k$ são elipses apenas para $|k| > c$ (não há pontos reais na faixa $-c < z < c$).
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.24\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.52]
+      \draw[-stealth, gray] (-1.5,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.8) -- (0,2.0) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, primaryColor] (-1.0,1.6) to[out=-60, in=180] (0,0.6) to[out=0, in=-120] (1.0,1.6);
+      \draw[thick, secondaryColor] (0,1.6) ellipse (1.0 and 0.3);
+      
+      \draw[thick, primaryColor] (-1.0,-1.6) to[out=60, in=180] (0,-0.6) to[out=0, in=120] (1.0,-1.6);
+      \draw[thick, secondaryColor] (0,-1.6) ellipse (1.0 and 0.3);
+    \end{tikzpicture}
+  \end{minipage}
+\end{formulabox}
+
+\begin{formulabox}[top=2pt, bottom=2pt, left=4pt, right=4pt]{8. Superfície Cilíndrica (Cilindro Elíptico / Circular)}
+  \begin{minipage}{0.72\textwidth}
+    \textbf{Forma Normal (eixo $OZ$):} $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = r^2$ \\
+    \textbf{Translada em $C(h,j)$:} $\dfrac{(x-h)^2}{a^2} + \dfrac{(y-j)^2}{b^2} = r^2$ \\
+    \textbf{Características:} Ausência da variável correspondente ao eixo gerador (neste caso, $z$). 
+    As secções $z=k$ são elipses idênticas. As secções $x=k$ (com $|k| < ar$) ou $y=k$ (com $|k| < br$) são pares de retas paralelas ao eixo $OZ$.
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.24\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.52]
+      \draw[-stealth, gray] (-1.5,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.6) -- (0,1.8) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, primaryColor] (-1.0,-1.3) -- (-1.0,1.3);
+      \draw[thick, primaryColor] (1.0,-1.3) -- (1.0,1.3);
+      \draw[thick, secondaryColor] (0,1.3) ellipse (1.0 and 0.3);
+      \draw[thick, secondaryColor] (0,-1.3) ellipse (1.0 and 0.3);
+    \end{tikzpicture}
+  \end{minipage}
+\end{formulabox}
+
+\begin{formulabox}[top=2pt, bottom=2pt, left=4pt, right=4pt]{9. Cilindro Parabólico}
+  \begin{minipage}{0.72\textwidth}
+    \textbf{Forma Normal (eixo $OZ$):} $y = ax^2$ \\
+    \textbf{Translada em $V(h,j)$:} $y-j = a(x-h)^2$ \\
+    \textbf{Características:} Ausência de uma das variáveis tridimensionais (neste caso, $z$). A curva diretriz no plano transversal $xOy$ é uma parábola. As secções $z=k$ são parábolas idênticas e as secções $x=k$ ou $y=k$ são retas verticais. \label{box:9}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.24\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=0.52]
+      \draw[-stealth, gray] (-1.5,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.6) -- (0,1.8) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, secondaryColor, domain=-0.9:0.9] plot (\x, {0.8*\x*\x + 0.5});
+      \draw[thick, secondaryColor, domain=-0.9:0.9] plot (\x, {0.8*\x*\x - 1.2});
+      
+      \draw[thick, primaryColor] (-0.9, 1.15) -- (-0.9, -0.55);
+      \draw[thick, primaryColor] (0.9, 1.15) -- (0.9, -0.55);
+      \draw[thick, primaryColor] (0, 0.5) -- (0, -1.2);
+    \end{tikzpicture}
+  \end{minipage}
+\end{formulabox}
+
+
+\subsubsection{Guia de Identificação Rápida de Quádricas}
+\label{sec:guia}
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item $x^2 + 4y^2 + 9z^2 = 1 \implies$ \textbf{Gráfico VII} (Elipsoide): Todos os coeficientes quadráticos positivos. Semi-eixos $a=1, b=1/2, c=1/3$. Alongado ao longo de $OX$ (eixo do maior semi-eixo).
+  \item $9x^2 + 4y^2 + z^2 = 1 \implies$ \textbf{Gráfico IV} (Elipsoide): Todos os coeficientes positivos. Semi-eixos $a=1/3, b=1/2, c=1$. Alongado ao longo do eixo vertical $OZ$.
+  \item $x^2 - y^2 + z^2 = 1 \implies$ \textbf{Gráfico II} (Hiperboloide de 1 Folha): Dois termos positivos, um negativo ($-y^2$). O termo negativo indica que o eixo do hiperboloide é paralelo a $OY$.
+  \item $-x^2 + y^2 - z^2 = 1 \implies$ \textbf{Gráfico III} (Hiperboloide de 2 Folhas): Apenas um termo positivo ($y^2$), dois negativos. O termo positivo define o eixo de simetria paralelo a $OY$.
+  \item $y = 2x^2 + z^2 \implies$ \textbf{Gráfico VI} (Parabolóide Elíptico): Uma variável linear ($y$) e duas quadráticas com o mesmo sinal. Abre-se na direção do eixo positivo $OY$.
+  \item $y^2 = x^2 + 2z^2 \implies$ \textbf{Gráfico I} (Cone Elíptico): Equação homogénea ($y^2 - x^2 - 2z^2 = 0$). Vértice na origem e eixo de simetria ao longo de $OY$.
+  \item $x^2 + 2z^2 = 1 \implies$ \textbf{Gráfico VIII} (Cilindro Elíptico): Ausência de $y$. Descreve uma elipse no plano $xOz$ projetada infinitamente ao longo do eixo $OY$.
+  \item $y = x^2 - z^2 \implies$ \textbf{Gráfico V} (Parabolóide Hiperbólico): Uma variável linear ($y$) e duas quadráticas com sinais opostos. Superfície em forma de sela com ponto de sela na origem.
+\end{enumerate}
+
+\newpage
 
 % ==========================================
 % Capítulo 3: Curvas e Funções Vetoriais de 1 Parâmetro
