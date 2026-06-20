@@ -405,7 +405,9 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
   \end{minipage}
 \end{center}
 
-\begin{theorembox}{Método de Euler}
+\vspace{2em}
+
+\noindent\begin{theorembox}{Método de Euler}
   Método numérico iterativo para aproximar a solução de um PVI $y' = f(x, y), y(x_0) = y_0$ em pontos distanciados entre si uma quantidade fixa $h > 0$ (passo):
   \begin{align*}
     x_{n+1} &= x_n + h \\
@@ -464,16 +466,15 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
 % Capítulo 2: Cónicas e Quádricas
 % ==========================================
 \section{Cónicas e Quádricas}
-\label{chap:conicas_quadricas}
 
 \subsection{Cónicas}
 
 \begin{definitionbox}{Secção Cónica}
   Uma \textbf{secção cónica} é a curva obtida através da interseção de um plano bidimensional com um cone circular reto duplo. 
   Analiticamente, qualquer cónica no plano $xOy$ é definida por uma equação geral de segundo grau:
-  \begin{equation}
-    Ax^2 + By^2 + Cxy + Dx + Ey + F = 0 \label{eq:conica_geral}
-  \end{equation}
+  \begin{equation*}
+    Ax^2 + By^2 + Cxy + Dx + Ey + F = 0
+  \end{equation*}
   \textbf{Classificação por Termos:}
   \begin{itemize}
     \item \textbf{Figuras Normais ($C = 0$):} Os eixos da cónica são paralelos aos eixos coordenados. O centro ou vértice está na origem se $D = E = 0$.
@@ -487,19 +488,19 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
     Conjunto dos pontos do plano cuja soma das distâncias a dois pontos fixos $F_1$ e $F_2$ (focos), distanciados de $2c$, é constante e igual a $2a$, com $a > c$.
     
     \textbf{Relação Fundamental:}
-    \begin{equation}
-      a^2 = b^2 + c^2 \label{eq:elipse_rel}
-    \end{equation}
+    \begin{equation*}
+      a^2 = b^2 + c^2
+    \end{equation*}
     Onde $a$ e $b$ são os semi-eixos maior e menor.
     
     \textbf{Equação Normal (Centro na Origem $O(0,0)$):}
-    \begin{equation}
+    \begin{equation*}
       \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1 \quad (\text{Eixo maior ao longo de } OX)
-    \end{equation}
+    \end{equation*}
     \textbf{Equação Geral (Centro em $C(h,k)$):}
-    \begin{equation}
+    \begin{equation*}
       \frac{(x-h)^2}{a^2} + \frac{(y-k)^2}{b^2} = 1
-    \end{equation}
+    \end{equation*}
     \textit{Nota:} Se $b > a$, o eixo maior é vertical ($OY$), os focos são $(h, k \pm c)$, e a relação é $b^2 = a^2 + c^2$.
   \end{definitionbox}
 \end{minipage}
@@ -544,21 +545,21 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
     Conjunto dos pontos do plano cuja diferença absoluta das distâncias a dois pontos fixos $F_1$ e $F_2$ (focos), distanciados de $2c$, é constante e igual a $2a$, com $a < c$.
     
     \textbf{Relação Fundamental:}
-    \begin{equation}
-      c^2 = a^2 + b^2 \label{eq:hiperbole_rel}
-    \end{equation}
+    \begin{equation*}
+      c^2 = a^2 + b^2
+    \end{equation*}
     Onde $a$ é o semi-eixo real e $b$ o semi-eixo imaginário.
     
     \textbf{Equação Normal (Centro na Origem $O(0,0)$):}
-    \begin{equation}
+    \begin{equation*}
       \frac{x^2}{a^2} - \frac{y^2}{b^2} = 1 \quad (\text{Abertura horizontal, eixo real } OX)
-    \end{equation}
+    \end{equation*}
     \textbf{Assíntotas:} $y = \pm \frac{b}{a} x$.
     
     \textbf{Equação Geral (Centro em $C(h,k)$):}
-    \begin{equation}
+    \begin{equation*}
       \frac{(x-h)^2}{a^2} - \frac{(y-k)^2}{b^2} = 1
-    \end{equation}
+    \end{equation*}
     \textit{Nota:} Se a abertura for vertical, a equação normal é $\frac{y^2}{b^2} - \frac{x^2}{a^2} = 1$, com assíntotas $y = \pm \frac{b}{a} x$ e focos em $(0, \pm c)$.
   \end{definitionbox}
 \end{minipage}
@@ -608,18 +609,18 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
     \textbf{Foco e Diretriz:} A distância do vértice ao foco é $p = \frac{1}{4a}$.
     
     \textbf{Equação Normal (Vértice na Origem $V(0,0)$, Eixo Vertical):}
-    \begin{equation}
+    \begin{equation*}
       y = ax^2 \quad \left(F\left(0, \frac{1}{4a}\right), \quad d: y = -\frac{1}{4a}\right)
-    \end{equation}
+    \end{equation*}
     \begin{itemize}
       \item $a > 0$: Concavidade voltada para cima.
       \item $a < 0$: Concavidade voltada para baixo.
     \end{itemize}
     \textbf{Equações Gerais (Vértice em $V(h,k)$):}
-    \begin{align}
+    \begin{align*}
       \text{Eixo Vertical:} \quad & y - k = a(x-h)^2 \\
       \text{Eixo Horizontal:} \quad & x - h = a(y-k)^2
-    \end{align}
+    \end{align*}
   \end{definitionbox}
 \end{minipage}
 \hfill
@@ -715,9 +716,9 @@ No espaço $\mathbb{R}^3$, pontos são representados por triplos ordenados $(x,y
 
 \subsubsection{Superfícies Quádricas}
 Uma \textbf{superfície quádrica} é definida analiticamente por uma equação tridimensional de segundo grau:
-\begin{equation}
-  Ax^2 + By^2 + Cz^2 + Dxy + Exz + Fyz + Gx + Hy + Iz + J = 0 \label{eq:quadrica_geral}
-\end{equation}
+\begin{equation*}
+  Ax^2 + By^2 + Cz^2 + Dxy + Exz + Fyz + Gx + Hy + Iz + J = 0
+\end{equation*}
 \textbf{Formas Normais ($D = E = F = 0$):} A superfície tem eixos paralelos aos eixos cartesianos e centro ou vértice na origem.
 
 \begin{formulabox}[top=2pt, bottom=2pt, left=4pt, right=4pt]{1. Superfície Esférica (Esfera)}
@@ -910,7 +911,7 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   \begin{minipage}{0.72\textwidth}
     \textbf{Forma Normal (eixo $OZ$):} $y = ax^2$ \\
     \textbf{Translada em $V(h,j)$:} $y-j = a(x-h)^2$ \\
-    \textbf{Características:} Ausência de uma das variáveis tridimensionais (neste caso, $z$). A curva diretriz no plano transversal $xOy$ é uma parábola. As secções $z=k$ são parábolas idênticas e as secções $x=k$ ou $y=k$ são retas verticais. \label{box:9}
+    \textbf{Características:} Ausência de uma das variáveis tridimensionais (neste caso, $z$). A curva diretriz no plano transversal $xOy$ é uma parábola. As secções $z=k$ são parábolas idênticas e as secções $x=k$ ou $y=k$ são retas verticais.
   \end{minipage}%
   \hfill
   \begin{minipage}{0.24\textwidth}
@@ -932,7 +933,6 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
 
 
 \subsubsection{Guia de Identificação Rápida de Quádricas}
-\label{sec:guia}
 \begin{enumerate}[label=\textbf{\arabic*.}]
   \item $x^2 + 4y^2 + 9z^2 = 1 \implies$ \textbf{Gráfico VII} (Elipsoide): Todos os coeficientes quadráticos positivos. Semi-eixos $a=1, b=1/2, c=1/3$. Alongado ao longo de $OX$ (eixo do maior semi-eixo).
   \item $9x^2 + 4y^2 + z^2 = 1 \implies$ \textbf{Gráfico IV} (Elipsoide): Todos os coeficientes positivos. Semi-eixos $a=1/3, b=1/2, c=1$. Alongado ao longo do eixo vertical $OZ$.
