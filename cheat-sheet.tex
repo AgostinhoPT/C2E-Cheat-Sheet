@@ -923,10 +923,92 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
 \label{chap:curvas_funcoes_vetoriais}
 
 \subsection{Definição e Parametrização}
-Definições de limites, continuidade, derivadas e integrais de funções vetoriais.
+
+\noindent\begin{minipage}[t]{0.65\textwidth}
+  \begin{definitionbox}{Curvas e Equações Paramétricas}
+    Seja $I \subseteq \R$ um intervalo. Um sistema de equações paramétricas descreve uma curva no plano ou no espaço onde as coordenadas são funções de uma variável independente $t \in I$ (parâmetro):
+    \begin{itemize}
+      \item \textbf{No plano ($\R^2$):} $\begin{cases} x = x(t) \\ y = y(t) \end{cases} \implies C = \{(x(t), y(t)) : t \in I\}$.
+      \item \textbf{No espaço ($\R^3$):} $\begin{cases} x = x(t) \\ y = y(t) \\ z = z(t) \end{cases} \implies C = \{(x(t), y(t), z(t)) : t \in I\}$.
+      \item \textbf{Orientação:} O sentido do movimento ao longo da curva à medida que $t$ aumenta.
+      \item \textbf{Tipos de Curvas (para $I = [a, b]$):}
+        \begin{enumerate}
+          \item \textbf{Regular:} se $\vec{r}'(t) \neq \vec{0}, \ \forall t \in I$ (sem pontos de paragem/bicos).
+          \item \textbf{Suave:} se $\vec{r}(t)$ é de classe $C^1$ em $I$ (diferenciável e com derivada $\vec{r}'(t)$ contínua).
+          \item \textbf{Fechada:} se o ponto inicial coincide com o final: $\vec{r}(a) = \vec{r}(b)$.
+        \end{enumerate}
+    \end{itemize}
+  \end{definitionbox}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.33\textwidth}
+  \centering
+  \vspace{8pt}
+  \begin{tikzpicture}[scale=0.9]
+    \draw[-stealth, gray] (-2.0,0) -- (2.0,0) node[right, black] {\tiny $x$};
+    \draw[-stealth, gray] (0,-1.2) -- (0,1.2) node[above, black] {\tiny $y$};
+    
+    % Ellipse x^2/2.25 + y^2/0.64 = 1
+    \draw[thick, primaryColor] (0,0) ellipse (1.5 and 0.8);
+    
+    % Orientation arrows (clockwise for x = 5sin(t), y = 2cos(t))
+    \draw[primaryColor, -stealth, thick] (0, 0.8) -- (0.75, 0.57);
+    \draw[primaryColor, -stealth, thick] (0, -0.8) -- (-0.75, -0.57);
+    
+    \fill[accentColor] (0, 0.8) circle (1.5pt) node[above right, black] {\tiny $t=0$};
+    \fill[accentColor] (1.5, 0) circle (1.5pt) node[below right, black] {\tiny $t=\frac{\pi}{2}$};
+    
+    \node[font=\tiny, align=center] at (0, -1.4) {Elipse com orientação \\ horária ($x=5\sin t, y=2\cos t$)};
+  \end{tikzpicture}
+\end{minipage}
 
 \subsection{Geometria Diferencial de Curvas}
-Vetor tangente unitário, vetor normal, curvatura, torção e comprimento de arco.
+
+\noindent\begin{minipage}[t]{0.65\textwidth}
+  \begin{definitionbox}{Cálculo em Funções Vetoriais}
+    Seja $\vec{r} : I \subseteq \R \to \R^n$ uma função vetorial.
+    \begin{itemize}
+      \item \textbf{Limite:} Calcula-se componente a componente: \\
+        $\lim_{t \to t_0} \vec{r}(t) = \left( \lim_{t \to t_0} r_1(t), \dots, \lim_{t \to t_0} r_n(t) \right)$.
+      \item \textbf{Derivada:} Vetor tangente/velocidade à curva no ponto $t_0$: \\
+        $\vec{r}'(t_0) = \lim_{h \to 0} \frac{\vec{r}(t_0+h) - \vec{r}(t_0)}{h} = \left( r_1'(t_0), \dots, r_n'(t_0) \right)$.
+    \end{itemize}
+  \end{definitionbox}
+
+  \begin{theorembox}{Comprimento de Arco e Reta Tangente}
+    Seja $\vec{r}(t)$ uma curva suave em $I = [a, b]$.
+    \begin{itemize}
+      \item \textbf{Comprimento da Curva ($L$):} Integral do módulo da velocidade: \\
+        $L = \int_a^b \|\vec{r}'(t)\| \dd t = \int_a^b \sqrt{(r_1'(t))^2 + \dots + (r_n'(t))^2} \dd t$.
+      \item \textbf{Reta Tangente:} Reta tangente à curva no ponto $P_0 = \vec{r}(t_0)$ na direção de $\vec{r}'(t_0) \neq \vec{0}$, parametrizada por: \\
+        $X(\lambda) = P_0 + \lambda \vec{r}'(t_0), \quad \lambda \in \R$.
+    \end{itemize}
+  \end{theorembox}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.33\textwidth}
+  \centering
+  \vspace{8pt}
+  \begin{tikzpicture}[scale=0.9, x={(-0.4cm,-0.4cm)}, y={(1.0cm,0cm)}, z={(0cm,1.0cm)}]
+    % Axes
+    \draw[-stealth, gray] (0,0,0) -- (1.5,0,0) node[below left, black] {\tiny $x$};
+    \draw[-stealth, gray] (0,0,0) -- (0,1.8,0) node[right, black] {\tiny $y$};
+    \draw[-stealth, gray] (0,0,0) -- (0,0,3.3) node[above, black] {\tiny $z$};
+    
+    % Helix curve r(t) = (cos(t), sin(t), 0.35*t)
+    \draw[thick, primaryColor, variable=\t, domain=0:2.5*pi, samples=80]
+      plot ({cos(\t r)}, {sin(\t r)}, {0.35*\t});
+    
+    % Arrow showing orientation
+    \draw[primaryColor, -stealth, thick, variable=\t, domain=1.0*pi:1.15*pi, samples=10]
+      plot ({cos(\t r)}, {sin(\t r)}, {0.35*\t});
+    
+    \fill[accentColor] ({cos(0)}, {sin(0)}, 0) circle (1.5pt) node[right, black] {\tiny $t=0$};
+    \fill[accentColor] ({cos(2.5*pi r)}, {sin(2.5*pi r)}, {0.35*2.5*pi}) circle (1.5pt) node[right, black] {\tiny $t=2.5\pi$};
+    
+    \node[font=\tiny, align=center] at (0,0,3.9) {Hélice Circular: \\ $x=3\sin t$, $y=3\cos t$ \\ $z=0.5t$, $t\in[0,2\pi]$};
+  \end{tikzpicture}
+\end{minipage}
 
 
 % ==========================================
@@ -935,11 +1017,223 @@ Vetor tangente unitário, vetor normal, curvatura, torção e comprimento de arc
 \section{Limites e Continuidade em \texorpdfstring{$\R^n$}{R\textasciicircum n}}
 \label{chap:limites_continuidade}
 
-\subsection{Topologia em \texorpdfstring{$\R^n$}{R\textasciicircum n}}
-Conjuntos abertos, fechados, limitados, fronteira e pontos de acumulação.
+\subsection{Topologia e Sucessões em \texorpdfstring{$\R^n$}{R\textasciicircum n}}
+
+\begin{minipage}[t]{0.65\textwidth}
+  \begin{definitionbox}{Conceitos Topológicos em $\R^n$}
+    Seja $A \subseteq \R^n$ um conjunto e $a \in \R^n$.
+    \begin{itemize}
+      \item \textbf{Bola Aberta de centro $a$ e raio $\delta > 0$:} $B_\delta(a) = \{x \in \R^n : \|x - a\| < \delta\}$.
+      \item \textbf{Ponto Aderente e Fecho ($\bar{A}$):} $a$ é aderente a $A$ se $\forall \delta > 0, B_\delta(a) \cap A \neq \emptyset$. O fecho $\bar{A}$ é o conjunto de todos os pontos aderentes a $A$.
+      \item \textbf{Ponto Interior e Interior ($\text{int}(A)$):} $a$ é interior a $A$ se $\exists \delta > 0, B_\delta(a) \subseteq A$. O interior $\text{int}(A)$ é o conjunto de todos os pontos interiores de $A$.
+      \item \textbf{Ponto de Fronteira e Fronteira ($\partial A$):} $a$ é de fronteira se não for interior nem exterior: $\forall \delta > 0$, $B_\delta(a) \cap A \neq \emptyset \wedge B_\delta(a) \cap (\R^n \setminus A) \neq \emptyset$.
+      \item \textbf{Ponto Exterior e Exterior:} $a$ é exterior se for interior ao complementar de $A$: $\exists \delta > 0, B_\delta(a) \subseteq \R^n \setminus A$.
+      \item \textbf{Conjunto Aberto e Fechado:}
+        \begin{itemize}
+          \item $A$ é \textbf{aberto} se $A = \text{int}(A)$ (todos os seus pontos são interiores).
+          \item $A$ é \textbf{fechado} se $A = \bar{A}$ (contém todos os seus pontos aderentes).
+        \end{itemize}
+      \item \textbf{Conjunto Compacto:} $A$ é compacto se for \textbf{fechado e limitado}.
+    \end{itemize}
+  \end{definitionbox}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.33\textwidth}
+  \centering
+  \vspace{8pt}
+  \begin{tikzpicture}[scale=1.0]
+    % Shade region A (light teal)
+    \fill[secondaryColor!15] (0,0) circle (1.2);
+    % Boundary of A (dashed line)
+    \draw[thick, dashed, secondaryColor] (0,0) circle (1.2) node[above right=0.9cm] {\small $A$};
+    
+    % Interior point
+    \coordinate (Int) at (-0.3, 0.2);
+    \fill[primaryColor] (Int) circle (1.5pt) node[below] {\tiny $x_{\text{int}}$};
+    \draw[dashed, primaryColor] (Int) circle (0.3);
+    
+    % Boundary point
+    \coordinate (Bnd) at (0.97, 0.7); % on the circle x^2+y^2 = 1.2^2 approximately
+    \fill[accentColor] (Bnd) circle (1.5pt) node[right] {\tiny $x_{\text{fr}}$};
+    \draw[dashed, accentColor] (Bnd) circle (0.3);
+    
+    % Exterior point
+    \coordinate (Ext) at (1.7, -0.5);
+    \fill[darkGray] (Ext) circle (1.5pt) node[below] {\tiny $x_{\text{ext}}$};
+    \draw[dashed, darkGray] (Ext) circle (0.3);
+    
+    % Labels
+    \node[secondaryColor] at (0, -0.4) {\tiny $\text{int}(A)$};
+    \node[accentColor] at (1.3, 1.1) {\tiny $\partial A$};
+  \end{tikzpicture}
+  
+  \begin{theorembox}{Sucessões em $\R^n$}
+    Uma sucessão em $\R^n$ é $u : \N \to \R^n$, $m \mapsto u_m = (u_m^1, \dots, u_m^n)$.
+    \begin{itemize}
+      \item \textbf{Exemplo:} $u_m = (m^2, 1/m)$.
+      \item \textbf{Limite:} $\lim u_m = a \iff \forall \epsilon > 0, \exists p \in \N, \forall m \ge p \implies \|u_m - a\| < \epsilon$.
+      \item \textbf{Convergência:} $\lim u_m = a \iff \lim u_m^i = a_i, \ \forall i \in \{1,\dots,n\}$.
+    \end{itemize}
+  \end{theorembox}
+\end{minipage}
+
+\subsection{Funções de Várias Variáveis e Domínios}
+
+\begin{minipage}[t]{0.65\textwidth}
+  \begin{definitionbox}{Domínio, Gráfico e Conjuntos de Nível}
+    Seja $f: D \subseteq \R^n \to \R$ uma função real de várias variáveis.
+    \begin{itemize}
+      \item \textbf{Domínio ($D$):} O maior subconjunto de $\R^n$ onde a expressão $f(x_1, \dots, x_n)$ tem significado matemático.
+      \item \textbf{Contra-domínio ($f(D)$) e Gráfico ($G$):} \\
+        $f(D) = \{z \in \R : z = f(x) \wedge x \in D\}$ \\
+        $G = \{(x_1, \dots, x_n, z) \in \R^{n+1} : z = f(x) \wedge x \in D\}$
+      \item \textbf{Conjunto de Nível ($C_k$):} $C_k = \{x \in \R^n : f(x) = k\}$ para $k \in f(D)$. Em $\R^2$, é a \textbf{curva de nível}; em $\R^3$, é a \textbf{superfície de nível}.
+    \end{itemize}
+  \end{definitionbox}
+
+  \begin{theorembox}{Cuidados no Cálculo de Domínios}
+    Garantir as seguintes restrições em todo o domínio $D$:
+    \begin{enumerate}
+      \item \textbf{Denominadores} não nulos: $P(x)/Q(x) \implies Q(x) \neq 0$.
+      \item \textbf{Raízes de índice par} não negativas: $\sqrt[2k]{g(x)} \implies g(x) \geq 0$.
+      \item \textbf{Logaritmos} com argumento positivo: $\ln(g(x)) \implies g(x) > 0$.
+      \item \textbf{Arcosseno e Arcocosseno} em $[-1, 1]$: $-1 \leq g(x) \leq 1$.
+      \item \textbf{Tangente:} $g(x) \neq \pi/2 + k\pi, \ k \in \Z$.
+    \end{enumerate}
+  \end{theorembox}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.33\textwidth}
+  \centering
+  \vspace{8pt}
+  \begin{tikzpicture}[scale=1.0]
+    \draw[-stealth, gray] (-2.0,0) -- (2.0,0) node[right, black] {\tiny $x$};
+    \draw[-stealth, gray] (0,-1.5) -- (0,1.5) node[above, black] {\tiny $y$};
+    
+    % Concentric ellipses for f(x,y) = x^2 + 2y^2 = k
+    \draw[thick, primaryColor] (0,0) ellipse (0.7 and 0.49);
+    \node[primaryColor, above right] at (0.49, 0.35) {\tiny $C_{k_1}$};
+    
+    \draw[thick, secondaryColor] (0,0) ellipse (1.2 and 0.84);
+    \node[secondaryColor, above right] at (0.84, 0.59) {\tiny $C_{k_2}$};
+    
+    \draw[thick, accentColor] (0,0) ellipse (1.7 and 1.19);
+    \node[accentColor, above right] at (1.19, 0.83) {\tiny $C_{k_3}$};
+    
+    \node[draw, fill=white, font=\tiny] at (0,1.3) {$f(x,y)=k$ ($k_1 < k_2 < k_3$)};
+  \end{tikzpicture}
+  \vspace{4pt}
+  \begin{center}
+    \small \textbf{Curvas de Nível ($C_k$):} Secções horizontais do gráfico projetadas no plano $xOy$.
+  \end{center}
+\end{minipage}
 
 \subsection{Limites Multivariáveis}
-Definição de limite, limites direcionais, limites iterados e mudança para coordenadas polares.
+
+\begin{definitionbox}{Limite de Funções Reais e Vetoriais}
+  Seja $f : D \subseteq \R^n \to \R^p$ uma função e $a \in \bar{D}$.
+  \begin{itemize}
+    \item \textbf{Limite segundo Cauchy:} $\lim_{x \to a} f(x) = b \iff \forall \delta > 0, \exists \epsilon > 0, x \in D \cap B_\epsilon(a) \implies f(x) \in B_\delta(b)$, i.e., $\forall \delta > 0, \exists \epsilon > 0, x \in D \wedge \|x - a\| < \epsilon \implies \|f(x) - b\| < \delta$.
+    \item \textbf{Limite segundo Heine:} $\lim_{x\to a} f(x) = b \iff \forall (x_m) \subset D$ com $x_m \to a$, tem-se $f(x_m) \to b$.
+    \item \textbf{Convergência por Componentes:} $\lim_{x \to a} f(x) = b \iff \lim_{x \to a} f_i(x) = b_i, \ \forall i \in \{1, \dots, p\}$.
+  \end{itemize}
+\end{definitionbox}
+
+\begin{theorembox}{Propriedades Operatórias e Squeeze Theorem}
+  Sejam $f, g, h : D \subseteq \R^n \to \R$ com limites finitos em $a \in \bar{D}$.
+  \begin{itemize}
+    \item \textbf{Álgebra de Limites:} $\lim(f \pm g) = \lim f \pm \lim g$; $\lim(f \cdot g) = \lim f \cdot \lim g$; $\lim(f/g) = \lim f / \lim g$ (se $\lim g \neq 0$).
+    \item \textbf{Carácter Local:} Se $f(x) = g(x)$ em $B_\epsilon(a) \cap D \implies \lim f = \lim g$.
+    \item \textbf{Enquadramento (Squeeze):} Se $f(x) \leq h(x) \leq g(x)$ em $B_\epsilon(a) \cap D$ e $\lim f = \lim g = b \implies \lim h = b$.
+    \item \textbf{Corolário (Infinitésimo por Limitada):} Se $\lim g = 0$ e $f$ é limitada ($|f| \leq L$) em $B_\epsilon(a) \cap D \implies \lim(f \cdot g) = 0$.
+    \item \textbf{União de Domínios:} Se $D = \cup D_i$ e $\lim_{x\to a, x\in D_i} f(x) = b \ \forall i \implies \lim_{x\to a} f(x) = b$.
+  \end{itemize}
+\end{theorembox}
+
+\begin{minipage}[t]{0.65\textwidth}
+  \begin{definitionbox}{Limites Relativos e Direcionais}
+    Seja $f : D \subseteq \R^n \to \R$ e $A \subset D$ com $a \in \bar{A}$.
+    \begin{itemize}
+      \item \textbf{Limite Relativo a $A$:} $\lim_{\substack{x \to a \\ x \in A}} f(x) = b \iff$ a restrição de $f$ a $A$ tem limite $b$. Pelo critério de Heine, $\forall u_m \in A, u_m \to a \implies f(u_m) \to b$.
+      \item \textbf{Limites Direcionais (em $\R^2$):} Aproximação a $a(a_1, a_2)$ por retas:
+        $A_m = \{(x, y) \in \R^2 : y - a_2 = m(x - a_1)\}$ (declive $m$) ou a reta vertical $A_\infty = \{(x, y) \in \R^2 : x = a_1\}$.
+      \item \textbf{Caminhos Parabólicos:} $A_k = \{(x, y) \in \R^2 : y - a_2 = k(x - a_1)^2\}$.
+    \end{itemize}
+  \end{definitionbox}
+
+  \begin{theorembox}{Teoremas de Não-Existência de Limite}
+    Sejam $A_1, A_2 \subseteq D$ com $a \in \bar{A}_1 \cap \bar{A}_2$.
+    \begin{enumerate}
+      \item Se os limites relativos diferem ou não existem: $\lim_{\substack{x \to a \\ x \in A_1}} f(x) \neq \lim_{\substack{x \to a \\ x \in A_2}} f(x) \implies \not\exists \lim_{x\to a} f(x)$.
+      \item Se o limite direcional $\lim_{\substack{(x,y)\to a \\ (x,y)\in A_m}} f(x,y)$ depender de $m \implies \not\exists \lim f$.
+    \end{enumerate}
+  \end{theorembox}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.33\textwidth}
+  \centering
+  \vspace{8pt}
+  \begin{tikzpicture}[scale=1.0]
+    \draw[-stealth, gray] (-1.8,0) -- (1.8,0) node[right, black] {\tiny $x$};
+    \draw[-stealth, gray] (0,-1.8) -- (0,1.8) node[above, black] {\tiny $y$};
+    
+    % Point a at origin
+    \fill[accentColor] (0,0) circle (1.8pt) node[below right, black] {\tiny $a(0,0)$};
+    
+    % Path y = mx (lines)
+    \draw[domain=-1.6:1.6, smooth, variable=\x, primaryColor, thick] plot (\x, {0.5*\x}) node[right] {\tiny $y=mx$};
+    \draw[domain=-1.3:1.3, smooth, variable=\x, primaryColor, thick] plot (\x, {-\x}) node[left] {\tiny $y=-x$};
+    
+    % Path y = kx^2 (parabola)
+    \draw[domain=-1.2:1.2, smooth, variable=\x, secondaryColor, thick] plot (\x, {\x*\x}) node[above] {\tiny $y=kx^2$};
+    
+    % Arrows along the paths to show approach
+    \draw[primaryColor, -stealth] (1.1, 0.55) -- (0.6, 0.3);
+    \draw[primaryColor, -stealth] (-0.9, 0.9) -- (-0.5, 0.5);
+    \draw[secondaryColor, -stealth] (0.9, 0.81) -- (0.5, 0.25);
+  \end{tikzpicture}
+  \vspace{2pt}
+  \begin{center}
+    \small \textbf{Caminhos de Aproximação:} O limite deve ser independente do caminho para existir.
+  \end{center}
+\end{minipage}
+
+\begin{formulabox}{Estratégias Práticas para Resolução de Limites}
+  Para $\lim_{(x,y) \to (a_1, a_2)} f(x,y) = b$:
+  \begin{itemize}
+    \item \textbf{1. Testar Não-Existência:} Analisar limites direcionais ou iterados. Se dependerem de $m$ ou forem diferentes, não existe.
+    \item \textbf{2. Enquadramento (Infinitésimos):} Se candidato a $b$ existir, majorar $|f(x,y) - b| \leq h(x,y)$ com $\lim h = 0$. Utilizar $|x| \leq \sqrt{x^2+y^2}$ e $|y| \leq \sqrt{x^2+y^2}$.
+    \item \textbf{3. Coordenadas Polares (em $(0,0)$):} Substituir $x = r\cos\theta, y = r\sin\theta$. O limite é $b \iff |f(r\cos\theta, r\sin\theta) - b| \leq h(r)$ com $\lim_{r \to 0^+} h(r) = 0$ independentemente de $\theta$.
+  \end{itemize}
+\end{formulabox}
+
+\subsection{Continuidade e Teoremas Fundamentais}
+
+\begin{definitionbox}{Continuidade e Prolongamento}
+  Seja $f : D \subseteq \R^n \to \R^p$ uma função e $a \in D$.
+  \begin{itemize}
+    \item \textbf{Continuidade em um Ponto:} $f$ é contínua em $a$ se $\lim_{x\to a} f(x) = f(a)$.
+    \item \textbf{Continuidade em um Conjunto:} $f$ é contínua em $A$ se for contínua em todos os pontos de $A$.
+    \item \textbf{Prolongamento por Continuidade:} $a \in \bar{D} \setminus D$. Se $\lim_{x\to a} f(x) = b$, então $\bar{f}(x) = f(x)$ para $x \in D$ e $\bar{f}(a) = b$ é contínua.
+    \item \textbf{Descontinuidade Removível:} $a \in D$ mas $\lim_{x\to a} f(x) = b \neq f(a)$. Basta redefinir $f(a) = b$.
+  \end{itemize}
+\end{definitionbox}
+
+\begin{theorembox}{Álgebra e Composição de Contínuas}
+  \begin{itemize}
+    \item \textbf{Operações:} Se $f, g$ contínuas em $a \implies f \pm g, f \cdot g, f/g$ (se $g(a) \neq 0$) são contínuas em $a$.
+    \item \textbf{Composição:} $g$ contínua em $a$ e $f$ contínua em $g(a) \implies f \circ g$ é contínua em $a$.
+    \item \textbf{Funções Elementares:} Constantes, projeções, polinómios, exponenciais, logaritmos e trigonométricas são contínuas nos seus domínios.
+  \end{itemize}
+\end{theorembox}
+
+\begin{theorembox}{Teoremas Fundamentais das Funções Contínuas}
+  \begin{itemize}
+    \item \textbf{Preservação da Compacidade:} $K$ compacto e $f$ contínua $\implies f(K)$ compacto.
+    \item \textbf{Teorema de Weierstrass (Extremos Absolutos):} $K$ compacto e $f$ contínua $\implies \exists x_1, x_2 \in K$ tais que $f(x_1) \leq f(x) \leq f(x_2), \ \forall x \in K$.
+    \item \textbf{Teorema de Bolzano (Valor Intermédio):} $f$ contínua em $D$, $a, b \in D$, $[a, b] \subseteq D \implies \forall k \in [f(a), f(b)], \exists c \in [a, b]$ tal que $f(c) = k$.
+  \end{itemize}
+\end{theorembox}
 
 
 % ==========================================
@@ -948,11 +1242,117 @@ Definição de limite, limites direcionais, limites iterados e mudança para coo
 \section{Cálculo Diferencial em \texorpdfstring{$\R^n$}{R\textasciicircum n}}
 \label{chap:calculo_diferencial}
 
-\subsection{Derivadas Parciais e Direcionais}
-Cálculo de derivadas parciais e a definição geral de derivada segundo um vetor.
+\subsection{Derivadas Parciais e Estruturas de Derivação}
 
-\subsection{Diferenciabilidade}
-Definição de função diferenciável, plano tangente, matriz Jacobiana e aproximações lineares.
+\noindent\begin{definitionbox}{Derivadas Parciais e de Ordem Superior}
+  Seja $f : D \subseteq \R^n \to \R$ e $a = (a_1, \dots, a_n) \in \text{int}(D)$.
+  \begin{itemize}
+    \item \textbf{Derivada Parcial em ordem a $x_i$:} Taxa de variação em relação a $x_i$ no ponto $a$:
+      \[ \frac{\partial f}{\partial x_i}(a) = \lim_{h\to 0} \frac{f(a_1, \dots, a_i+h, \dots, a_n) - f(a_1, \dots, a_n)}{h} \]
+    \item \textbf{Derivadas de Ordem Superior:} Derivação sucessiva de funções derivadas parciais:
+      \[ \frac{\partial^2 f}{\partial x_j \partial x_i}(a) = \frac{\partial}{\partial x_j} \left( \frac{\partial f}{\partial x_i} \right) (a), \quad \frac{\partial^2 f}{\partial x_i^2}(a) = \frac{\partial}{\partial x_i} \left( \frac{\partial f}{\partial x_i} \right) (a) \]
+    \item \textbf{Classe $C^p$:} $f \in C^p(A)$ num aberto $A$ se as derivadas parciais de $f$ até à ordem $p$ existem e são contínuas em $A$. $f \in C^\infty(A) \iff f \in C^p(A), \forall p \in \N$.
+  \end{itemize}
+\end{definitionbox}
+
+\noindent\begin{theorembox}{Teorema de Schwarz, Gradiente e Hessiana}
+  \begin{itemize}
+    \item \textbf{Teorema de Schwarz (Simetria das Mistas):} Se $f \in C^2(A)$, a ordem das derivações parciais de segunda ordem pode ser trocada:
+      \[ \frac{\partial^2 f}{\partial x_j \partial x_i}(a) = \frac{\partial^2 f}{\partial x_i \partial x_j}(a) \]
+    \item \textbf{Vetor Gradiente ($\nabla f$):} Vetor coluna das derivadas parciais de primeira ordem:
+      \[ \nabla f(x) = \left[ \frac{\partial f}{\partial x_1}(x), \dots, \frac{\partial f}{\partial x_n}(x) \right]^T \]
+    \item \textbf{Matriz Hessiana ($\text{Hess}\,f$):} Matriz quadrada das derivadas parciais de 2.ª ordem:
+      \[ \text{Hess}\,f(x) = \left[ \frac{\partial^2 f}{\partial x_i \partial x_j}(x) \right]_{n \times n} \]
+      Pelo Teorema de Schwarz, se $f \in C^2(A)$, a matriz Hessiana é \textbf{simétrica}.
+  \end{itemize}
+\end{theorembox}
+
+\subsection{Diferenciabilidade e Diferencial}
+
+\noindent\begin{definitionbox}{Diferenciabilidade em $\R^n$}
+  Seja $f : D \subseteq \R^n \to \R$ e $a \in \text{int}(D)$.
+  \begin{itemize}
+    \item \textbf{Definição:} $f$ é diferenciável em $a$ se existe aplicação linear $L_a : \R^n \to \R$ tal que:
+      \[ f(a+h) = f(a) + L_a(h) + \|h\|\epsilon(h), \quad \text{com } \lim_{h\to 0}\epsilon(h) = 0 \]
+    \item \textbf{Diferenciabilidade $\implies$ Continuidade:} Se $f$ é diferenciável em $a$, então $f$ é contínua em $a$. (A recíproca é falsa).
+    \item \textbf{Propriedade:} Se $f$ é diferenciável em $a$, todas as parciais existem e:
+      \[ \dd f(a)(h) = L_a(h) = \nabla f(a)^T h = \frac{\partial f}{\partial x_1}(a)h_1 + \dots + \frac{\partial f}{\partial x_n}(a)h_n \]
+  \end{itemize}
+\end{definitionbox}
+
+\noindent\begin{theorembox}{Condições de Diferenciabilidade}
+  \begin{itemize}
+    \item \textbf{Em $\R$ vs $\R^n$:} Em $\R$, diferenciável $\iff$ existe derivada. Em $\R^n$, a existência de todas as derivadas parciais \textbf{não garante} diferenciabilidade (nem continuidade).
+    \item \textbf{Condição Suficiente (Classe $C^1$):} Se as parciais $\frac{\partial f}{\partial x_i}$ existem e são \textbf{contínuas} em $A$ aberto $\implies f$ é diferenciável em todos os pontos de $A$.
+  \end{itemize}
+\end{theorembox}
+
+\noindent\begin{formulabox}{Guia Prático: Como Provar a Diferenciabilidade num Ponto}
+  Para verificar se $f(x)$ é diferenciável no ponto $a \in \text{int}(D)$:
+  \begin{enumerate}
+    \item \textbf{Passo 1:} Calcular $\frac{\partial f}{\partial x_i}(a)$ para todo $i \in \{1,\dots,n\}$. Se alguma parcial não existir, $f$ \textbf{não é diferenciável} em $a$.
+    \item \textbf{Passo 2:} Obter o candidato a diferencial: $\dd f(a)(h) = \nabla f(a)^T h$.
+    \item \textbf{Passo 3:} Calcular o limite do erro $\epsilon(h)$ quando $h \to 0$:
+      \[ \lim_{h \to \vec{0}} \frac{f(a+h) - f(a) - \dd f(a)(h)}{\|h\|} = 0 \]
+      Se o limite existir e for igual a 0, $f$ é diferenciável em $a$; caso contrário, não é.
+  \end{enumerate}
+\end{formulabox}
+
+\subsection{Derivadas segundo um Vetor e Direcionais}
+
+\noindent\begin{definitionbox}{Derivada segundo um Vetor e Direcional}
+  Seja $f : D \subseteq \R^n \to \R$, $a \in \text{int}(D)$ e $\vec{u} \in \R^n$.
+  \begin{itemize}
+    \item \textbf{Derivada segundo um vetor $\vec{u}$:} O limite de variação média direcional:
+      \[ f'_{\vec{u}}(a) = \lim_{t \to 0} \frac{f(a + t\vec{u}) - f(a)}{t} \]
+    \item \textbf{Derivada Direcional:} Se $\vec{u}$ for unitário ($\|\vec{u}\| = 1$), a derivada designa-se por derivada direcional de $f$ em $a$ na direção de $\vec{u}$. Representa a taxa de variação na direção de $\vec{u}$.
+    \item \textbf{Propriedade:} A derivada segundo os vetores da base padrão $\vec{e}_i$ corresponde às derivadas parciais: $f'_{\vec{e}_i}(a) = \frac{\partial f}{\partial x_i}(a)$.
+  \end{itemize}
+\end{definitionbox}
+
+\noindent\begin{theorembox}{Diferenciabilidade, Direções de Máximo e Mínimo}
+  \begin{itemize}
+    \item \textbf{Teorema:} Se $f$ é diferenciável em $a$, então admite derivada segundo qualquer vetor $\vec{u}$ e esta calcula-se diretamente pelo produto escalar:
+      \[ f'_{\vec{u}}(a) = \dd f(a)(\vec{u}) = \nabla f(a)^T \vec{u} = \nabla f(a) \cdot \vec{u} \]
+      \textit{Nota:} Uma função pode admitir derivada segundo qualquer vetor num ponto e \textbf{não ser diferenciável} (ou sequer contínua) nesse ponto.
+    \item \textbf{Crescimento Máximo (Taxa Máxima):} Ocorre na direção e sentido do vetor gradiente $\nabla f(a)$ (se $\nabla f(a) \neq \vec{0}$). O valor máximo da derivada direcional é $\|\nabla f(a)\|$.
+    \item \textbf{Decrescimento Máximo (Taxa Mínima):} Ocorre na direção e sentido oposto ao gradiente $-\nabla f(a)$. O valor mínimo da derivada direcional é $-\|\nabla f(a)\|$.
+  \end{itemize}
+\end{theorembox}
+
+\subsection{Funções Vetoriais, Plano Tangente e Aproximações}
+
+\noindent\begin{definitionbox}{Diferenciabilidade de Funções Vetoriais}
+  Seja $f : D \subseteq \R^n \to \R^p$ com componentes $f(x) = (f_1(x), \dots, f_p(x))$.
+  \begin{itemize}
+    \item \textbf{Diferenciabilidade Componente a Componente:} $f$ é diferenciável em $a \in \text{int}(D)$ se e só se cada $f_i$ for diferenciável em $a$ para todo o $i \in \{1,\dots,p\}$.
+    \item \textbf{Matriz Jacobiana ($\text{Jac}\,f$):} Matriz $p \times n$ das derivadas parciais das componentes:
+      \[ \text{Jac}\,f(a) = \begin{bmatrix} \frac{\partial f_1}{\partial x_1}(a) & \dots & \frac{\partial f_1}{\partial x_n}(a) \\ \vdots & \ddots & \vdots \\ \frac{\partial f_p}{\partial x_1}(a) & \dots & \frac{\partial f_p}{\partial x_n}(a) \end{bmatrix} = \begin{bmatrix} \nabla f_1(a)^T \\ \vdots \\ \nabla f_p(a)^T \end{bmatrix} \]
+    \item \textbf{Diferencial Vetorial:} Calculado matricialmente por $\dd f(a)(h) = \text{Jac}\,f(a)h$.
+  \end{itemize}
+\end{definitionbox}
+
+\noindent\begin{theorembox}{Regra da Cadeia e Operações com Diferenciais}
+  Sejam $f, g : \R^n \to \R^p$ diferenciáveis em $a \in \text{int}(D)$.
+  \begin{itemize}
+    \item \textbf{Álgebra de Diferenciais:} $\dd(f \pm g)(a) = \dd f(a) \pm \dd g(a)$. Para $p=1$:
+      \[ \dd(f \cdot g)(a) = g(a)\dd f(a) + f(a)\dd g(a), \quad \dd(f/g)(a) = \frac{g(a)\dd f(a) - f(a)\dd g(a)}{g(a)^2} \ (\text{se } g(a)\neq 0) \]
+    \item \textbf{Regra da Cadeia (Composição):} Se $g : \R^n \to \R^p$ é diferenciável em $a$ e $f : \R^p \to \R^q$ é diferenciável em $g(a) \implies f \circ g : \R^n \to \R^q$ é diferenciável em $a$:
+      \[ \dd(f \circ g)(a) = \dd f(g(a)) \circ \dd g(a) \implies \text{Jac}(f \circ g)(a) = \text{Jac}\,f(g(a)) \times \text{Jac}\,g(a) \]
+  \end{itemize}
+\end{theorembox}
+
+\noindent\begin{formulabox}{Aproximação Linear e Plano Tangente}
+  Seja $f : D \subseteq \R^2 \to \R$ diferenciável em $(x_0, y_0) \in \text{int}(D)$.
+  \begin{itemize}
+    \item \textbf{Aproximação Linear ($L$):} Para pontos $(x,y)$ próximos de $(x_0, y_0)$, $f(x, y) \approx L(x, y)$:
+      \[ L(x, y) = f(x_0, y_0) + \frac{\partial f}{\partial x}(x_0, y_0)(x - x_0) + \frac{\partial f}{\partial y}(x_0, y_0)(y - y_0) \]
+      O erro $E(x,y) = f(x,y) - L(x,y)$ satisfaz: $\lim_{(x,y)\to(x_0,y_0)} \frac{E(x,y)}{\|(x,y) - (x_0,y_0)\|} = 0$.
+    \item \textbf{Plano Tangente:} A equação do plano tangente ao gráfico de $f$ em $(x_0, y_0, f(x_0,y_0))$ é:
+      \[ z = f(x_0, y_0) + \frac{\partial f}{\partial x}(x_0, y_0)(x - x_0) + \frac{\partial f}{\partial y}(x_0, y_0)(y - y_0) \]
+    \item \textbf{Variação Aproximada:} $\dd f(x_0, y_0)(x - x_0, y - y_0) \approx f(x, y) - f(x_0, y_0)$.
+  \end{itemize}
+\end{formulabox}
 
 
 % ==========================================
