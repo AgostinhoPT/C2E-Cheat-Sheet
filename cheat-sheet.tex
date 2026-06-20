@@ -236,10 +236,6 @@ A solução geral de uma EDO de ordem $n$ apresenta $n$ constantes arbitrárias.
 \]
 Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas específicas para certos tipos.
 
-\begin{theorembox}{Teorema de Existência e Unicidade (Picard-Lindelöf)}
-  Se $f(x, y)$ e $\frac{\partial f}{\partial y}$ forem contínuas num retângulo aberto contendo $(x_0, y_0)$, então o PVI tem uma única solução $y(x)$ definida numa vizinhança de $x_0$.
-\end{theorembox}
-
 \subsection{Resolução de EDOs de 1.ª Ordem}
 
 \begin{theorembox}{EDO Linear de 1.ª Ordem}
@@ -249,7 +245,7 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
     \item Multiplica-se a EDO por $\mu(x)$: $(\mu(x) y)' = \mu(x) f(x)$.
     \item Solução geral: $y(x) = \frac{1}{\mu(x)} \left[ \int \mu(x) f(x) \dx + C \right]$.
   \end{enumerate}
-  \textbf{Exemplo Prático (Slide 1):} $t y' + (1+t)y = 2$ para $t > 0$.
+  \textbf{Exemplo Prático:} $t y' + (1+t)y = 2$ para $t > 0$.
   \begin{enumerate}
     \item Forma padrão: $y' + \frac{1+t}{t}y = \frac{2}{t} \implies g(t) = 1 + \frac{1}{t}$ e $f(t) = \frac{2}{t}$.
     \item Fator integrante: $\mu(t) = e^{\int \left(1 + \frac{1}{t}\right) \dd t} = e^{t + \ln t} = t e^t$.
@@ -258,14 +254,14 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
   \end{enumerate}
 \end{theorembox}
 
-\begin{theorembox}{EDO de Variáveis Separáveis}
+\noindent\begin{theorembox}{EDO de Variáveis Separáveis}
   EDO da forma $h(y) \frac{\dd y}{\dd x} = g(x)$, onde $g$ e $h$ são contínuas: $\int h(y) \dd y = \int g(x) \dx + C \implies H(y) = G(x) + C$.
   
   \textbf{Aviso de Perda de Soluções:} 
   
   No processo de divisão para separar variáveis, assumindo $h(y) \neq 0$, podem perder-se soluções constantes (singulares).
   
-  \textbf{Exemplo Prático (Slide 1):} Resolver a EDO $y' - 3y = 0$:
+  \textbf{Exemplo Prático:} Resolver a EDO $y' - 3y = 0$:
   \begin{enumerate}
     \item Separar as variáveis: $y' = 3y \implies \frac{1}{y} \dd y = 3 \dd x$.
     \item Integrar ambos os membros: $\int \frac{1}{y} \dd y = \int 3 \dd x \implies \ln|y| = 3x + C_1$.
@@ -300,7 +296,7 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
   \]
 \end{formulabox}
 
-\begin{formulabox}{Lei da Variação de Temperatura de Newton}
+\noindent\begin{formulabox}{Lei da Variação de Temperatura de Newton}
   A taxa de variação da temperatura $T(t)$ de um objeto é proporcional à diferença entre a sua temperatura e a temperatura constante do ambiente $T_a$:
   \[
     \frac{\dd T}{\dd t} = k(T - T_a) \implies \int \frac{\dd T}{T-T_a} = \int k \dd t \implies T(t) = T_a + C e^{kt}
@@ -1010,6 +1006,7 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   \end{tikzpicture}
 \end{minipage}
 
+\newpage
 
 % ==========================================
 % Capítulo 4: Limites e Continuidade em $\R^n$
@@ -1235,6 +1232,7 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   \end{itemize}
 \end{theorembox}
 
+\newpage
 
 % ==========================================
 % Capítulo 5: Cálculo Diferencial em $\R^n$
@@ -1354,6 +1352,7 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   \end{itemize}
 \end{formulabox}
 
+\newpage
 
 % ==========================================
 % Capítulo 6: Extremos Relativos e Condicionados
@@ -1362,11 +1361,102 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
 \label{chap:extremos}
 
 \subsection{Extremos Livres}
-Pontos críticos, matriz Hessiana e classificação de pontos (máximo, mínimo ou sela).
+
+\noindent\begin{definitionbox}{Extremos Locais e Pontos Críticos}
+  Seja $f : D \subseteq \R^n \to \R$ e $a \in \text{int}(D)$.
+  \begin{itemize}
+    \item \textbf{Extremo Relativo:} $f(a)$ é um \textbf{máximo relativo} se existir $\epsilon>0$ t.q. $f(x) \leq f(a), \forall x \in D \cap B_\epsilon(a)$; é um \textbf{mínimo relativo} se $f(x) \geq f(a), \forall x \in D \cap B_\epsilon(a)$.
+    \item \textbf{Ponto Crítico ou Estacionário:} $a$ é ponto crítico se $\nabla f(a) = \vec{0}$, ou seja, $\frac{\partial f}{\partial x_i}(a) = 0, \ \forall i \in \{1,\dots,n\}$.
+    \item \textbf{Condição Necessária:} Se $f$ tem extremo relativo em $a$ e todas as parciais existem em $a \implies a$ é ponto estacionário. (A recíproca não é verdadeira, ex: pontos de sela).
+  \end{itemize}
+\end{definitionbox}
+
+\noindent\begin{theorembox}{Teorema de Taylor em Várias Variáveis}
+  Seja $A \subseteq \R^n$ aberto, $f \in C^m(A)$ e $a \in A$. O desenvolvimento de Taylor de ordem $m$ de $f$ em torno de $a$ é:
+  \[ f(a+h) = \sum_{0 \leq i_1 + \dots + i_n \leq m} \frac{D_1^{i_1} \dots D_n^{i_n} f(a)}{i_1! \dots i_n!} h_1^{i_1} \dots h_n^{i_n} + \|h\|^m \epsilon(h) \]
+  com $\lim_{h\to\vec{0}} \epsilon(h) = 0$. Em forma compacta vetorial (ordem $m=2$):
+  \[ f(a+h) = f(a) + \nabla f(a)^T h + \frac{1}{2} h^T \text{Hess}\,f(a) h + \|h\|^2 \epsilon(h) \]
+  Se $a$ é estacionário ($\nabla f(a)=\vec{0}$), a diferença é aproximada por $f(a+h) - f(a) \approx \frac{1}{2} h^T \text{Hess}\,f(a) h$.
+\end{theorembox}
+
+\noindent\begin{formulabox}{Classificação de Pontos Críticos em $\R^2$}
+  Seja $a \in \text{int}(D)$ ponto crítico de $f \in C^2(D)$. Seja $H(a) = \text{Hess}\,f(a)$ com determinante $|H(a)|$:
+  \begin{itemize}
+    \item \textbf{Se $|H(a)| < 0$:} $f$ não tem extremo em $a \implies$ \textbf{Ponto de Sela} (\textit{saddle point}).
+    \item \textbf{Se $|H(a)| > 0$:} $f$ tem extremo relativo em $a$:
+      \begin{itemize}
+        \item Se $\frac{\partial^2 f}{\partial x^2}(a) > 0$ (ou $\frac{\partial^2 f}{\partial y^2}(a) > 0$) $\implies$ \textbf{Mínimo Relativo}.
+        \item Se $\frac{\partial^2 f}{\partial x^2}(a) < 0$ (ou $\frac{\partial^2 f}{\partial y^2}(a) < 0$) $\implies$ \textbf{Máximo Relativo}.
+      \end{itemize}
+    \item \textbf{Se $|H(a)| = 0$:} O teste é inconclusivo (\textbf{nada se pode concluir}).
+  \end{itemize}
+\end{formulabox}
+
+\noindent\begin{theorembox}{Extremos Absolutos e Compacidade}
+  Se $f$ é contínua num compacto $K \subset \R^n$ (fechado e limitado), o Teorema de Weierstrass garante a existência de máximo e mínimo absolutos.
+  \begin{itemize}
+    \item \textbf{Candidatos:} Pontos críticos estacionários em $\text{int}(K)$ e pontos da fronteira $\partial K$.
+    \item \textbf{Resolução:} Avaliam-se as imagens dos candidatos: o maior valor é o máximo absoluto, o menor é o mínimo absoluto. A análise na fronteira $\partial K$ faz-se por extremos condicionados.
+  \end{itemize}
+\end{theorembox}
 
 \subsection{Extremos Condicionados (Multiplicadores de Lagrange)}
-Otimização com restrições de igualdade utilizando multiplicadores de Lagrange.
 
+\noindent\begin{minipage}[t]{0.65\textwidth}
+  \begin{definitionbox}{Geometria dos Extremos Condicionados}
+    Ao percorrer a restrição $c(x, y) = 0$, o valor de $f(x, y)$ varia a menos que a curva de restrição intersete tangencialmente uma das curvas de nível de $f$.
+    \begin{itemize}
+      \item \textbf{Condição de Tangência:} Os vetores perpendiculares às curvas, i.e. os gradientes $\nabla f(a)$ e $\nabla c(a)$, devem ser colineares.
+      \item \textbf{Propriedades do Gradiente:} $\nabla f(a)$ indica o sentido de subida máxima; $-\nabla f(a)$ o de descida máxima. O gradiente é ortogonal à curva de nível correspondente.
+      \item \textbf{Geometria do Gráfico:} A reta normal ao gráfico de $f$ em $(a, f(a))$ tem a direção de $(\nabla f(a), -1)$ e parametriza-se por:
+        $X(t) = (a, f(a)) + t(\nabla f(a), -1), \ t \in \R$.
+    \end{itemize}
+  \end{definitionbox}
+
+  \begin{theorembox}{Teorema dos Multiplicadores de Lagrange}
+    Sejam $f, c \in C^1(\R^n)$ e $a \in \R^n$ com $\nabla c(a) \neq \vec{0}$. Se $a$ for um extremo de $f$ sujeito à restrição $c(x) = 0$, então existe $\lambda \in \R$ tal que:
+    \[ \begin{cases} \nabla f(a) = \lambda \nabla c(a) \\ c(a) = 0 \end{cases} \]
+    \textbf{Função Lagrangeana:} As soluções do sistema são pontos críticos de:
+    \[ \mathcal{L}(x, \lambda) = f(x) - \lambda c(x), \quad \lambda \in \R \]
+  \end{theorembox}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.33\textwidth}
+  \centering
+  \vspace{8pt}
+  \begin{tikzpicture}[scale=1.0]
+    % Draw level curves of f (concentric arcs or circles)
+    \draw[gray, thick, domain=0:90] plot ({1.1*cos(\x)}, {1.1*sin(\x)});
+    \node[gray, right] at (1.1, 0.1) {\tiny $f=c_1$};
+    
+    \draw[gray, thick, domain=0:90] plot ({1.7*cos(\x)}, {1.7*sin(\x)});
+    \node[gray, right] at (1.7, 0.1) {\tiny $f=c_2$};
+    
+    \draw[gray, thick, domain=0:90] plot ({2.3*cos(\x)}, {2.3*sin(\x)});
+    \node[gray, right] at (2.3, 0.1) {\tiny $f=c_3$};
+    
+    % Draw constraint g(x,y) = 0 (say, y = -1.19*x + 2.7)
+    \draw[thick, secondaryColor, domain=0.3:2.1] plot (\x, {-1.19*\x + 2.7}) node[right] {\tiny $c(x,y)=0$};
+    
+    % Point of tangency
+    \coordinate (P) at (1.33, 1.12);
+    \fill[accentColor] (P) circle (1.8pt) node[below left, black] {\tiny $a$};
+    
+    % Gradient of f
+    \draw[-stealth, thick, primaryColor] (P) -- ++(0.55, 0.46) node[above right] {\tiny $\nabla f(a)$};
+    
+    % Gradient of c
+    \draw[-stealth, thick, accentColor] (P) -- ++(-0.42, -0.35) node[below left] {\tiny $\nabla c(a)$};
+    
+    \node[draw, fill=white, font=\tiny, align=center] at (1.2, 2.1) {Tangência: \\ $\nabla f = \lambda \nabla c$};
+  \end{tikzpicture}
+  \vspace{4pt}
+  \begin{center}
+    \small \textbf{Multiplicadores:} A restrição é tangente à curva de nível no extremo.
+  \end{center}
+\end{minipage}
+
+\newpage
 
 % ==========================================
 % Capítulo 7: Teorema da Função Implícita e Inversa
@@ -1375,11 +1465,64 @@ Otimização com restrições de igualdade utilizando multiplicadores de Lagrang
 \label{chap:funcao_implicita_inversa}
 
 \subsection{Teorema da Função Inversa}
-Condições para a invertibilidade local de funções de $\R^n \to \R^n$ e cálculo da derivada da inversa.
+
+\noindent\begin{definitionbox}{Injetividade e Função Inversa}
+  Seja $f : A \subseteq \R^n \to B \subseteq \R^n$.
+  \begin{itemize}
+    \item \textbf{Injetividade:} $f$ é injetiva se $\forall x, y \in A, x \neq y \implies f(x) \neq f(y)$.
+    \item \textbf{Consequência:} A equação $f(x) = k$, com $k \in f(A)$, tem uma única solução.
+    \item \textbf{Função Inversa ($f^{-1}$):} Se $f$ é injetiva, existe uma única função $g : f(A) \subseteq B \to A$ tal que $(g \circ f)(x) = x, \ \forall x \in A$, designada por $f^{-1}$.
+  \end{itemize}
+\end{definitionbox}
+
+\noindent\begin{theorembox}{Teorema da Função Inversa (Local)}
+  Seja $f : D \subseteq \R^n \to \R^n$ uma função de classe $C^1$ no aberto $D$ e $a \in D$. Se o determinante da matriz Jacobiana for não nulo em $a$:
+  \[ \det \text{Jac}\,f(a) \neq 0 \]
+  Então:
+  \begin{enumerate}
+    \item \textbf{Invertibilidade Local:} Existem vizinhanças abertas $U$ de $a$ e $V$ de $f(a)$ tais que $f : U \to V$ é uma bijeção, estando a inversa $f^{-1} : V \to U$ bem definida.
+    \item \textbf{Suavidade da Inversa:} A função inversa é de classe $C^1$ em $V$, ou seja, $f^{-1} \in C^1(V)$.
+    \item \textbf{Cálculo da Jacobiana da Inversa:} A Jacobiana de $f^{-1}$ no ponto $y = f(x)$ é a matriz inversa da Jacobiana de $f$ no ponto $x$:
+      \[ \text{Jac}\,f^{-1}(y) = \left[ \text{Jac}\,f(x) \right]^{-1}, \quad \forall x \in U, y \in V, y = f(x) \]
+  \end{enumerate}
+  \textit{Nota Crucial:} O teorema apenas garante a invertibilidade **local** (na vizinhança de $a$), não garantindo a invertibilidade global em todo o domínio $D$.
+\end{theorembox}
 
 \subsection{Teorema da Função Implícita}
-Existência e diferenciação de funções definidas implicitamente por sistemas de equações.
 
+\noindent\begin{definitionbox}{Função Implícita em $\R^2$ (Caso $F(x,y)=0$)}
+  Seja $F : D \subseteq \R^2 \to \R$ definida no aberto $D$ e $(a, b) \in D$ tal que:
+  \begin{enumerate}
+    \item $F(a, b) = 0$
+    \item $F \in C^1(D)$
+    \item $\frac{\partial F}{\partial y}(a, b) \neq 0$
+  \end{enumerate}
+  Então:
+  \begin{itemize}
+    \item A equação $F(x, y) = 0$ define implicitamente $y$ como função de $x$ numa vizinhança de $(a, b)$.
+    \item Escrevendo $y = \phi(x)$, a função $\phi$ é de classe $C^1$ na vizinhança de $a$ e a sua derivada é:
+      \[ \phi'(x) = - \frac{\frac{\partial F}{\partial x}(x, \phi(x))}{\frac{\partial F}{\partial y}(x, \phi(x))} \]
+  \end{itemize}
+\end{definitionbox}
+
+\noindent\begin{theorembox}{Teorema da Função Implícita (Caso Geral)}
+  Seja $F : D \subseteq \R^{n+m} \to \R^m$ de classe $C^1$ no aberto $D$. Escrevemos os pontos como $(x, y) \in \R^n \times \R^m$. Seja $(A, B) \in D$ com $A \in \R^n$ e $B \in \R^m$ tal que:
+  \begin{enumerate}
+    \item $F(A, B) = \vec{0}$
+    \item O determinante da matriz Jacobiana em ordem às variáveis dependentes $y$ é não nulo em $(A, B)$:
+      \[ \det \frac{\partial(F_1, \dots, F_m)}{\partial(y_1, \dots, y_m)}(A, B) = \det \begin{bmatrix} \frac{\partial F_1}{\partial y_1} & \dots & \frac{\partial F_1}{\partial y_m} \\ \vdots & \ddots & \vdots \\ \frac{\partial F_m}{\partial y_1} & \dots & \frac{\partial F_m}{\partial y_m} \end{bmatrix}_{(A, B)} \neq 0 \]
+  \end{enumerate}
+  Então:
+  \begin{itemize}
+    \item A equação $F(x, y) = \vec{0}$ define implicitamente $y = (y_1, \dots, y_m)$ como função de $x = (x_1, \dots, x_n)$ numa vizinhança de $(A, B)$, ou seja, $y = \Phi(x)$, com $\Phi$ de classe $C^1$.
+    \item \textbf{Cálculo Matricial das Derivadas (Jacobiana de $\Phi$):}
+      \[ \text{Jac}\,\Phi(x) = - \left[ \frac{\partial F}{\partial y}(x, \Phi(x)) \right]^{-1} \frac{\partial F}{\partial x}(x, \Phi(x)) \]
+    \item \textbf{Cálculo por Componentes (Regra de Cramer):}
+      \[ \frac{\partial \Phi_i}{\partial x_j}(x) = - \frac{\det \frac{\partial(F_1, \dots, F_m)}{\partial(y_1, \dots, y_{i-1}, x_j, y_{i+1}, \dots, y_m)}(x, \Phi(x))}{\det \frac{\partial(F_1, \dots, F_m)}{\partial(y_1, \dots, y_m)}(x, \Phi(x))} \]
+  \end{itemize}
+\end{theorembox}
+
+\newpage
 
 % ==========================================
 % Capítulo 8: Integrais Duplos
@@ -1387,12 +1530,197 @@ Existência e diferenciação de funções definidas implicitamente por sistemas
 \section{Integrais Duplos}
 \label{chap:integrais_duplos}
 
-\subsection{Integração em Retângulos e Regiões Gerais}
-Definição de integral duplo e Teorema de Fubini.
+\subsection{Definição e Integração em Retângulos}
 
-\subsection{Mudança de Variáveis (Coordenadas Polares)}
-Transformação de coordenadas e aplicação do Jacobiano em integrais duplos.
+\begin{definitionbox}{Integral Duplo em Retângulos}
+  Seja $f : D \subseteq \R^2 \to \R$ uma função limitada e $R = [a, b] \times [c, d]$ um retângulo contido em $D$.
+  \begin{itemize}
+    \item \textbf{Partição ($P$):} Dados $a = x_0 < x_1 < \dots < x_n = b$ e $c = y_0 < y_1 < \dots < y_m = d$, o conjunto de subretângulos $R_{ij} = [x_i, x_{i+1}] \times [y_j, y_{j+1}]$ (com $i \in \{0, \dots, n-1\}$ e $j \in \{0, \dots, m-1\}$) constitui uma partição $P$ de $R$. Note-se que $R = \bigcup_{i=0}^{n-1}\bigcup_{j=0}^{m-1} R_{ij}$ e $\text{int}(R_{ij}) \cap \text{int}(R_{kl}) = \emptyset$ se $(i,j) \neq (k,l)$.
+    \item \textbf{Área do Subretângulo:} $\Delta R_{ij} = (x_{i+1} - x_i)(y_{j+1} - y_j)$.
+    \item \textbf{Somas de Darboux:}
+      \begin{itemize}
+        \item \textbf{Inferior:} $s_f(P) = \sum_{i=0}^{n-1} \sum_{j=0}^{m-1} \Delta R_{ij} \inf_{(x,y) \in R_{ij}} f(x, y)$
+        \item \textbf{Superior:} $S_f(P) = \sum_{i=0}^{n-1} \sum_{j=0}^{m-1} \Delta R_{ij} \sup_{(x,y) \in R_{ij}} f(x, y)$
+      \end{itemize}
+    \item \textbf{Integrabilidade:} $f$ diz-se integrável em $R$ se:
+      \[ \sup_{P} s_f(P) = \inf_{P} S_f(P) \]
+      Este valor comum designa-se pelo integral duplo: $\iint_R f(x, y) \, dx \, dy$.
+    \item \textbf{Significado Geométrico:} Se $f(x, y) \ge 0$, o integral duplo $\iint_R f(x, y) \, dx \, dy$ corresponde ao volume sob o gráfico de $z = f(x, y)$ acima de $R$ no plano $xOy$.
+  \end{itemize}
+\end{definitionbox}
 
+\subsection{Teoremas de Integrabilidade e Teorema de Fubini}
+
+\begin{theorembox}{Existência do Integral}
+  Se $f : D \subseteq \R^2 \to \R$ é contínua num conjunto contendo o retângulo $R$, então $f$ é integrável em $R$.
+  
+  \textit{Nota:} Esta propriedade mantém-se mesmo que a continuidade falhe, desde que o conjunto de descontinuidades tenha \textbf{medida nula}.
+\end{theorembox}
+
+\begin{theorembox}{Teorema de Fubini}
+  Se $f : [a, b] \times [c, d] \to \R$ é contínua, então o integral duplo pode ser calculado por \textbf{integrais iterados}:
+  \[ \iint_R f(x, y) \, dx \, dy = \int_c^d \int_a^b f(x, y) \, dx \, dy = \int_a^b \int_c^d f(x, y) \, dy \, dx \]
+\end{theorembox}
+
+\subsection{Integração sobre Regiões Gerais (Conjuntos Simples)}
+
+\noindent\begin{minipage}[t]{0.49\textwidth}
+  \begin{definitionbox}{Conjunto Verticamente Simples}
+    Sejam $g_1, g_2$ funções contínuas em $[a, b]$. Uma região $V \subset \R^2$ é \textbf{verticamente simples} se:
+    \[ V = \{(x, y) \in \R^2 : a \le x \le b, \ g_1(x) \le y \le g_2(x)\} \]
+    \textbf{Cálculo do Integral:}
+    \[ \iint_V f(x, y) \, dx \, dy = \int_a^b \int_{g_1(x)}^{g_2(x)} f(x, y) \, dy \, dx \]
+  \end{definitionbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}
+  \begin{definitionbox}{Conjunto Horizontalmente Simples}
+    Sejam $h_1, h_2$ funções contínuas em $[c, d]$. Uma região $H \subset \R^2$ é \textbf{horizontalmente simples} se:
+    \[ H = \{(x, y) \in \R^2 : c \le y \le d, \ h_1(y) \le x \le h_2(y)\} \]
+    \textbf{Cálculo do Integral:}
+    \[ \iint_H f(x, y) \, dx \, dy = \int_c^d \int_{h_1(y)}^{h_2(y)} f(x, y) \, dx \, dy \]
+  \end{definitionbox}
+\end{minipage}
+
+\vspace{0.3em}
+
+\begin{center}
+  \begin{minipage}{0.48\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=1.1]
+      \draw[-stealth, gray] (-0.3,0) -- (3.2,0) node[right, black] {\tiny $x$};
+      \draw[-stealth, gray] (0,-0.3) -- (0,2.3) node[above, black] {\tiny $y$};
+      
+      \fill[primaryColor!10] 
+        plot[domain=0.5:2.5, samples=20] (\x, {1.8 - 0.15*(\x-1.5)*(\x-1.5)}) -- 
+        plot[domain=2.5:0.5, samples=20] (\x, {0.4 + 0.1*(\x-1.5)*(\x-1.5)}) -- cycle;
+        
+      \draw[thick, primaryColor] plot[domain=0.5:2.5, samples=20] (\x, {1.8 - 0.15*(\x-1.5)*(\x-1.5)}) node[above] {\tiny $y=g_2(x)$};
+      \draw[thick, primaryColor] plot[domain=0.5:2.5, samples=20] (\x, {0.4 + 0.1*(\x-1.5)*(\x-1.5)}) node[below] {\tiny $y=g_1(x)$};
+      
+      \draw[dashed, gray] (0.5, 0) -- (0.5, {0.4 + 0.1*(0.5-1.5)*(0.5-1.5)});
+      \draw[dashed, gray] (2.5, 0) -- (2.5, {0.4 + 0.1*(2.5-1.5)*(2.5-1.5)});
+      \node[below, black] at (0.5, 0) {\tiny $a$};
+      \node[below, black] at (2.5, 0) {\tiny $b$};
+      
+      \draw[accentColor, -stealth, thick] (1.5, 0.5) -- (1.5, 1.6) node[midway, right] {\tiny $dy$};
+      \draw[accentColor, -stealth, thick] (0.5, -0.15) -- (2.5, -0.15) node[midway, below] {\tiny $dx$};
+    \end{tikzpicture}
+    \\ \small\color{primaryColor} \textbf{Região Verticamente Simples ($V$)}
+  \end{minipage}\hfill
+  \begin{minipage}{0.48\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=1.1]
+      \draw[-stealth, gray] (-0.3,0) -- (3.2,0) node[right, black] {\tiny $x$};
+      \draw[-stealth, gray] (0,-0.3) -- (0,2.3) node[above, black] {\tiny $y$};
+      
+      \fill[secondaryColor!10] 
+        plot[domain=0.3:1.7, samples=20] ({2.4 - 0.3*(\x-1)*(\x-1)}, \x) -- 
+        plot[domain=1.7:0.3, samples=20] ({0.5 + 0.2*(\x-1)*(\x-1)}, \x) -- cycle;
+        
+      \draw[thick, secondaryColor] plot[domain=0.3:1.7, samples=20] ({2.4 - 0.3*(\x-1)*(\x-1)}, \x) node[right] {\tiny $x=h_2(y)$};
+      \draw[thick, secondaryColor] plot[domain=0.3:1.7, samples=20] ({0.5 + 0.2*(\x-1)*(\x-1)}, \x) node[left] {\tiny $x=h_1(y)$};
+      
+      \draw[dashed, gray] (0, 0.3) -- ({0.5 + 0.2*(0.3-1)*(0.3-1)}, 0.3);
+      \draw[dashed, gray] (0, 1.7) -- ({0.5 + 0.2*(1.7-1)*(1.7-1)}, 1.7);
+      \node[left, black] at (0, 0.3) {\tiny $c$};
+      \node[left, black] at (0, 1.7) {\tiny $d$};
+      
+      \draw[accentColor, -stealth, thick] (0.7, 1.0) -- (2.1, 1.0) node[midway, above] {\tiny $dx$};
+      \draw[accentColor, -stealth, thick] (-0.15, 0.3) -- (-0.15, 1.7) node[midway, left] {\tiny $dy$};
+    \end{tikzpicture}
+    \\ \small\color{secondaryColor} \textbf{Região Horizontalmente Simples ($H$)}
+  \end{minipage}
+\end{center}
+
+\subsection{Propriedades de Cálculo e Aplicações}
+
+\noindent\begin{minipage}[t]{0.49\textwidth}
+  \begin{theorembox}{Propriedades dos Integrais Duplos}
+    Sejam $f, g: \R^2 \to \R$ funções integráveis numa região $A$.
+    \begin{itemize}
+      \item \textbf{Aditividade:} Se $A = A_1 \cup A_2$ e $\text{int}(A_1) \cap \text{int}(A_2) = \emptyset$:
+        \[ \iint_A f = \iint_{A_1} f + \iint_{A_2} f \]
+      \item \textbf{Linearidade:} Para qualquer constante $c \in \R$:
+        \[ \iint_A (f + cg) = \iint_A f + c\iint_A g \]
+      \item \textbf{Monotonia:} Se $f \ge g$ em $A$:
+        \[ \iint_A f \ge \iint_A g \]
+      \item \textbf{Desigualdade Modular:}
+        \[ \left| \iint_A f \right| \le \iint_A |f| \]
+    \end{itemize}
+  \end{theorembox}
+\\ \textbf{} % empty space holder to balance heights
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}
+  \begin{formulabox}{Aplicações Físicas e Geométricas}
+    Seja $D \subset \R^2$ a região plana e $d(x,y)$ a função densidade superficial da lâmina:
+    \begin{itemize}
+      \item \textbf{Área da Região $D$:} $A = \iint_D 1 \, dx \, dy$
+      \item \textbf{Volume do Sólido (entre superfícies $f \ge g$):}
+        \[ V = \iint_D (f(x, y) - g(x, y)) \, dx \, dy \]
+      \item \textbf{Massa da Lâmina:} $M = \iint_D d(x, y) \, dx \, dy$
+      \item \textbf{Centro de Massa ($CM = (\bar{x}, \bar{y})$):}
+        \[ \bar{x} = \frac{M_x}{M}, \quad \bar{y} = \frac{M_y}{M} \]
+        com $\begin{cases} M_x = \iint_D x \, d(x, y) \, dx \, dy \\ M_y = \iint_D y \, d(x, y) \, dx \, dy \end{cases}$
+      \item \textbf{Momentos de Inércia (eixos $OX$, $OY$):}
+        \[ \begin{cases} I_x = \iint_D y^2 \, d(x, y) \, dx \, dy \\ I_y = \iint_D x^2 \, d(x, y) \, dx \, dy \end{cases} \]
+    \end{itemize}
+  \end{formulabox}
+\end{minipage}
+
+\subsection{Mudança de Variáveis e Coordenadas Polares}
+
+\begin{theorembox}{Teorema da Mudança de Variáveis}
+  Seja $f : S \to \R$ contínua e $T(u, v) = (x(u,v), y(u,v))$ uma função vetorial tal que $T(R) = S$. Se $T$ for de classe $C^1$, injetiva no interior de $R$ e o seu determinante Jacobiano $\frac{\partial(x, y)}{\partial(u, v)} \neq 0$ no interior de $R$, então:
+  \[ \iint_S f(x, y) \, dx \, dy = \iint_R f(x(u, v), y(u, v)) \, \left| \frac{\partial(x, y)}{\partial(u, v)} \right| \, du \, dv \]
+  onde o Jacobiano é dado por: \ $\frac{\partial(x, y)}{\partial(u, v)} = \begin{vmatrix} \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\ \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} \end{vmatrix}$.
+\end{theorembox}
+
+\noindent\begin{minipage}[t]{0.60\textwidth}
+  \begin{definitionbox}{Mudança Polar}
+    A transformação de coordenadas polares é dada por:
+    \[ x = r \cos\theta, \quad y = r \sin\theta \quad (r \ge 0, \ \theta \in [0, 2\pi[) \]
+    O jacobiano da transformação polar é:
+    \[ J(r, \theta) = \frac{\partial(x, y)}{\partial(r, \theta)} = \begin{vmatrix} \cos\theta & -r\sin\theta \\ \sin\theta & r\cos\theta \end{vmatrix} = r \]
+    Fórmula de Integração em coordenadas polares:
+    \[ \iint_S f(x, y) \, dx \, dy = \iint_R f(r\cos\theta, r\sin\theta) \, r \, dr \, d\theta \]
+  \end{definitionbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.38\textwidth}
+  \centering
+  \vspace{6pt}
+  \begin{tikzpicture}[scale=1.1]
+    \draw[-stealth, gray] (-0.3,0) -- (2.5,0) node[right, black] {\tiny $x$};
+    \draw[-stealth, gray] (0,-0.3) -- (0,2.2) node[above, black] {\tiny $y$};
+    
+    \draw[dashed, gray] (0,0) -- (25:2.4) node[right, black] {\tiny $\theta = \alpha$};
+    \draw[dashed, gray] (0,0) -- (65:2.4) node[above, black] {\tiny $\theta = \beta$};
+    
+    \fill[primaryColor!10] plot[domain=25:65, samples=20] (\x: {1.0 + 0.15*sin(2*\x)}) -- 
+      plot[domain=65:25, samples=20] (\x: {2.0 + 0.2*sin(2*\x)}) -- cycle;
+      
+    \draw[thick, primaryColor] plot[domain=25:65, samples=20] (\x: {1.0 + 0.15*sin(2*\x)}) node[below right] {\tiny $g_1(\theta)$};
+    \draw[thick, primaryColor] plot[domain=25:65, samples=20] (\x: {2.0 + 0.2*sin(2*\x)}) node[above right] {\tiny $g_2(\theta)$};
+    
+    \draw[accentColor, ->, thick] (0:0.7) arc (0:25:0.7);
+    \node[accentColor] at (12:0.85) {\tiny $\alpha$};
+    \draw[accentColor, ->, thick] (0:0.5) arc (0:65:0.5);
+    \node[accentColor] at (45:0.65) {\tiny $\beta$};
+    
+    \draw[accentColor, -stealth, thick] (45:1.2) -- (45:1.8) node[midway, right] {\tiny $dr$};
+  \end{tikzpicture}
+\end{minipage}
+
+\begin{theorembox}{Limites de Integração em Coordenadas Polares}
+  Para passar de um integral duplo a dois integrais iterados em coordenadas polares:
+  \begin{itemize}
+    \item \textbf{Região $\theta$-simples (Simetria angular):} Se $R = \{(r, \theta) \in \R^+ \times [0, 2\pi[ \ : \ \alpha \le \theta \le \beta \land g_1(\theta) \le r \le g_2(\theta)\}$:
+      \[ \iint_S f(x, y) \, dx \, dy = \int_\alpha^\beta \int_{g_1(\theta)}^{g_2(\theta)} f(r\cos\theta, r\sin\theta) \, r \, dr \, d\theta \]
+    \item \textbf{Região $r$-simples (Simetria radial):} Se $R = \{(r, \theta) \in \R^+ \times [0, 2\pi[ \ : \ a \le r \le b \land h_1(r) \le \theta \le h_2(r)\}$:
+      \[ \iint_S f(x, y) \, dx \, dy = \int_a^b \int_{h_1(r)}^{h_2(r)} f(r\cos\theta, r\sin\theta) \, r \, d\theta \, dr \]
+  \end{itemize}
+\end{theorembox}
+
+\newpage
 
 % ==========================================
 % Capítulo 9: Integrais Triplos
@@ -1400,10 +1728,170 @@ Transformação de coordenadas e aplicação do Jacobiano em integrais duplos.
 \section{Integrais Triplos}
 \label{chap:integrais_triplos}
 
-\subsection{Integração em Regiões Tridimensionais}
-Definição, ordem de integração e cálculo de volumes.
+\subsection{Definição e Integração em Paralelepípedos}
 
-\subsection{Mudanças de Variáveis}
-Coordenadas cilíndricas e esféricas com os respetivos Jacobianos.
+\begin{definitionbox}{Integral Triplo em Paralelepípedos}
+  Seja $f : D \subseteq \R^3 \to \R$ uma função limitada e $P = [a_1, a_2] \times [b_1, b_2] \times [c_1, c_2]$ um paralelepípedo em $D$.
+  \begin{itemize}
+    \item \textbf{Partição ($\pi$):} Definida por subdivisões dos intervalos em cada eixo:
+      \[ a_1 = x_0 < x_1 < \dots < x_n = a_2, \quad b_1 = y_0 < y_1 < \dots < y_m = b_2, \quad c_1 = z_0 < z_1 < \dots < z_l = c_2 \]
+      Sub-paralelepípedos: $P_{ijk} = [x_i, x_{i+1}] \times [y_j, y_{j+1}] \times [z_k, z_{k+1}]$, com volume $\text{Vol}(P_{ijk}) = \Delta x_i \Delta y_j \Delta z_k$.
+    \item \textbf{Somas de Darboux:}
+      \[ s_f(\pi) = \sum_{i=0}^{n-1} \sum_{j=0}^{m-1} \sum_{k=0}^{l-1} \text{Vol}(P_{ijk}) \inf_{P_{ijk}} f \quad \text{e} \quad S_f(\pi) = \sum_{i=0}^{n-1} \sum_{j=0}^{m-1} \sum_{k=0}^{l-1} \text{Vol}(P_{ijk}) \sup_{P_{ijk}} f \]
+    \item \textbf{Integrabilidade:} $f$ é integrável em $P$ se $\sup_{\pi} s_f(\pi) = \inf_{\pi} S_f(\pi) = \iiint_P f(x, y, z) \, dx \, dy \, dz$.
+  \end{itemize}
+\end{definitionbox}
+
+\begin{theorembox}{Teorema de Fubini e Existência}
+  \begin{itemize}
+    \item \textbf{Existência:} Se $f$ é contínua em $P$ (ou descontínua apenas num conjunto de medida nula), então $f$ é integrável em $P$.
+    \item \textbf{Teorema de Fubini:} Se $f$ é contínua em $P$, o integral triplo pode ser escrito como integrais iterados de seis formas distintas:
+      \[ \iiint_P f(x, y, z) \, dx \, dy \, dz = \int_{a_1}^{a_2} \int_{b_1}^{b_2} \int_{c_1}^{c_2} f(x, y, z) \, dz \, dy \, dx = \dots = \int_{c_1}^{c_2} \int_{b_1}^{b_2} \int_{a_1}^{a_2} f(x, y, z) \, dx \, dy \, dz \]
+  \end{itemize}
+\end{theorembox}
+
+\subsection{Integração em Regiões Gerais (Conjuntos Básicos)}
+
+\begin{definitionbox}{Conjuntos Básicos de $\R^3$}
+  Seja $C \subset \R^2$ uma região plana e $g_1, g_2 : C \to \R$ funções contínuas tais que $g_1(x,y) \le g_2(x,y), \ \forall (x,y)\in C$. O conjunto básico tipo I em $\R^3$ é definido por:
+  \[ S = \{(x, y, z) \in \R^3 : (x, y) \in C, \ g_1(x, y) \le z \le g_2(x, y)\} \]
+  \textbf{Cálculo do Integral (Proposição):} Se $f$ é contínua em $S$:
+  \[ \iiint_S f(x, y, z) \, dx \, dy \, dz = \iint_C \left( \int_{g_1(x,y)}^{g_2(x,y)} f(x, y, z) \, dz \right) dx \, dy \]
+  \textit{Nota:} Existem formulações análogas para a projeção de $S$ nos planos $xOz$ ou $yOz$.
+\end{definitionbox}
+
+\subsection{Propriedades de Cálculo e Aplicações}
+
+\noindent\begin{minipage}[t]{0.49\textwidth}
+  \begin{theorembox}{Propriedades dos Integrais Triplos}
+    \begin{itemize}
+      \item \textbf{Aditividade:} Se $S = S_1 \cup S_2$ com $\text{int}(S_1) \cap \text{int}(S_2) = \emptyset$:
+        \[ \iiint_S f = \iiint_{S_1} f + \iiint_{S_2} f \]
+      \item \textbf{Linearidade:} Para $c \in \R$:
+        \[ \iiint_S (f + cg) = \iiint_S f + c \iiint_S g \]
+      \item \textbf{Monotonia:} Se $f \ge g$ em $S$:
+        \[ \iiint_S f \ge \iiint_S g \]
+      \item \textbf{Módulo:} $\left| \iiint_S f \right| \le \iiint_S |f|$
+    \end{itemize}
+  \end{theorembox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}
+  \begin{formulabox}{Aplicações Geométricas e Físicas}
+    Seja $S \subset \R^3$ um sólido e $d(x,y,z)$ a sua função densidade volumétrica:
+    \begin{itemize}
+      \item \textbf{Volume de $S$:} $V = \iiint_S 1 \, dx \, dy \, dz$
+      \item \textbf{Massa de $S$:} $M = \iiint_S d(x, y, z) \, dx \, dy \, dz$
+      \item \textbf{Centro de Massa ($CM = (\bar{x}, \bar{y}, \bar{z})$):}
+        \[ \bar{x} = \frac{M_x}{M}, \quad \bar{y} = \frac{M_y}{M}, \quad \bar{z} = \frac{M_z}{M} \]
+        com $\begin{cases} M_x = \iiint_S x \, d(x,y,z) \, dV \\ M_y = \iiint_S y \, d(x,y,z) \, dV \\ M_z = \iiint_S z \, d(x,y,z) \, dV \end{cases}$
+      \item \textbf{Momentos de Inércia (eixos $OX, OY, OZ$):}
+        \[ \begin{cases} I_x = \iiint_S (y^2+z^2) \, d(x,y,z) \, dV \\ I_y = \iiint_S (x^2+z^2) \, d(x,y,z) \, dV \\ I_z = \iiint_S (x^2+y^2) \, d(x,y,z) \, dV \end{cases} \]
+    \end{itemize}
+  \end{formulabox}
+\end{minipage}
+
+\subsection{Mudança de Variáveis e Coordenadas Cilíndricas}
+
+\begin{theorembox}{Teorema da Mudança de Variáveis em $\R^3$}
+  Seja $f: S \to \R$ contínua e $T(u,v,w) = (x(u,v,w), y(u,v,w), z(u,v,w))$ uma transformação $C^1$, injetiva no interior de $R$, com $T(R)=S$ e Jacobiano não nulo no interior de $R$:
+  \[ \iiint_S f(x,y,z) \, dV_{xyz} = \iiint_R f(T(u,v,w)) \, \left| \frac{\partial(x,y,z)}{\partial(u,v,w)} \right| \, du \, dv \, dw \]
+  onde \ $\frac{\partial(x,y,z)}{\partial(u,v,w)} = \begin{vmatrix} \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} & \frac{\partial x}{\partial w} \\ \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} & \frac{\partial y}{\partial w} \\ \frac{\partial z}{\partial u} & \frac{\partial z}{\partial v} & \frac{\partial z}{\partial w} \end{vmatrix}$.
+\end{theorembox}
+
+\begin{definitionbox}{Coordenadas Cilíndricas}
+  A transformação de coordenadas cilíndricas associa a cada ponto $(r, \theta, z)$ a coordenada $(x,y,z)$ por:
+  \[ x = r\cos\theta, \quad y = r\sin\theta, \quad z = z \quad (r \ge 0, \ \theta \in [0, 2\pi[, \ z \in \R) \]
+  Relações inversas: $r^2 = x^2 + y^2$, \ $\tan\theta = \frac{y}{x}$, \ $z = z$.
+  
+  O determinante Jacobiano é:
+  \[ J(r, \theta, z) = \frac{\partial(x,y,z)}{\partial(r,\theta,z)} = \begin{vmatrix} \cos\theta & -r\sin\theta & 0 \\ \sin\theta & r\cos\theta & 0 \\ 0 & 0 & 1 \end{vmatrix} = r \]
+  Fórmula de Integração:
+  \[ \iiint_S f(x,y,z) \, dV = \iiint_R f(r\cos\theta, r\sin\theta, z) \, r \, dz \, dr \, d\theta \]
+\end{definitionbox}
+
+\begin{theorembox}{Limites de Integração em Coordenadas Cilíndricas}
+  \begin{itemize}
+    \item \textbf{Região $\theta$-simples:} Se $R = \{(r, \theta, z) : \alpha \le \theta \le \beta, \ r_1(\theta) \le r \le r_2(\theta), \ g_1(r, \theta) \le z \le g_2(r, \theta)\}$:
+      \[ \iiint_S f(x, y, z) \, dV = \int_\alpha^\beta \int_{r_1(\theta)}^{r_2(\theta)} \int_{g_1(r,\theta)}^{g_2(r,\theta)} f(r\cos\theta, r\sin\theta, z) \, r \, dz \, dr \, d\theta \]
+    \item \textbf{Região $r$-simples:} Se $R = \{(r, \theta, z) : a \le r \le b, \ \theta_1(r) \le \theta \le \theta_2(r), \ h_1(r, \theta) \le z \le h_2(r, \theta)\}$:
+      \[ \iiint_S f(x, y, z) \, dV = \int_a^b \int_{\theta_1(r)}^{\theta_2(r)} \int_{h_1(r,\theta)}^{h_2(r,\theta)} f(r\cos\theta, r\sin\theta, z) \, r \, dz \, d\theta \, dr \]
+  \end{itemize}
+\end{theorembox}
+
+\subsection{Coordenadas Esféricas}
+
+\begin{definitionbox}{Coordenadas Esféricas}
+  A transformação de coordenadas esféricas associa a cada ponto $(\rho, \theta, \phi)$ a coordenada $(x,y,z)$ por:
+  \[ \begin{cases} x = \rho \sin\phi \cos\theta \\ y = \rho \sin\phi \sin\theta \\ z = \rho \cos\phi \end{cases} \quad (\rho \ge 0, \ \theta \in [0, 2\pi[, \ \phi \in [0, \pi]) \]
+  Relações inversas: $\rho^2 = x^2 + y^2 + z^2$, \ $\tan\theta = \frac{y}{x}$, \ $\cos\phi = \frac{z}{\rho}$.
+  
+  O determinante Jacobiano da transformação esférica é:
+  \[ J(\rho, \theta, \phi) = \frac{\partial(x,y,z)}{\partial(\rho,\theta,\phi)} = -\rho^2 \sin\phi \implies |J| = \rho^2 \sin\phi \]
+  Fórmula de Integração:
+  \[ \iiint_S f(x,y,z) \, dV = \iiint_R f(\rho\sin\phi\cos\theta, \rho\sin\phi\sin\theta, \rho\cos\phi) \, \rho^2 \sin\phi \, d\rho \, d\phi \, d\theta \]
+\end{definitionbox}
+
+\begin{theorembox}{Limites de Integração em Coordenadas Esféricas}
+  Se a região de integração é descrita em coordenadas esféricas por:
+  \[ R = \{(\rho, \theta, \phi) : \alpha \le \theta \le \beta, \ \phi_1 \le \phi \le \phi_2, \ h_1(\theta, \phi) \le \rho \le h_2(\theta, \phi)\} \]
+  então o integral triplo iterado é:
+  \[ \iiint_S f(x, y, z) \, dV = \int_\alpha^\beta \int_{\phi_1}^{\phi_2} \int_{h_1(\theta, \phi)}^{h_2(\theta, \phi)} f(\rho\sin\phi\cos\theta, \rho\sin\phi\sin\theta, \rho\cos\phi) \, \rho^2 \sin\phi \, d\rho \, d\phi \, d\theta \]
+  (analogamente para outras ordens de integração de acordo com a geometria da região).
+\end{theorembox}
+
+\vspace{0.4em}
+
+\begin{center}
+  \begin{minipage}{0.48\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=1.1, x={(-0.35cm,-0.35cm)}, y={(1.0cm,0cm)}, z={(0cm,1.0cm)}]
+      \draw[-stealth, gray] (0,0,0) -- (2.3,0,0) node[left, black] {\tiny $x$};
+      \draw[-stealth, gray] (0,0,0) -- (0,2.6,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,0,0) -- (0,0,2.3) node[above, black] {\tiny $z$};
+      
+      \coordinate (P) at (1.2, 1.6, 1.5);
+      \coordinate (Pxy) at (1.2, 1.6, 0);
+      
+      \draw[dashed, darkGray] (0,0,0) -- (Pxy) node[midway, below] {\tiny $r$};
+      \draw[dashed, darkGray] (Pxy) -- (P) node[midway, right] {\tiny $z$};
+      \draw[dashed, darkGray] (1.2,0,0) -- (Pxy);
+      \draw[dashed, darkGray] (0,1.6,0) -- (Pxy);
+      
+      \fill[accentColor] (P) circle (1.5pt) node[above right, black] {\tiny $P(x,y,z)$};
+      \fill[primaryColor] (Pxy) circle (1.2pt);
+      
+      \draw[accentColor, ->, thick, variable=\t, domain=0:53, samples=10] plot ({0.8*cos(\t)}, {0.8*sin(\t)}, 0);
+      \node[accentColor] at (0.6, 0.4, 0) {\tiny $\theta$};
+    \end{tikzpicture}
+    \\ \small\color{primaryColor} \textbf{Sistemas Cilíndricos $(r, \theta, z)$}
+  \end{minipage}\hfill
+  \begin{minipage}{0.48\textwidth}
+    \centering
+    \begin{tikzpicture}[scale=1.1, x={(-0.35cm,-0.35cm)}, y={(1.0cm,0cm)}, z={(0cm,1.0cm)}]
+      \draw[-stealth, gray] (0,0,0) -- (2.3,0,0) node[left, black] {\tiny $x$};
+      \draw[-stealth, gray] (0,0,0) -- (0,2.6,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,0,0) -- (0,0,2.3) node[above, black] {\tiny $z$};
+      
+      \coordinate (P) at (1.06, 1.41, 1.41);
+      \coordinate (Pxy) at (1.06, 1.41, 0);
+      
+      \draw[thick, primaryColor] (0,0,0) -- (P) node[midway, above left] {\tiny $\rho$};
+      \draw[dashed, darkGray] (Pxy) -- (P);
+      \draw[dashed, darkGray] (0,0,0) -- (Pxy);
+      
+      \fill[accentColor] (P) circle (1.5pt) node[above right, black] {\tiny $P(x,y,z)$};
+      \fill[primaryColor] (Pxy) circle (1.2pt);
+      
+      % theta arc
+      \draw[accentColor, ->, thick, variable=\t, domain=0:53, samples=10] plot ({0.8*cos(\t)}, {0.8*sin(\t)}, 0);
+      \node[accentColor] at (0.6, 0.4, 0) {\tiny $\theta$};
+      
+      % phi arc
+      \draw[accentColor, ->, thick, variable=\t, domain=0:45, samples=10] plot ({0.8*sin(\t)*cos(53)}, {0.8*sin(\t)*sin(53)}, {0.8*cos(\t)});
+      \node[accentColor] at (0.2, 0.3, 0.8) {\tiny $\phi$};
+    \end{tikzpicture}
+    \\ \small\color{secondaryColor} \textbf{Sistemas Esféricos $(\rho, \theta, \phi)$}
+  \end{minipage}
+\end{center}
 
 \end{document}
