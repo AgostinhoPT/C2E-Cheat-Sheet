@@ -469,18 +469,67 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
 
 \subsection{Cónicas}
 
-\begin{definitionbox}{Secção Cónica}
-  Uma \textbf{secção cónica} é a curva obtida através da interseção de um plano bidimensional com um cone circular reto duplo. 
-  Analiticamente, qualquer cónica no plano $xOy$ é definida por uma equação geral de segundo grau:
-  \begin{equation*}
-    Ax^2 + By^2 + Cxy + Dx + Ey + F = 0
-  \end{equation*}
-  \textbf{Classificação por Termos:}
-  \begin{itemize}
-    \item \textbf{Figuras Normais ($C = 0$):} Os eixos da cónica são paralelos aos eixos coordenados. O centro ou vértice está na origem se $D = E = 0$.
-    \item \textbf{Figuras Rodadas ($C \neq 0$):} A presença do termo misto $Cxy$ indica uma rotação dos eixos da cónica em relação ao sistema $xOy$.
-  \end{itemize}
-\end{definitionbox}
+\noindent
+\begin{minipage}{0.58\textwidth}
+  \begin{definitionbox}{Secção Cónica}
+    Uma \textbf{secção cónica} é a curva obtida através da interseção de um plano bidimensional com um cone circular reto duplo. 
+    Analiticamente, qualquer cónica no plano $xOy$ é definida por uma equação geral de segundo grau:
+    \begin{equation*}
+      Ax^2 + By^2 + Cxy + Dx + Ey + F = 0
+    \end{equation*}
+    \textbf{Classificação por Termos:}
+    \begin{itemize}
+      \item \textbf{Figuras Normais ($C = 0$):} Os eixos da cónica são paralelos aos eixos coordenados. O centro ou vértice está na origem se $D = E = 0$.
+      \item \textbf{Figuras Rodadas ($C \neq 0$):} A presença do termo misto $Cxy$ indica uma rotação dos eixos da cónica em relação ao sistema $xOy$.
+    \end{itemize}
+  \end{definitionbox}
+\end{minipage}
+\hfill
+\begin{minipage}{0.38\textwidth}
+  \centering
+  \begin{tikzpicture}[scale=1.1]
+    % Draw central axis (Z-axis) of the double cone
+    \draw[darkGray, dashed, line width=0.5pt] (0, -2.2) -- (0, 2.2) node[above] {\tiny Eixo $z$};
+
+    % --- BOTTOM CONE ---
+    % Back half of the bottom base ellipse (dashed)
+    \draw[darkGray, dashed] (1.1, -1.8) arc (0:180:1.1 and 0.28);
+    % Bottom cone body with gradient shading
+    \shadedraw[left color=primaryColor!15, right color=primaryColor!45, middle color=primaryColor!25, draw=darkGray] 
+      (0,0) -- (-1.1, -1.8) arc (180:360:1.1 and 0.28) -- cycle;
+
+    % --- TOP CONE ---
+    % Back half of the top base ellipse (dashed)
+    \draw[darkGray, dashed] (1.1, 1.8) arc (0:180:1.1 and 0.28);
+    % Top cone body with gradient shading
+    \shadedraw[left color=primaryColor!15, right color=primaryColor!45, middle color=primaryColor!25, draw=darkGray] 
+      (0,0) -- (-1.1, 1.8) arc (180:360:1.1 and 0.28) -- cycle;
+
+    % --- INTERSECTING PLANE ---
+    % Define plane coordinates (adjusted scale and tilt to look elegant)
+    \coordinate (P1) at (-1.8, 0.35);
+    \coordinate (P2) at (1.4, 0.7);
+    \coordinate (P3) at (1.8, 2.1);
+    \coordinate (P4) at (-1.4, 1.75);
+    
+    % Fill plane with transparency
+    \fill[secondaryColor, fill opacity=0.45] (P1) -- (P2) -- (P3) -- (P4) -- cycle;
+    % Draw plane border
+    \draw[secondaryColor, thick, line join=round] (P1) -- (P2) -- (P3) -- (P4) -- cycle;
+
+    % --- INTERSECTION CURVE (Conic Section - Ellipse) ---
+    % Located on the top cone where the plane cuts it.
+    \draw[accentColor, very thick, line join=round, rotate around={10:(0.1, 1.2)}] 
+      (0.1, 1.2) ellipse (0.5 and 0.2);
+      
+    % Label the elements
+    \node[right, secondaryColor] at (P3) {\tiny Plano Secante};
+    \node[accentColor, right] at (0.55, 1.35) {\tiny Secção Cónica (Elipse)};
+    \fill[accentColor] (0.1, 1.2) circle (1pt);
+  \end{tikzpicture}
+  \\[0.15cm]
+  \small\textbf{Figura 2.0:} Interseção Cónica.
+\end{minipage}
 
 \subsubsection{Elipse}
 \begin{minipage}{0.58\textwidth}
@@ -575,10 +624,19 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
     \draw[dashed, gray] (-2.0,-1.63) -- (2.0,1.63);
     \draw[dashed, gray] (-2.0,1.63) -- (2.0,-1.63);
     
-    % Auxiliary rectangle: 2a x 2b
-    \draw[dotted, darkGray] (-1.1,-0.9) rectangle (1.1,0.9);
-    \fill (1.1,0) circle (1pt) node[below right] {\tiny $V_2$};
-    \fill (-1.1,0) circle (1pt) node[below left] {\tiny $V_1$};
+    % Auxiliary rectangle: 2a x 2b (dashed as in user diagram)
+    \draw[dashed, darkGray] (-1.1,-0.9) rectangle (1.1,0.9);
+    
+    % Vertices on x-axis (swapped anchors to project inwards)
+    \fill (1.1,0) circle (1pt) node[below left] {\tiny $V_2$};
+    \fill (-1.1,0) circle (1pt) node[below right] {\tiny $V_1$};
+    
+    % Vertices on y-axis (V3 and V4)
+    \fill (0,0.9) circle (1pt) node[above right] {\tiny $V_3$};
+    \fill (0,-0.9) circle (1pt) node[below right] {\tiny $V_4$};
+    
+    % Origin label
+    \node[below left] at (0,0) {\tiny $O$};
     
     % Foci
     \coordinate (F1) at (-1.42,0);
@@ -592,10 +650,13 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
     \draw[thick, primaryColor, domain=-50:50, samples=100] 
       plot ({-1.1/cos(\x)}, {0.9*tan(\x)});
     
-    % Triangle for c^2 = a^2 + b^2
-    \draw[thick, secondaryColor] (0,0) -- (1.1,0.9) node[midway, above left] {\tiny $c$};
-    \draw[dashed, darkGray] (0,0) -- (1.1,0) node[midway, below] {\tiny $a$};
-    \draw[dashed, darkGray] (1.1,0) -- (1.1,0.9) node[midway, right] {\tiny $b$};
+    % Right triangle representing c^2 = a^2 + b^2
+    % Thick hypotenuse c and base a as in the user's diagram
+    \draw[very thick, secondaryColor] (0,0) -- (1.1,0.9) node[midway, above left] {\tiny $c$};
+    \draw[very thick, secondaryColor] (0,0) -- (1.1,0) node[midway, below] {\tiny $a$};
+    
+    % Label b inside the rectangle to the left of the y-axis
+    \node[left] at (0, 0.45) {\tiny $b$};
   \end{tikzpicture}
   \\[0.2cm]
   \small\textbf{Figura 2.2:} Elementos da Hipérbole.
