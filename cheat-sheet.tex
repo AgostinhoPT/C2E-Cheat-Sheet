@@ -702,14 +702,14 @@ Não existe um método geral para resolver EDOs de 1.ª ordem. Usam-se técnicas
     % Directrix line: y = -0.5
     \draw[thick, dashed, secondaryColor] (-1.9,-0.5) -- (1.9,-0.5) node[right] {\tiny $d$};
     
-    % Point P on parabola: P = (1.2, 0.5 * 1.2^2) = (1.2, 0.72)
-    \coordinate (P) at (1.2,0.72);
+    % Point P on parabola: P = (0.8, 0.5 * 0.8^2) = (0.8, 0.32)
+    \coordinate (P) at (0.8,0.32);
     \fill (P) circle (1.5pt) node[above right] {\tiny $P(x,y)$};
     
     % Distances to focus and directrix
     \draw[dotted, darkGray, thick] (P) -- (F);
-    \draw[dotted, darkGray, thick] (P) -- (1.2,-0.5);
-    \fill (1.2,-0.5) circle (1pt);
+    \draw[dotted, darkGray, thick] (P) -- (0.8,-0.5);
+    \fill (0.8,-0.5) circle (1pt);
   \end{tikzpicture}
   \\[0.2cm]
   \small\textbf{Figura 2.3:} Elementos da Parábola.
@@ -994,16 +994,111 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
 
 
 \subsubsection{Guia de Identificação Rápida de Quádricas}
-\begin{enumerate}[label=\textbf{\arabic*.}]
-  \item $x^2 + 4y^2 + 9z^2 = 1 \implies$ \textbf{Gráfico VII} (Elipsoide): Todos os coeficientes quadráticos positivos. Semi-eixos $a=1, b=1/2, c=1/3$. Alongado ao longo de $OX$ (eixo do maior semi-eixo).
-  \item $9x^2 + 4y^2 + z^2 = 1 \implies$ \textbf{Gráfico IV} (Elipsoide): Todos os coeficientes positivos. Semi-eixos $a=1/3, b=1/2, c=1$. Alongado ao longo do eixo vertical $OZ$.
-  \item $x^2 - y^2 + z^2 = 1 \implies$ \textbf{Gráfico II} (Hiperboloide de 1 Folha): Dois termos positivos, um negativo ($-y^2$). O termo negativo indica que o eixo do hiperboloide é paralelo a $OY$.
-  \item $-x^2 + y^2 - z^2 = 1 \implies$ \textbf{Gráfico III} (Hiperboloide de 2 Folhas): Apenas um termo positivo ($y^2$), dois negativos. O termo positivo define o eixo de simetria paralelo a $OY$.
-  \item $y = 2x^2 + z^2 \implies$ \textbf{Gráfico VI} (Parabolóide Elíptico): Uma variável linear ($y$) e duas quadráticas com o mesmo sinal. Abre-se na direção do eixo positivo $OY$.
-  \item $y^2 = x^2 + 2z^2 \implies$ \textbf{Gráfico I} (Cone Elíptico): Equação homogénea ($y^2 - x^2 - 2z^2 = 0$). Vértice na origem e eixo de simetria ao longo de $OY$.
-  \item $x^2 + 2z^2 = 1 \implies$ \textbf{Gráfico VIII} (Cilindro Elíptico): Ausência de $y$. Descreve uma elipse no plano $xOz$ projetada infinitamente ao longo do eixo $OY$.
-  \item $y = x^2 - z^2 \implies$ \textbf{Gráfico V} (Parabolóide Hiperbólico): Uma variável linear ($y$) e duas quadráticas com sinais opostos. Superfície em forma de sela com ponto de sela na origem.
-\end{enumerate}
+
+\noindent
+\begin{minipage}[t]{0.42\textwidth}
+  \centering
+  \begin{tabular}{cc}
+    \textbf{I} & \textbf{II} \\
+    \begin{tikzpicture}[scale=0.55]
+      \draw[-stealth, gray] (-1.8,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.5) -- (0,1.5) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, secondaryColor] (1.2,0) ellipse (0.3 and 0.85);
+      \draw[thick, secondaryColor] (-1.2,0) ellipse (0.3 and 0.85);
+      \draw[thick, primaryColor] (-1.2, 0.85) -- (1.2, -0.85);
+      \draw[thick, primaryColor] (-1.2, -0.85) -- (1.2, 0.85);
+    \end{tikzpicture} &
+    \begin{tikzpicture}[scale=0.55]
+      \draw[-stealth, gray] (-1.8,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.5) -- (0,1.5) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, primaryColor] (-1.2,0.95) to[out=-20, in=180] (0,0.55) to[out=0, in=-160] (1.2,0.95);
+      \draw[thick, primaryColor] (-1.2,-0.95) to[out=20, in=180] (0,-0.55) to[out=0, in=-200] (1.2,-0.95);
+      
+      \draw[thick, secondaryColor] (1.2,0) ellipse (0.3 and 0.95);
+      \draw[thick, secondaryColor] (0,0) ellipse (0.16 and 0.55);
+      \draw[thick, secondaryColor] (-1.2,0) ellipse (0.3 and 0.95);
+    \end{tikzpicture} \\[-0.15cm]
+    \textbf{III} & \textbf{IV} \\
+    \begin{tikzpicture}[scale=0.55]
+      \draw[-stealth, gray] (-1.8,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.5) -- (0,1.5) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, primaryColor] (1.2,0.95) to[out=180, in=90] (0.6,0) to[out=-90, in=180] (1.2,-0.95);
+      \draw[thick, secondaryColor] (1.2,0) ellipse (0.3 and 0.95);
+      
+      \draw[thick, primaryColor] (-1.2,0.95) to[out=0, in=90] (-0.6,0) to[out=-90, in=0] (-1.2,-0.95);
+      \draw[thick, secondaryColor] (-1.2,0) ellipse (0.3 and 0.95);
+    \end{tikzpicture} &
+    \begin{tikzpicture}[scale=0.55]
+      \draw[-stealth, gray] (-1.8,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.5) -- (0,1.5) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, primaryColor] (0,0) ellipse (0.75 and 1.3);
+      \draw[dashed, secondaryColor] (0.75,0) arc (0:180:0.75 and 0.25);
+      \draw[thick, secondaryColor] (-0.75,0) arc (180:360:0.75 and 0.25);
+    \end{tikzpicture} \\[-0.15cm]
+    \textbf{V} & \textbf{VI} \\
+    \begin{tikzpicture}[scale=0.55]
+      \draw[-stealth, gray] (-1.8,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.5) -- (0,1.5) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, primaryColor] (-1.2,0.8) to[out=-30, in=180] (0,-0.4) to[out=0, in=-150] (1.2,0.8);
+      \draw[thick, primaryColor] (-0.8,-0.8) to[out=45, in=180] (0,0.4) to[out=0, in=135] (0.8,-0.8);
+      \draw[dashed, secondaryColor] (-1.2,0.8) -- (-0.8,-0.8);
+      \draw[thick, secondaryColor] (1.2,0.8) -- (0.8,-0.8);
+    \end{tikzpicture} &
+    \begin{tikzpicture}[scale=0.55]
+      \draw[-stealth, gray] (-1.8,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.5) -- (0,1.5) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, primaryColor] (1.2,0.95) to[out=180, in=10] (0,0) to[out=-10, in=180] (1.2,-0.95);
+      \draw[thick, secondaryColor] (1.2,0) ellipse (0.3 and 0.95);
+      \draw[dashed, gray] (0.5, 0.45) to[out=180, in=0] (0,0.1) to[out=0, in=180] (0.5, -0.45);
+    \end{tikzpicture} \\[-0.15cm]
+    \textbf{VII} & \textbf{VIII} \\
+    \begin{tikzpicture}[scale=0.55]
+      \draw[-stealth, gray] (-1.8,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.5) -- (0,1.5) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, primaryColor, rotate=-40] (0,0) ellipse (1.35 and 0.65);
+      \draw[dashed, secondaryColor, rotate=-40] (1.35,0) arc (0:180:1.35 and 0.2);
+      \draw[thick, secondaryColor, rotate=-40] (-1.35,0) arc (180:360:1.35 and 0.2);
+    \end{tikzpicture} &
+    \begin{tikzpicture}[scale=0.55]
+      \draw[-stealth, gray] (-1.8,0) -- (1.8,0) node[right, black] {\tiny $y$};
+      \draw[-stealth, gray] (0,-1.5) -- (0,1.5) node[above, black] {\tiny $z$};
+      \draw[-stealth, gray] (0.8,-0.8) -- (-0.8,0.8) node[above left, black] {\tiny $x$};
+      
+      \draw[thick, primaryColor] (-1.2, 0.85) -- (1.2, 0.85);
+      \draw[thick, primaryColor] (-1.2, -0.85) -- (1.2, -0.85);
+      \draw[thick, secondaryColor] (1.2,0) ellipse (0.3 and 0.85);
+      \draw[thick, secondaryColor] (-1.2,0) ellipse (0.3 and 0.85);
+    \end{tikzpicture}
+  \end{tabular}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.56\textwidth}
+  \vspace{2pt}
+  \begin{enumerate}[label=\textbf{\arabic*.}]
+    \item $x^2 + 4y^2 + 9z^2 = 1 \implies$ \textbf{VII} (\textit{Elipsoide}): Todos os coeficientes quadráticos positivos. Semi-eixos $a=1, b=1/2, c=1/3$. Alongado ao longo de $OX$ (eixo do maior semi-eixo).
+    \item $9x^2 + 4y^2 + z^2 = 1 \implies$ \textbf{IV} (\textit{Elipsoide}): Todos os coeficientes positivos. Semi-eixos $a=1/3, b=1/2, c=1$. Alongado ao longo do eixo vertical $OZ$.
+    \item $x^2 - y^2 + z^2 = 1 \implies$ \textbf{II} (\textit{Hiperboloide de 1 Folha}): Dois termos positivos, um negativo ($-y^2$). O termo negativo indica que o eixo do hiperboloide é paralelo a $OY$.
+    \item $-x^2 + y^2 - z^2 = 1 \implies$ \textbf{III} (\textit{Hiperboloide de 2 Folhas}): Apenas um termo positivo ($y^2$), dois negativos. O termo positivo define o eixo de simetria paralelo a $OY$.
+    \item $y = 2x^2 + z^2 \implies$ \textbf{VI} (\textit{Parabolóide Elíptico}): Uma variável linear ($y$) e duas quadráticas com o mesmo sinal. Abre-se na direção do eixo positivo $OY$.
+    \item $y^2 = x^2 + 2z^2 \implies$ \textbf{I} (\textit{Cone Elíptico}): Equação homogénea ($y^2 - x^2 - 2z^2 = 0$). Vértice na origem e eixo de simetria ao longo de $OY$.
+    \item $x^2 + 2z^2 = 1 \implies$ \textbf{VIII} (\textit{Cilindro Elíptico}): Ausência de $y$. Descreve uma elipse no plano $xOz$ projetada infinitamente ao longo do eixo $OY$.
+    \item $y = x^2 - z^2 \implies$ \textbf{V} (\textit{Parabolóide Hiperbólico}): Uma variável linear ($y$) e duas quadráticas com sinais opostos. Superfície em forma de sela com ponto de sela na origem.
+  \end{enumerate}
+\end{minipage}
 
 \newpage
 
