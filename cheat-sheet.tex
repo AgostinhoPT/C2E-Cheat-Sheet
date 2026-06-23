@@ -1108,93 +1108,68 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
 \section{Curvas e Funções Vetoriais de 1 Parâmetro}
 \label{chap:curvas_funcoes_vetoriais}
 
+\begin{tcolorbox}[
+  colback=lightGray,
+  colframe=primaryColor,
+  fonttitle=\bfseries,
+  title={Intuição e Utilidade: Porquê Curvas e Funções Vetoriais?},
+  arc=3pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt,
+  boxrule=1.2pt,
+  before=\vspace{5pt},
+  after=\vspace{5pt}
+]
+  \small
+  \textbf{O Conceito:} Imagine uma curva como a \textbf{trajetória de uma partícula no espaço} à medida que o tempo passa. O parâmetro $t$ representa o "tempo". Para cada instante $t$, a partícula está numa posição única dada por $(x(t), y(t), z(t))$. A função vetorial $\vec{r}(t)$ simplesmente junta estas coordenadas num único vetor posição.
+  
+  \textbf{Porquê um único parâmetro $t$?} Porque a curva é um objeto unidimensional (um caminho/linha), mesmo que se curve e se mova no espaço 3D. Só precisa de uma variável independente ($t$) para saber a localização exata da partícula.
+  
+  \textbf{Para que serve na prática?}
+  \begin{enumerate}[leftmargin=*]
+    \item \textbf{Física e Mecânica (Cinemática):} A derivada $\vec{r}'(t)$ dá-nos o \textbf{vetor velocidade} (sempre tangente à trajetória), e a sua norma $\|\vec{r}'(t)\|$ é a velocidade escalar. A segunda derivada $\vec{r}''(t)$ é a \textbf{aceleração}.
+    \item \textbf{Curvas Complexas:} Curvas que dão voltas (como hélices, molas ou órbitas) não podem ser escritas na forma $y = f(x)$ porque violam a definição de função de variável única. A parametrização resolve isto de forma natural.
+    \item \textbf{Cálculo de Distâncias:} Permite-nos calcular o comprimento exato de qualquer trajetória integrada no tempo.
+  \end{enumerate}
+\end{tcolorbox}
+
 \subsection{Definição e Parametrização}
 
-\noindent\begin{minipage}[t]{0.65\textwidth}
-  \begin{definitionbox}{Curvas e Equações Paramétricas}
-    Seja $I \subseteq \R$ um intervalo. Um sistema de equações paramétricas descreve uma curva no plano ou no espaço onde as coordenadas são funções de uma variável independente $t \in I$ (parâmetro):
-    \begin{itemize}
-      \item \textbf{No plano ($\R^2$):} $\begin{cases} x = x(t) \\ y = y(t) \end{cases} \implies C = \{(x(t), y(t)) : t \in I\}$.
-      \item \textbf{No espaço ($\R^3$):} $\begin{cases} x = x(t) \\ y = y(t) \\ z = z(t) \end{cases} \implies C = \{(x(t), y(t), z(t)) : t \in I\}$.
-      \item \textbf{Orientação:} O sentido do movimento ao longo da curva à medida que $t$ aumenta.
-      \item \textbf{Tipos de Curvas (para $I = [a, b]$):}
-        \begin{enumerate}
-          \item \textbf{Regular:} se $\vec{r}'(t) \neq \vec{0}, \ \forall t \in I$ (sem pontos de paragem/bicos).
-          \item \textbf{Suave:} se $\vec{r}(t)$ é de classe $C^1$ em $I$ (diferenciável e com derivada $\vec{r}'(t)$ contínua).
-          \item \textbf{Fechada:} se o ponto inicial coincide com o final: $\vec{r}(a) = \vec{r}(b)$.
-        \end{enumerate}
-    \end{itemize}
-  \end{definitionbox}
-\end{minipage}%
-\hfill
-\begin{minipage}[t]{0.33\textwidth}
-  \centering
-  \vspace{8pt}
-  \begin{tikzpicture}[scale=0.9]
-    \draw[-stealth, gray] (-2.0,0) -- (2.0,0) node[right, black] {\tiny $x$};
-    \draw[-stealth, gray] (0,-1.2) -- (0,1.2) node[above, black] {\tiny $y$};
-    
-    % Ellipse x^2/2.25 + y^2/0.64 = 1
-    \draw[thick, primaryColor] (0,0) ellipse (1.5 and 0.8);
-    
-    % Orientation arrows (clockwise for x = 5sin(t), y = 2cos(t))
-    \draw[primaryColor, -stealth, thick] (0, 0.8) -- (0.75, 0.57);
-    \draw[primaryColor, -stealth, thick] (0, -0.8) -- (-0.75, -0.57);
-    
-    \fill[accentColor] (0, 0.8) circle (1.5pt) node[above right, black] {\tiny $t=0$};
-    \fill[accentColor] (1.5, 0) circle (1.5pt) node[below right, black] {\tiny $t=\frac{\pi}{2}$};
-    
-    \node[font=\tiny, align=center] at (0, -1.4) {Elipse com orientação \\ horária ($x=5\sin t, y=2\cos t$)};
-  \end{tikzpicture}
-\end{minipage}
+\begin{definitionbox}{Curvas e Equações Paramétricas}
+  Seja $I \subseteq \R$ um intervalo. Um sistema de equações paramétricas descreve uma curva no plano ou no espaço onde as coordenadas são funções de uma variável independente $t \in I$ (parâmetro):
+  \begin{itemize}
+    \item \textbf{No plano ($\R^2$):} $\begin{cases} x = x(t) \\ y = y(t) \end{cases} \implies C = \{(x(t), y(t)) : t \in I\}$.
+    \item \textbf{No espaço ($\R^3$):} $\begin{cases} x = x(t) \\ y = y(t) \\ z = z(t) \end{cases} \implies C = \{(x(t), y(t), z(t)) : t \in I\}$.
+    \item \textbf{Orientação:} O sentido do movimento ao longo da curva à medida que $t$ aumenta.
+    \item \textbf{Tipos de Curvas (para $I = [a, b]$):}
+      \begin{enumerate}
+        \item \textbf{Regular:} se $\vec{r}'(t) \neq \vec{0}, \ \forall t \in I$ (sem pontos de paragem/bicos).
+        \item \textbf{Suave:} se $\vec{r}(t)$ é de classe $C^1$ em $I$ (diferenciável e com derivada $\vec{r}'(t)$ contínua).
+        \item \textbf{Fechada:} se o ponto inicial coincide com o final: $\vec{r}(a) = \vec{r}(b)$.
+      \end{enumerate}
+  \end{itemize}
+\end{definitionbox}
 
 \subsection{Geometria Diferencial de Curvas}
 
-\noindent\begin{minipage}[t]{0.65\textwidth}
-  \begin{definitionbox}{Cálculo em Funções Vetoriais}
-    Seja $\vec{r} : I \subseteq \R \to \R^n$ uma função vetorial.
-    \begin{itemize}
-      \item \textbf{Limite:} Calcula-se componente a componente: \\
-        $\lim_{t \to t_0} \vec{r}(t) = \left( \lim_{t \to t_0} r_1(t), \dots, \lim_{t \to t_0} r_n(t) \right)$.
-      \item \textbf{Derivada:} Vetor tangente/velocidade à curva no ponto $t_0$: \\
-        $\vec{r}'(t_0) = \lim_{h \to 0} \frac{\vec{r}(t_0+h) - \vec{r}(t_0)}{h} = \left( r_1'(t_0), \dots, r_n'(t_0) \right)$.
-    \end{itemize}
-  \end{definitionbox}
+\begin{definitionbox}{Cálculo em Funções Vetoriais}
+  Seja $\vec{r} : I \subseteq \R \to \R^n$ uma função vetorial.
+  \begin{itemize}
+    \item \textbf{Limite:} Calcula-se componente a componente: \\
+      $\lim_{t \to t_0} \vec{r}(t) = \left( \lim_{t \to t_0} r_1(t), \dots, \lim_{t \to t_0} r_n(t) \right)$.
+    \item \textbf{Derivada:} Vetor tangente/velocidade à curva no ponto $t_0$: \\
+      $\vec{r}'(t_0) = \lim_{h \to 0} \frac{\vec{r}(t_0+h) - \vec{r}(t_0)}{h} = \left( r_1'(t_0), \dots, r_n'(t_0) \right)$.
+  \end{itemize}
+\end{definitionbox}
 
-  \begin{theorembox}{Comprimento de Arco e Reta Tangente}
-    Seja $\vec{r}(t)$ uma curva suave em $I = [a, b]$.
-    \begin{itemize}
-      \item \textbf{Comprimento da Curva ($L$):} Integral do módulo da velocidade: \\
-        $L = \int_a^b \|\vec{r}'(t)\| \dd t = \int_a^b \sqrt{(r_1'(t))^2 + \dots + (r_n'(t))^2} \dd t$.
-      \item \textbf{Reta Tangente:} Reta tangente à curva no ponto $P_0 = \vec{r}(t_0)$ na direção de $\vec{r}'(t_0) \neq \vec{0}$, parametrizada por: \\
-        $X(\lambda) = P_0 + \lambda \vec{r}'(t_0), \quad \lambda \in \R$.
-    \end{itemize}
-  \end{theorembox}
-\end{minipage}%
-\hfill
-\begin{minipage}[t]{0.33\textwidth}
-  \centering
-  \vspace{8pt}
-  \begin{tikzpicture}[scale=0.9, x={(-0.4cm,-0.4cm)}, y={(1.0cm,0cm)}, z={(0cm,1.0cm)}]
-    % Axes
-    \draw[-stealth, gray] (0,0,0) -- (1.5,0,0) node[below left, black] {\tiny $x$};
-    \draw[-stealth, gray] (0,0,0) -- (0,1.8,0) node[right, black] {\tiny $y$};
-    \draw[-stealth, gray] (0,0,0) -- (0,0,3.3) node[above, black] {\tiny $z$};
-    
-    % Helix curve r(t) = (cos(t), sin(t), 0.35*t)
-    \draw[thick, primaryColor, variable=\t, domain=0:2.5*pi, samples=80]
-      plot ({cos(\t r)}, {sin(\t r)}, {0.35*\t});
-    
-    % Arrow showing orientation
-    \draw[primaryColor, -stealth, thick, variable=\t, domain=1.0*pi:1.15*pi, samples=10]
-      plot ({cos(\t r)}, {sin(\t r)}, {0.35*\t});
-    
-    \fill[accentColor] ({cos(0)}, {sin(0)}, 0) circle (1.5pt) node[right, black] {\tiny $t=0$};
-    \fill[accentColor] ({cos(2.5*pi r)}, {sin(2.5*pi r)}, {0.35*2.5*pi}) circle (1.5pt) node[right, black] {\tiny $t=2.5\pi$};
-    
-    \node[font=\tiny, align=center] at (0,0,3.9) {Hélice Circular: \\ $x=3\sin t$, $y=3\cos t$ \\ $z=0.5t$, $t\in[0,2\pi]$};
-  \end{tikzpicture}
-\end{minipage}
+\begin{theorembox}{Comprimento de Arco e Reta Tangente}
+  Seja $\vec{r}(t)$ uma curva suave em $I = [a, b]$.
+  \begin{itemize}
+    \item \textbf{Comprimento da Curva ($L$):} Integral do módulo da velocidade: \\
+      $L = \int_a^b \|\vec{r}'(t)\| \dd t = \int_a^b \sqrt{(r_1'(t))^2 + \dots + (r_n'(t))^2} \dd t$.
+    \item \textbf{Reta Tangente:} Reta tangente à curva no ponto $P_0 = \vec{r}(t_0)$ na direção de $\vec{r}'(t_0) \neq \vec{0}$, parametrizada por: \\
+      $X(\lambda) = P_0 + \lambda \vec{r}'(t_0), \quad \lambda \in \R$.
+  \end{itemize}
+\end{theorembox}
 
 \newpage
 
