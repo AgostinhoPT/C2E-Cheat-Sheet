@@ -1114,10 +1114,10 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   fonttitle=\bfseries,
   title={Intuição e Utilidade: Porquê Curvas e Funções Vetoriais?},
   arc=3pt,
-  left=6pt, right=6pt, top=6pt, bottom=6pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
   boxrule=1.2pt,
-  before=\vspace{5pt},
-  after=\vspace{5pt}
+  before=\vspace{2pt},
+  after=\vspace{2pt}
 ]
   \small
   \textbf{O Conceito:} Imagine uma curva como a \textbf{trajetória de uma partícula no espaço} à medida que o tempo passa. O parâmetro $t$ representa o "tempo". Para cada instante $t$, a partícula está numa posição única dada por $(x(t), y(t), z(t))$. A função vetorial $\vec{r}(t)$ simplesmente junta estas coordenadas num único vetor posição.
@@ -1125,23 +1125,25 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   \textbf{Porquê um único parâmetro $t$?} Porque a curva é um objeto unidimensional (um caminho/linha), mesmo que se curve e se mova no espaço 3D. Só precisa de uma variável independente ($t$) para saber a localização exata da partícula.
   
   \textbf{Para que serve na prática?}
-  \begin{enumerate}[leftmargin=*]
+  \begin{enumerate}[leftmargin=*, noitemsep, topsep=1pt, parsep=0pt]
     \item \textbf{Física e Mecânica (Cinemática):} A derivada $\vec{r}'(t)$ dá-nos o \textbf{vetor velocidade} (sempre tangente à trajetória), e a sua norma $\|\vec{r}'(t)\|$ é a velocidade escalar. A segunda derivada $\vec{r}''(t)$ é a \textbf{aceleração}.
     \item \textbf{Curvas Complexas:} Curvas que dão voltas (como hélices, molas ou órbitas) não podem ser escritas na forma $y = f(x)$ porque violam a definição de função de variável única. A parametrização resolve isto de forma natural.
     \item \textbf{Cálculo de Distâncias:} Permite-nos calcular o comprimento exato de qualquer trajetória integrada no tempo.
   \end{enumerate}
 \end{tcolorbox}
 
+\vspace{-4pt}
 \subsection{Definição e Parametrização}
+\vspace{-2pt}
 
-\begin{definitionbox}{Curvas e Equações Paramétricas}
+\begin{definitionbox}[before=\vspace{2pt}, after=\vspace{2pt}, top=4pt, bottom=4pt]{Curvas e Equações Paramétricas}
   Seja $I \subseteq \R$ um intervalo. Um sistema de equações paramétricas descreve uma curva no plano ou no espaço onde as coordenadas são funções de uma variável independente $t \in I$ (parâmetro):
-  \begin{itemize}
+  \begin{itemize}[noitemsep, topsep=1pt, parsep=0pt]
     \item \textbf{No plano ($\R^2$):} $\begin{cases} x = x(t) \\ y = y(t) \end{cases} \implies C = \{(x(t), y(t)) : t \in I\}$.
     \item \textbf{No espaço ($\R^3$):} $\begin{cases} x = x(t) \\ y = y(t) \\ z = z(t) \end{cases} \implies C = \{(x(t), y(t), z(t)) : t \in I\}$.
     \item \textbf{Orientação:} O sentido do movimento ao longo da curva à medida que $t$ aumenta.
     \item \textbf{Tipos de Curvas (para $I = [a, b]$):}
-      \begin{enumerate}
+      \begin{enumerate}[noitemsep, topsep=1pt, parsep=0pt]
         \item \textbf{Regular:} se $\vec{r}'(t) \neq \vec{0}, \ \forall t \in I$ (sem pontos de paragem/bicos).
         \item \textbf{Suave:} se $\vec{r}(t)$ é de classe $C^1$ em $I$ (diferenciável e com derivada $\vec{r}'(t)$ contínua).
         \item \textbf{Fechada:} se o ponto inicial coincide com o final: $\vec{r}(a) = \vec{r}(b)$.
@@ -1149,11 +1151,13 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   \end{itemize}
 \end{definitionbox}
 
+\vspace{-4pt}
 \subsection{Geometria Diferencial de Curvas}
+\vspace{-2pt}
 
-\begin{definitionbox}{Cálculo em Funções Vetoriais}
+\begin{definitionbox}[before=\vspace{2pt}, after=\vspace{2pt}, top=4pt, bottom=4pt]{Cálculo em Funções Vetoriais}
   Seja $\vec{r} : I \subseteq \R \to \R^n$ uma função vetorial.
-  \begin{itemize}
+  \begin{itemize}[noitemsep, topsep=1pt, parsep=0pt]
     \item \textbf{Limite:} Calcula-se componente a componente: \\
       $\lim_{t \to t_0} \vec{r}(t) = \left( \lim_{t \to t_0} r_1(t), \dots, \lim_{t \to t_0} r_n(t) \right)$.
     \item \textbf{Derivada:} Vetor tangente/velocidade à curva no ponto $t_0$: \\
@@ -1161,9 +1165,9 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   \end{itemize}
 \end{definitionbox}
 
-\begin{theorembox}{Comprimento de Arco e Reta Tangente}
+\noindent\begin{theorembox}[before=\vspace{2pt}, after=\vspace{2pt}, top=4pt, bottom=4pt]{Comprimento de Arco e Reta Tangente}
   Seja $\vec{r}(t)$ uma curva suave em $I = [a, b]$.
-  \begin{itemize}
+  \begin{itemize}[noitemsep, topsep=1pt, parsep=0pt]
     \item \textbf{Comprimento da Curva ($L$):} Integral do módulo da velocidade: \\
       $L = \int_a^b \|\vec{r}'(t)\| \dd t = \int_a^b \sqrt{(r_1'(t))^2 + \dots + (r_n'(t))^2} \dd t$.
     \item \textbf{Reta Tangente:} Reta tangente à curva no ponto $P_0 = \vec{r}(t_0)$ na direção de $\vec{r}'(t_0) \neq \vec{0}$, parametrizada por: \\
