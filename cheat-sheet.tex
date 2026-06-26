@@ -1193,7 +1193,7 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
       \item \textbf{Ponto Aderente e Fecho ($\bar{A}$):} $a$ é aderente a $A$ se $\forall \delta > 0, B_\delta(a) \cap A \neq \emptyset$. O fecho $\bar{A}$ é o conjunto de todos os pontos aderentes a $A$.
       \item \textbf{Ponto Interior e Interior ($\text{int}(A)$):} $a$ é interior a $A$ se $\exists \delta > 0, B_\delta(a) \subseteq A$. O interior $\text{int}(A)$ é o conjunto de todos os pontos interiores de $A$.
       \item \textbf{Ponto de Fronteira e Fronteira ($\partial A$):} $a$ é de fronteira se não for interior nem exterior: $\forall \delta > 0$, $B_\delta(a) \cap A \neq \emptyset \wedge B_\delta(a) \cap (\R^n \setminus A) \neq \emptyset$.
-      \item \textbf{Ponto Exterior e Exterior:} $a$ é exterior se for interior ao complementar de $A$: $\exists \delta > 0, B_\delta(a) \subseteq \R^n \setminus A$.
+      \item \textbf{Ponto Exterior e Exterior ($\text{ext}(A)$):} $a$ é exterior se for interior ao complementar de $A$: $\exists \delta > 0, B_\delta(a) \subseteq \R^n \setminus A$.
       \item \textbf{Conjunto Aberto e Fechado:}
         \begin{itemize}
           \item $A$ é \textbf{aberto} se $A = \text{int}(A)$ (todos os seus pontos são interiores).
@@ -1211,7 +1211,7 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
     % Shade region A (light teal)
     \fill[secondaryColor!15] (0,0) circle (1.2);
     % Boundary of A (dashed line)
-    \draw[thick, dashed, secondaryColor] (0,0) circle (1.2) node[above right=0.9cm] {\small $A$};
+    \draw[thick, dashed, secondaryColor] (0,0) circle (1.2) node[above left=0.9cm] {\small $A$};
     
     % Interior point
     \coordinate (Int) at (-0.3, 0.2);
@@ -1245,7 +1245,7 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
 
 \subsection{Funções de Várias Variáveis e Domínios}
 
-\begin{minipage}[t]{0.65\textwidth}
+\noindent\begin{minipage}[t]{0.65\textwidth}
   \begin{definitionbox}{Domínio, Gráfico e Conjuntos de Nível}
     Seja $f: D \subseteq \R^n \to \R$ uma função real de várias variáveis.
     \begin{itemize}
@@ -1256,17 +1256,6 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
       \item \textbf{Conjunto de Nível ($C_k$):} $C_k = \{x \in \R^n : f(x) = k\}$ para $k \in f(D)$. Em $\R^2$, é a \textbf{curva de nível}; em $\R^3$, é a \textbf{superfície de nível}.
     \end{itemize}
   \end{definitionbox}
-
-  \begin{theorembox}{Cuidados no Cálculo de Domínios}
-    Garantir as seguintes restrições em todo o domínio $D$:
-    \begin{enumerate}
-      \item \textbf{Denominadores} não nulos: $P(x)/Q(x) \implies Q(x) \neq 0$.
-      \item \textbf{Raízes de índice par} não negativas: $\sqrt[2k]{g(x)} \implies g(x) \geq 0$.
-      \item \textbf{Logaritmos} com argumento positivo: $\ln(g(x)) \implies g(x) > 0$.
-      \item \textbf{Arcosseno e Arcocosseno} em $[-1, 1]$: $-1 \leq g(x) \leq 1$.
-      \item \textbf{Tangente:} $g(x) \neq \pi/2 + k\pi, \ k \in \Z$.
-    \end{enumerate}
-  \end{theorembox}
 \end{minipage}%
 \hfill
 \begin{minipage}[t]{0.33\textwidth}
@@ -1294,9 +1283,22 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   \end{center}
 \end{minipage}
 
+\vspace{0.5cm}
+
+\noindent\begin{theorembox}{Cuidados no Cálculo de Domínios}
+  Garantir as seguintes restrições em todo o domínio $D$:
+  \begin{enumerate}
+    \item \textbf{Denominadores} não nulos: $P(x)/Q(x) \implies Q(x) \neq 0$.
+    \item \textbf{Raízes de índice par} não negativas: $\sqrt[2k]{g(x)} \implies g(x) \geq 0$.
+    \item \textbf{Logaritmos} com argumento positivo: $\ln(g(x)) \implies g(x) > 0$.
+    \item \textbf{Arcosseno e Arcocosseno} em $[-1, 1]$: $-1 \leq g(x) \leq 1$.
+    \item \textbf{Tangente:} $g(x) \neq \pi/2 + k\pi, \ k \in \Z$.
+  \end{enumerate}
+\end{theorembox}
+
 \subsection{Limites Multivariáveis}
 
-\begin{definitionbox}{Limite de Funções Reais e Vetoriais}
+\noindent\begin{definitionbox}{Limite de Funções Reais e Vetoriais}
   Seja $f : D \subseteq \R^n \to \R^p$ uma função e $a \in \bar{D}$.
   \begin{itemize}
     \item \textbf{Limite segundo Cauchy:} $\lim_{x \to a} f(x) = b \iff \forall \delta > 0, \exists \epsilon > 0, x \in D \cap B_\epsilon(a) \implies f(x) \in B_\delta(b)$, i.e., $\forall \delta > 0, \exists \epsilon > 0, x \in D \wedge \|x - a\| < \epsilon \implies \|f(x) - b\| < \delta$.
@@ -1305,7 +1307,7 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   \end{itemize}
 \end{definitionbox}
 
-\begin{theorembox}{Propriedades Operatórias e Squeeze Theorem}
+\noindent\begin{theorembox}{Propriedades Operatórias e Squeeze Theorem}
   Sejam $f, g, h : D \subseteq \R^n \to \R$ com limites finitos em $a \in \bar{D}$.
   \begin{itemize}
     \item \textbf{Álgebra de Limites:} $\lim(f \pm g) = \lim f \pm \lim g$; $\lim(f \cdot g) = \lim f \cdot \lim g$; $\lim(f/g) = \lim f / \lim g$ (se $\lim g \neq 0$).
@@ -1316,7 +1318,7 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   \end{itemize}
 \end{theorembox}
 
-\begin{minipage}[t]{0.65\textwidth}
+\noindent\begin{minipage}[t]{0.65\textwidth}
   \begin{definitionbox}{Limites Relativos e Direcionais}
     Seja $f : D \subseteq \R^n \to \R$ e $A \subset D$ com $a \in \bar{A}$.
     \begin{itemize}
@@ -1326,14 +1328,6 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
       \item \textbf{Caminhos Parabólicos:} $A_k = \{(x, y) \in \R^2 : y - a_2 = k(x - a_1)^2\}$.
     \end{itemize}
   \end{definitionbox}
-
-  \begin{theorembox}{Teoremas de Não-Existência de Limite}
-    Sejam $A_1, A_2 \subseteq D$ com $a \in \bar{A}_1 \cap \bar{A}_2$.
-    \begin{enumerate}
-      \item Se os limites relativos diferem ou não existem: $\lim_{\substack{x \to a \\ x \in A_1}} f(x) \neq \lim_{\substack{x \to a \\ x \in A_2}} f(x) \implies \not\exists \lim_{x\to a} f(x)$.
-      \item Se o limite direcional $\lim_{\substack{(x,y)\to a \\ (x,y)\in A_m}} f(x,y)$ depender de $m \implies \not\exists \lim f$.
-    \end{enumerate}
-  \end{theorembox}
 \end{minipage}%
 \hfill
 \begin{minipage}[t]{0.33\textwidth}
@@ -1364,7 +1358,17 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   \end{center}
 \end{minipage}
 
-\begin{formulabox}{Estratégias Práticas para Resolução de Limites}
+\vspace{0.5cm}
+
+\noindent\begin{theorembox}{Teoremas de Não-Existência de Limite}
+  Sejam $A_1, A_2 \subseteq D$ com $a \in \bar{A}_1 \cap \bar{A}_2$.
+  \begin{enumerate}
+    \item Se os limites relativos diferem ou não existem: $\lim_{\substack{x \to a \\ x \in A_1}} f(x) \neq \lim_{\substack{x \to a \\ x \in A_2}} f(x) \implies \not\exists \lim_{x\to a} f(x)$.
+    \item Se o limite direcional $\lim_{\substack{(x,y)\to a \\ (x,y)\in A_m}} f(x,y)$ depender de $m \implies \not\exists \lim f$.
+  \end{enumerate}
+\end{theorembox}
+
+\noindent\begin{formulabox}{Estratégias Práticas para Resolução de Limites}
   Para $\lim_{(x,y) \to (a_1, a_2)} f(x,y) = b$:
   \begin{itemize}
     \item \textbf{1. Testar Não-Existência:} Analisar limites direcionais ou iterados. Se dependerem de $m$ ou forem diferentes, não existe.
@@ -1375,7 +1379,7 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
 
 \subsection{Continuidade e Teoremas Fundamentais}
 
-\begin{definitionbox}{Continuidade e Prolongamento}
+\noindent\begin{definitionbox}{Continuidade e Prolongamento}
   Seja $f : D \subseteq \R^n \to \R^p$ uma função e $a \in D$.
   \begin{itemize}
     \item \textbf{Continuidade em um Ponto:} $f$ é contínua em $a$ se $\lim_{x\to a} f(x) = f(a)$.
@@ -1385,7 +1389,7 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   \end{itemize}
 \end{definitionbox}
 
-\begin{theorembox}{Álgebra e Composição de Contínuas}
+\noindent\begin{theorembox}{Álgebra e Composição de Contínuas}
   \begin{itemize}
     \item \textbf{Operações:} Se $f, g$ contínuas em $a \implies f \pm g, f \cdot g, f/g$ (se $g(a) \neq 0$) são contínuas em $a$.
     \item \textbf{Composição:} $g$ contínua em $a$ e $f$ contínua em $g(a) \implies f \circ g$ é contínua em $a$.
@@ -1393,7 +1397,7 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   \end{itemize}
 \end{theorembox}
 
-\begin{theorembox}{Teoremas Fundamentais das Funções Contínuas}
+\noindent\begin{theorembox}{Teoremas Fundamentais das Funções Contínuas}
   \begin{itemize}
     \item \textbf{Preservação da Compacidade:} $K$ compacto e $f$ contínua $\implies f(K)$ compacto.
     \item \textbf{Teorema de Weierstrass (Extremos Absolutos):} $K$ compacto e $f$ contínua $\implies \exists x_1, x_2 \in K$ tais que $f(x_1) \leq f(x) \leq f(x_2), \ \forall x \in K$.
