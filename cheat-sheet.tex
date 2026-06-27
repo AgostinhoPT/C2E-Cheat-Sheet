@@ -2073,149 +2073,145 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
 
 Este guia condensa todas as técnicas, substituições, coordenadas especiais e fórmulas necessárias para resolver os exercícios típicos de cada um dos 9 capítulos de Cálculo II.
 
-\begin{multicols}{2}
-  \raggedcolumns
-  \scriptsize
-  \setlength{\columnsep}{10pt}
-  \setlength{\tabcolsep}{2pt}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
 
-  \begin{definitionbox}[breakable, left=3pt, right=3pt, top=3pt, bottom=3pt, boxrule=0.6pt, colframe=primaryColor]{Cap. 1: Equações Diferenciais Ordinárias (EDOs)}
-    \def\arraystretch{1.2}
-    \begin{tabular}{|p{1.4cm}|p{1.7cm}|p{3.9cm}|}
-      \hline
-      \textbf{Tipo EDO} & \textbf{Forma / Condição} & \textbf{Fórmula de Resolução} \\ \hline
-      Separável & $y' = g(x)h(y)$ & $\int \frac{dy}{h(y)} = \int g(x)\,dx + C$ \\ \hline
-      Linear & $y' + p(x)y = q(x)$ & $y = \frac{1}{\mu} \left[ \int \mu q\,dx + C \right]$, com $\mu = e^{\int p\,dx}$ \\ \hline
-      Bernoulli & $y' + p(x)y = q(x)y^n$ & $u = y^{1-n} \implies u' + (1-n)pu = (1-n)q$ \\ \hline
-      Homog. & $y' = f(y/x)$ & $v = y/x \implies \int \frac{dv}{f(v)-v} = \int \frac{dx}{x} + C$ \\ \hline
-      Exata & $M\,dx + N\,dy = 0$ com $M_y = N_x$ & $\Psi_x = M, \Psi_y = N \implies \Psi(x,y)=C$ \newline
-      $\Psi = \int M\,dx + g(y) \implies g' = N - \Psi_y^{int}$ \\ \hline
-      Fator Int. & $M_y \neq N_x$ & $\mu(x) = e^{\int \frac{M_y-N_x}{N}dx}$ ou $\mu(y) = e^{\int \frac{N_x-M_y}{M}dy}$ \\ \hline
-      Coefs. Constantes & $a y'' + b y' + c y = 0$ & Eq. Car.: $a r^2 + b r + c = 0$ \newline
-       * $r_1 \neq r_2 \in \R \implies y_h = c_1 e^{r_1 x} + c_2 e^{r_2 x}$ \newline
-       * $r_1 = r_2 = r \implies y_h = (c_1 + c_2 x) e^{r x}$ \newline
-       * $r = \alpha \pm i\beta \implies y_h = e^{\alpha x} (c_1\cos\beta x + c_2\sin\beta x)$ \\ \hline
-      Coefs. Indet. & $q(x) = P_m(x)e^{\alpha x}\cos\beta x$ & $y_p = x^s e^{\alpha x}[A_m\cos\beta x + B_m\sin\beta x]$, \newline
-       $s$ mult. de $\alpha+i\beta$ na eq. carac. \\ \hline
-      Var. Parâm. & $y_p = u_1 y_1 + u_2 y_2$ & $y_p = -y_1 \int \frac{y_2 q}{a W}\,dx + y_2 \int \frac{y_1 q}{a W}\,dx$ \newline
-       com $W = y_1 y_2' - y_2 y_1'$ \\ \hline
-    \end{tabular}
-  \end{definitionbox}
+\begin{definitionbox}[breakable, left=4pt, right=4pt, top=4pt, bottom=4pt, boxrule=0.6pt, colframe=primaryColor]{Cap. 1: Equações Diferenciais Ordinárias (EDOs)}
+  \def\arraystretch{1.2}
+  \begin{tabular}{|p{2.2cm}|p{4.2cm}|p{10.2cm}|}
+    \hline
+    \textbf{Tipo EDO} & \textbf{Forma / Condição} & \textbf{Fórmula de Resolução} \\ \hline
+    Separável & $y' = g(x)h(y)$ & $\int \frac{dy}{h(y)} = \int g(x)\,dx + C$ \\ \hline
+    Linear & $y' + p(x)y = q(x)$ & $y = \frac{1}{\mu} \left[ \int \mu q\,dx + C \right]$, com $\mu = e^{\int p\,dx}$ \\ \hline
+    Bernoulli & $y' + p(x)y = q(x)y^n$ & $u = y^{1-n} \implies u' + (1-n)pu = (1-n)q$ ($n \neq 0, 1$) \\ \hline
+    Homog. & $y' = f(y/x)$ & $v = y/x \implies \int \frac{dv}{f(v)-v} = \int \frac{dx}{x} + C$ \\ \hline
+    Exata & $M\,dx + N\,dy = 0$ com $M_y = N_x$ & $\Psi_x = M, \Psi_y = N \implies \Psi(x,y)=C$ \newline
+    $\Psi = \int M\,dx + g(y) \implies g' = N - \frac{\partial}{\partial y}\int M\,dx$ \\ \hline
+    Fator Int. & $M_y \neq N_x$ & $\mu(x) = e^{\int \frac{M_y-N_x}{N}dx}$ ou $\mu(y) = e^{\int \frac{N_x-M_y}{M}dy}$ \\ \hline
+    Coefs. Constantes & $a y'' + b y' + c y = 0$ & Eq. Car.: $a r^2 + b r + c = 0$ \newline
+     * $r_1 \neq r_2 \in \R \implies y_h = c_1 e^{r_1 x} + c_2 e^{r_2 x}$ \newline
+     * $r_1 = r_2 = r \implies y_h = (c_1 + c_2 x) e^{r x}$ \newline
+     * $r = \alpha \pm i\beta \implies y_h = e^{\alpha x} (c_1\cos\beta x + c_2\sin\beta x)$ \\ \hline
+    Coefs. Indet. & $q(x) = P_m(x)e^{\alpha x}\cos\beta x$ & $y_p = x^s e^{\alpha x}[A_m\cos\beta x + B_m\sin\beta x]$, \newline
+     $s$ mult. de $\alpha+i\beta$ na eq. carac. \\ \hline
+    Var. Parâm. & $y_p = u_1 y_1 + u_2 y_2$ & $y_p = -y_1 \int \frac{y_2 q}{a W}\,dx + y_2 \int \frac{y_1 q}{a W}\,dx$ com $W = y_1 y_2' - y_2 y_1'$ \\ \hline
+  \end{tabular}
+\end{definitionbox}
 
-  \begin{definitionbox}[breakable, left=3pt, right=3pt, top=3pt, bottom=3pt, boxrule=0.6pt, colframe=secondaryColor]{Cap. 2: Cónicas e Quádricas}
-    \def\arraystretch{1.2}
-    \begin{tabular}{|p{1.4cm}|p{1.7cm}|p{3.9cm}|}
-      \hline
-      \textbf{Superf.} & \textbf{Eq. Canónica} & \textbf{Detalhes Chave / Focos} \\ \hline
-      Elipse & $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ & Focos: $c = \sqrt{|a^2-b^2|}$, exc.: $e = c/\text{semieixo maior}$ \\ \hline
-      Hipérbole & $\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1$ & Focos: $c = \sqrt{a^2+b^2}$, assín.: $y = \pm \frac{b}{a} x$ \\ \hline
-      Parábola & $y^2 = 2px$ ou $x^2 = 2py$ & Foco: $(p/2,0)$, diretriz: $x = -p/2$ \\ \hline
-      Elipsoide & $\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1$ & Esfera se $a=b=c=R$: $(x-x_0)^2+(y-y_0)^2+(z-z_0)^2=R^2$ \\ \hline
-      Hiperb. 1F & $\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = 1$ & Eixo de simetria $Oz$ (sinal menos) \\ \hline
-      Hiperb. 2F & $-\frac{x^2}{a^2} - \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1$ & Eixo de simetria $Oz$ (sinal mais único) \\ \hline
-      Parabol. & $z = \frac{x^2}{a^2} \pm \frac{y^2}{b^2}$ & $+$: Elítico (taça), $-$: Hiperbólico (sela) \\ \hline
-      Cone & $\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = 0$ & Eixo $Oz$, vértice na origem \\ \hline
-      Cilindros & $\frac{x^2}{a^2} \pm \frac{y^2}{b^2} = 1$; $y = a x^2$ & Sem termo em $z \implies$ geratriz paralela a $Oz$ \\ \hline
-      Rotação & $Ax^2 + Bxy + Cy^2 = D$ & $M = \begin{bmatrix} A & B/2 \\ B/2 & C \end{bmatrix} \implies \lambda_1 X'^2 + \lambda_2 Y'^2 = D$ \\ \hline
-    \end{tabular}
-  \end{definitionbox}
+\begin{definitionbox}[breakable, left=4pt, right=4pt, top=4pt, bottom=4pt, boxrule=0.6pt, colframe=secondaryColor]{Cap. 2: Cónicas e Quádricas}
+  \def\arraystretch{1.2}
+  \begin{tabular}{|p{2.2cm}|p{4.2cm}|p{10.2cm}|}
+    \hline
+    \textbf{Superfície} & \textbf{Eq. Canónica} & \textbf{Detalhes Chave / Focos} \\ \hline
+    Elipse & $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ & Focos: $c = \sqrt{|a^2-b^2|}$, exc.: $e = c/\text{semieixo maior}$ \\ \hline
+    Hipérbole & $\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1$ & Focos: $c = \sqrt{a^2+b^2}$, assín.: $y = \pm \frac{b}{a} x$ \\ \hline
+    Parábola & $y^2 = 2px$ ou $x^2 = 2py$ & Foco: $(p/2,0)$, diretriz: $x = -p/2$ \\ \hline
+    Elipsoide & $\frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1$ & Esfera se $a=b=c=R$: $(x-x_0)^2+(y-y_0)^2+(z-z_0)^2=R^2$ \\ \hline
+    Hiperb. 1F & $\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = 1$ & Eixo de simetria $Oz$ (sinal menos) \\ \hline
+    Hiperb. 2F & $-\frac{x^2}{a^2} - \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1$ & Eixo de simetria $Oz$ (sinal mais único) \\ \hline
+    Parabol. & $z = \frac{x^2}{a^2} \pm \frac{y^2}{b^2}$ & $+$: Elítico (taça), $-$: Hiperbólico (sela) \\ \hline
+    Cone & $\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = 0$ & Eixo $Oz$, vértice na origem \\ \hline
+    Cilindros & $\frac{x^2}{a^2} \pm \frac{y^2}{b^2} = 1$; $y = a x^2$ & Sem termo em $z \implies$ geratriz paralela a $Oz$ \\ \hline
+    Rotação & $Ax^2 + Bxy + Cy^2 = D$ & $M = \begin{bmatrix} A & B/2 \\ B/2 & C \end{bmatrix} \implies \lambda_1 X'^2 + \lambda_2 Y'^2 = D$ (eigs $\lambda_i$) \\ \hline
+  \end{tabular}
+\end{definitionbox}
 
-  \begin{definitionbox}[breakable, left=3pt, right=3pt, top=3pt, bottom=3pt, boxrule=0.6pt, colframe=accentColor]{Cap. 3: Curvas e Funções Vetoriais}
-    \def\arraystretch{1.2}
-    \begin{tabular}{|p{1.8cm}|p{5.2cm}|}
-      \hline
-      \textbf{Conceito} & \textbf{Fórmula / Definição Matemática} \\ \hline
-      Rapidez & $v(t) = \|\vec{r}'(t)\| = \sqrt{x'^2 + y'^2 + z'^2}$ \\ \hline
-      Tangente Unit. & $\vec{T}(t) = \vec{r}'(t) / v(t)$ \\ \hline
-      Normal Unit. & $\vec{N}(t) = \vec{T}'(t) / \|\vec{T}'(t)\|$ \\ \hline
-      Binormal Unit. & $\vec{B}(t) = \vec{T}(t) \times \vec{N}(t)$ \\ \hline
-      Curvatura ($\kappa$) & $\kappa(t) = \frac{\|\vec{r}' \times \vec{r}''\|}{v(t)^3}$ (ou $\frac{|x'y''-y'x''|}{(x'^2+y'^2)^{3/2}}$ em $\R^2$) \\ \hline
-      Torção ($\tau$) & $\tau(t) = \frac{(\vec{r}' \times \vec{r}'') \cdot \vec{r}'''}{\|\vec{r}' \times \vec{r}''\|^2}$ \\ \hline
-      Frenet-Serret & $\vec{T}' = v\kappa\vec{N}$, \ $\vec{B}' = -v\tau\vec{N}$, \ $\vec{N}' = -v\kappa\vec{T} + v\tau\vec{B}$ \\ \hline
-      Plano Osculador & Ortogonal a $\vec{B}(t_0) \implies \vec{B}(t_0) \cdot (X - \vec{r}(t_0)) = 0$ \\ \hline
-      Plano Normal & Ortogonal a $\vec{T}(t_0) \implies \vec{T}(t_0) \cdot (X - \vec{r}(t_0)) = 0$ \\ \hline
-      Plano Retificante & Ortogonal a $\vec{N}(t_0) \implies \vec{N}(t_0) \cdot (X - \vec{r}(t_0)) = 0$ \\ \hline
-      Compr. de Arco & $s = \int_a^b v(t)\,dt$ \\ \hline
-    \end{tabular}
-  \end{definitionbox}
+\begin{definitionbox}[breakable, left=4pt, right=4pt, top=4pt, bottom=4pt, boxrule=0.6pt, colframe=accentColor]{Cap. 3: Curvas e Funções Vetoriais}
+  \def\arraystretch{1.2}
+  \begin{tabular}{|p{2.5cm}|p{14.1cm}|}
+    \hline
+    \textbf{Conceito} & \textbf{Fórmula / Definição Matemática} \\ \hline
+    Rapidez & $v(t) = \|\vec{r}'(t)\| = \sqrt{x'^2 + y'^2 + z'^2}$ \\ \hline
+    Tangente Unit. & $\vec{T}(t) = \vec{r}'(t) / v(t)$ \\ \hline
+    Normal Unit. & $\vec{N}(t) = \vec{T}'(t) / \|\vec{T}'(t)\|$ \\ \hline
+    Binormal Unit. & $\vec{B}(t) = \vec{T}(t) \times \vec{N}(t)$ \\ \hline
+    Curvatura ($\kappa$) & $\kappa(t) = \frac{\|\vec{r}' \times \vec{r}''\|}{v(t)^3}$ (ou $\frac{|x'y''-y'x''|}{(x'^2+y'^2)^{3/2}}$ em $\R^2$) \\ \hline
+    Torção ($\tau$) & $\tau(t) = \frac{(\vec{r}' \times \vec{r}') \cdot \vec{r}'''}{\|\vec{r}' \times \vec{r}''\|^2}$ \\ \hline
+    Frenet-Serret & $\vec{T}' = v\kappa\vec{N}$, \ $\vec{B}' = -v\tau\vec{N}$, \ $\vec{N}' = -v\kappa\vec{T} + v\tau\vec{B}$ \\ \hline
+    Plano Osculador & Ortogonal a $\vec{B}(t_0) \implies \vec{B}(t_0) \cdot (X - \vec{r}(t_0)) = 0$ \\ \hline
+    Plano Normal & Ortogonal a $\vec{T}(t_0) \implies \vec{T}(t_0) \cdot (X - \vec{r}(t_0)) = 0$ \\ \hline
+    Plano Retificante & Ortogonal a $\vec{N}(t_0) \implies \vec{N}(t_0) \cdot (X - \vec{r}(t_0)) = 0$ \\ \hline
+    Compr. de Arco & $s = \int_a^b v(t)\,dt$ \\ \hline
+  \end{tabular}
+\end{definitionbox}
 
-  \begin{definitionbox}[breakable, left=3pt, right=3pt, top=3pt, bottom=3pt, boxrule=0.6pt, colframe=primaryColor]{Cap. 4 e 5: Limites e Cálculo Diferencial}
-    \def\arraystretch{1.2}
-    \begin{tabular}{|p{2.1cm}|p{4.9cm}|}
-      \hline
-      \textbf{Tópico} & \textbf{Fórmula / Regra de Resolução} \\ \hline
-      Limite Inexistente & Testar retas $y-b=m(x-a)$ ou parábolas $y-b=k(x-a)^2$. Se depender do declive, não existe. \\ \hline
-      Majorantes (Exist.) & $|f(x,y)-L| \le g(x,y) \to 0$. Desig. útil: $|xy| \le \frac{1}{2}(x^2+y^2)$ \\ \hline
-      Lim. em Polares & $x=r\cos\theta, y=r\sin\theta \implies \lim_{r\to0} f(r\cos\theta,r\sin\theta) = L$ (indep. de $\theta$) \\ \hline
-      Diferenciab. & $\lim_{h\to\vec{0}} \frac{f(a+h) - f(a) - \nabla f(a)^T h}{\|h\|} = 0$. (Nota: $f \in C^1 \implies$ dif.) \\ \hline
-      Derivada Direc. & Dif.: $D_{\vec{u}}f(a) = \nabla f(a) \cdot \vec{u}$ ($\|\vec{u}\|=1$). Não dif.: usar limite. \\ \hline
-      Plano Tangente & Ao gráfico $z = f(x,y)$: $z - z_0 = f_x(x_0,y_0)(x-x_0) + f_y(x_0,y_0)(y-y_0)$ \\ \hline
-      Reta Normal & $X(t) = (x_0, y_0, z_0) + t(f_x(x_0,y_0), f_y(x_0,y_0), -1)$ \\ \hline
-      Máx. Crescimento & Direção de $\nabla f(a)$ com taxa máxima igual a $\|\nabla f(a)\|$ \\ \hline
-      Regra da Cadeia & $\text{Jac}(f \circ g)(x) = \text{Jac}\,f(g(x)) \cdot \text{Jac}\,g(x)$ \\ \hline
-    \end{tabular}
-  \end{definitionbox}
+\begin{definitionbox}[breakable, left=4pt, right=4pt, top=4pt, bottom=4pt, boxrule=0.6pt, colframe=primaryColor]{Cap. 4 e 5: Limites e Cálculo Diferencial}
+  \def\arraystretch{1.2}
+  \begin{tabular}{|p{2.5cm}|p{14.1cm}|}
+    \hline
+    \textbf{Tópico} & \textbf{Fórmula / Regra de Resolução} \\ \hline
+    Limite Inexistente & Testar retas $y-b=m(x-a)$ ou parábolas $y-b=k(x-a)^2$. Se depender do declive, não existe. \\ \hline
+    Majorantes (Exist.) & $|f(x,y)-L| \le g(x,y) \to 0$. Desigualdade útil: $|xy| \le \frac{1}{2}(x^2+y^2)$ e $|x| \le \sqrt{x^2+y^2}$ \\ \hline
+    Lim. em Polares & $x=r\cos\theta, y=r\sin\theta \implies \lim_{r\to0} f(r\cos\theta,r\sin\theta) = L$ (majorante $h(r) \to 0$ independente de $\theta$) \\ \hline
+    Diferenciabilidade & $\lim_{h\to\vec{0}} \frac{f(a+h) - f(a) - \nabla f(a)^T h}{\|h\|} = 0$. (Nota: $f \in C^1 \implies$ dif.) \\ \hline
+    Derivada Direc. & Diferenciável: $D_{\vec{u}}f(a) = \nabla f(a) \cdot \vec{u}$ ($\|\vec{u}\|=1$). Não dif.: usar limite por definição. \\ \hline
+    Plano Tangente & Ao gráfico $z = f(x,y)$: $z - f(x_0,y_0) = f_x(x_0,y_0)(x-x_0) + f_y(x_0,y_0)(y-y_0)$ \\ \hline
+    Reta Normal & $X(t) = (x_0, y_0, f(x_0,y_0)) + t(f_x(x_0,y_0), f_y(x_0,y_0), -1)$ \\ \hline
+    Máx. Crescimento & Direção de $\nabla f(a)$ com taxa máxima igual a $\|\nabla f(a)\|$ \\ \hline
+    Regra da Cadeia & $\text{Jac}(f \circ g)(x) = \text{Jac}\,f(g(x)) \cdot \text{Jac}\,g(x)$ \\ \hline
+  \end{tabular}
+\end{definitionbox}
 
-  \begin{definitionbox}[breakable, left=3pt, right=3pt, top=3pt, bottom=3pt, boxrule=0.6pt, colframe=accentColor]{Cap. 6: Extremos Livres e Condicionados}
-    \def\arraystretch{1.2}
-    \begin{tabular}{|p{1.6cm}|p{1.8cm}|p{3.6cm}|}
-      \hline
-      \textbf{Conceito} & \textbf{Condição / Teste} & \textbf{Classificação / Resolução} \\ \hline
-      Ponto Crítico & $\nabla f(a) = \vec{0}$ & Candidato a extremo local \\ \hline
-      Hessiana em $\R^2$ & $|H| = f_{xx}f_{yy} - f_{xy}^2$ & * $|H| < 0 \implies$ Ponto de Sela \newline
-      * $|H| > 0, f_{xx} > 0 \implies$ Mínimo Local \newline
-      * $|H| > 0, f_{xx} < 0 \implies$ Máximo Local \newline
-      * $|H| = 0 \implies$ Inconclusivo \\ \hline
-      Hessiana em $\R^n$ & Menores principais $D_i$ & * $D_i > 0 \ \forall i \implies$ Mínimo Local \newline
-      * $D_1 < 0, D_2 > 0, D_3 < 0 \dots \implies$ Máximo \newline
-      * $\det H \neq 0$ e não cumpre os acima $\implies$ Sela \newline
-      * $\det H = 0 \implies$ Inconclusivo \\ \hline
-      Lagrange (Restr.) & $\nabla f = \lambda \nabla c$ com $c(x)=0$ & Para $k$ restrições: $\nabla f = \sum_{i=1}^k \lambda_i \nabla c_i$ \\ \hline
-      Weierstrass (Comp.) & $K$ fechado e limitado & Extremos absolutos: comparar interior ($\nabla f = 0$) e fronteira (Lagrange) \\ \hline
-    \end{tabular}
-  \end{definitionbox}
+\begin{definitionbox}[breakable, left=4pt, right=4pt, top=4pt, bottom=4pt, boxrule=0.6pt, colframe=accentColor]{Cap. 6: Extremos Livres e Condicionados}
+  \def\arraystretch{1.2}
+  \begin{tabular}{|p{2.2cm}|p{4.2cm}|p{10.2cm}|}
+    \hline
+    \textbf{Conceito} & \textbf{Condição / Teste} & \textbf{Classificação / Resolução} \\ \hline
+    Ponto Crítico & $\nabla f(a) = \vec{0}$ & Candidato a extremo local \\ \hline
+    Hessiana em $\R^2$ & $|H| = f_{xx}f_{yy} - f_{xy}^2$ & * $|H| < 0 \implies$ Ponto de Sela \newline
+    * $|H| > 0, f_{xx} > 0 \implies$ Mínimo Local \newline
+    * $|H| > 0, f_{xx} < 0 \implies$ Máximo Local \newline
+    * $|H| = 0 \implies$ Inconclusivo \\ \hline
+    Hessiana em $\R^n$ & Menores principais $D_i$ & * $D_i > 0 \ \forall i \implies$ Mínimo Local \newline
+    * $D_1 < 0, D_2 > 0, D_3 < 0 \dots \implies$ Máximo Local \newline
+    * $\det H \neq 0$ e não cumpre os acima $\implies$ Ponto de Sela \newline
+    * $\det H = 0 \implies$ Inconclusivo (Hessiana semidefinida) \\ \hline
+    Lagrange (Restr.) & $\nabla f = \lambda \nabla c$ com $c(x)=0$ & Para $k$ restrições: $\nabla f = \sum_{i=1}^k \lambda_i \nabla c_i$ e $c_i(x)=0$ \\ \hline
+    Weierstrass (Comp.) & $K$ fechado e limitado & Extremos absolutos: comparar interior ($\nabla f = 0$) e fronteira (Lagrange) \\ \hline
+  \end{tabular}
+\end{definitionbox}
 
-  \begin{definitionbox}[breakable, left=3pt, right=3pt, top=3pt, bottom=3pt, boxrule=0.6pt, colframe=primaryColor]{Cap. 7: Funções Implícitas e Inversas}
-    \def\arraystretch{1.2}
-    \begin{tabular}{|p{1.6cm}|p{1.8cm}|p{3.6cm}|}
-      \hline
-      \textbf{Caso} & \textbf{Condição} & \textbf{Fórmula / Plano Tangente} \\ \hline
-      Função Inversa & $\det \text{Jac}\,f(a) \neq 0$ & Localmente invertível. \newline
-      $\text{Jac}(f^{-1})(f(a)) = [\text{Jac}\,f(a)]^{-1}$ \\ \hline
-      Implícita $F(x,y)=0$ & $F(a,b)=0, F_y(a,b)\neq0$ & $y = \phi(x) \implies \phi'(x) = -F_x / F_y$. \newline
-      Reta tg: $F_x(a,b)(x-a) + F_y(a,b)(y-b) = 0$ \\ \hline
-      Implícita $F(x,y,z)=0$ & $F(a,b,c)=0, F_z\neq0$ & $z = \phi(x,y) \implies z_x = -F_x/F_z$, $z_y = -F_y/F_z$. \newline
-      Plano tg: $\nabla F(a,b,c) \cdot (x-a, y-b, z-c) = 0$ \\ \hline
-      Sistemas & $\det \text{Jac}_y F \neq 0$ & $\text{Jac}_x y = - [\text{Jac}_y F]^{-1} \cdot \text{Jac}_x F$ \\ \hline
-    \end{tabular}
-  \end{definitionbox}
+\begin{definitionbox}[breakable, left=4pt, right=4pt, top=4pt, bottom=4pt, boxrule=0.6pt, colframe=primaryColor]{Cap. 7: Funções Implícitas e Inversas}
+  \def\arraystretch{1.2}
+  \begin{tabular}{|p{2.2cm}|p{4.2cm}|p{10.2cm}|}
+    \hline
+    \textbf{Caso} & \textbf{Condição} & \textbf{Fórmula / Plano Tangente} \\ \hline
+    Função Inversa & $\det \text{Jac}\,f(a) \neq 0$ & Localmente invertível. $\text{Jac}(f^{-1})(f(a)) = [\text{Jac}\,f(a)]^{-1}$ \\ \hline
+    Implícita $F(x,y)=0$ & $F(a,b)=0, F_y(a,b)\neq0$ & $y = \phi(x) \implies \phi'(x) = -F_x / F_y$. \newline
+    Reta tangente: $F_x(a,b)(x-a) + F_y(a,b)(y-b) = 0$ \\ \hline
+    Implícita $F(x,y,z)=0$ & $F(a,b,c)=0, F_z(a,b,c)\neq0$ & $z = \phi(x,y) \implies z_x = -F_x/F_z$, $z_y = -F_y/F_z$. \newline
+    Plano tangente: $\nabla F(a,b,c) \cdot (x-a, y-b, z-c) = 0$ \\ \hline
+    Sistemas & $\det \text{Jac}_y F \neq 0$ & $\text{Jac}_x y = - [\text{Jac}_y F]^{-1} \cdot \text{Jac}_x F$ \\ \hline
+  \end{tabular}
+\end{definitionbox}
 
-  \begin{definitionbox}[breakable, left=3pt, right=3pt, top=3pt, bottom=3pt, boxrule=0.6pt, colframe=secondaryColor]{Cap. 8 e 9: Integrais, Coordenadas e Aplicações}
-    \def\arraystretch{1.2}
-    \textbf{Mudanças de Coordenadas:} \par
-    \begin{tabular}{|p{1.6cm}|p{1.9cm}|p{3.5cm}|}
-      \hline
-      \textbf{Sistema} & \textbf{Substituição Canónica} & \textbf{Jacobiano ($|J|$) / Vol.} \\ \hline
-      Polares Descent. & $x = x_0 + r\cos\theta$, $y = y_0 + r\sin\theta$ & $|J| = r \implies dA = r \, dr d\theta$ \\ \hline
-      Cilind. & $x = r\cos\theta$, $y = r\sin\theta$, $z = z$ & $|J| = r \implies dV = r \, dz dr d\theta$ \\ \hline
-      Esfer. Descent. & $x = x_0 + \rho\sin\phi\cos\theta$, $y = y_0 + \rho\sin\phi\sin\theta$, $z = z_0 + \rho\cos\phi$ & $|J| = \rho^2\sin\phi \implies dV = \rho^2\sin\phi \, d\rho d\phi d\theta$ \\ \hline
-      Elips. & $x = x_0 + a\rho\sin\phi\cos\theta$, $y = y_0 + b\rho\sin\phi\sin\theta$, $z = z_0 + c\rho\cos\phi$ & $|J| = abc\,\rho^2\sin\phi \implies dV = abc\,\rho^2\sin\phi \, d\rho d\phi d\theta$ \\ \hline
-      Mudança Geral & $x=x(u,v), y=y(u,v)$ & $|J| = \left| \pdv{(x,y)}{(u,v)} \right| \implies dA = |J| du dv$ \\ \hline
-    \end{tabular}
+\begin{definitionbox}[breakable, left=4pt, right=4pt, top=4pt, bottom=4pt, boxrule=0.6pt, colframe=secondaryColor]{Cap. 8 e 9: Integrais, Coordenadas e Aplicações}
+  \def\arraystretch{1.2}
+  \textbf{Mudanças de Coordenadas:} \par
+  \vspace{2pt}
+  \begin{tabular}{|p{2.3cm}|p{5.1cm}|p{9.2cm}|}
+    \hline
+    \textbf{Sistema} & \textbf{Substituição Canónica} & \textbf{Jacobiano ($|J|$) / Vol.} \\ \hline
+    Polares Descent. & $x = x_0 + r\cos\theta$, $y = y_0 + r\sin\theta$ & $|J| = r \implies dA = r \, dr d\theta$ \\ \hline
+    Cilíndricas & $x = r\cos\theta$, $y = r\sin\theta$, $z = z$ & $|J| = r \implies dV = r \, dz dr d\theta$ \\ \hline
+    Esféricas Descent. & $x = x_0 + \rho\sin\phi\cos\theta, y = y_0 + \rho\sin\phi\sin\theta, z = z_0 + \rho\cos\phi$ & $|J| = \rho^2\sin\phi \implies dV = \rho^2\sin\phi \, d\rho d\phi d\theta$ \\ \hline
+    Elipsoidais & $x = x_0 + a\rho\sin\phi\cos\theta, y = y_0 + b\rho\sin\phi\sin\theta, z = z_0 + c\rho\cos\phi$ & $|J| = abc\,\rho^2\sin\phi \implies dV = abc\,\rho^2\sin\phi \, d\rho d\phi d\theta$ \\ \hline
+    Mudança Geral & $x=x(u,v), y=y(u,v)$ & $|J| = \left| \pdv{(x,y)}{(u,v)} \right| \implies dA = |J| du dv$ \\ \hline
+  \end{tabular}
 
-    \vspace{4pt}
-    \textbf{Aplicações Geométricas e Físicas ($d(X)$ é densidade):} \par
-    \begin{tabular}{|p{1.8cm}|p{5.2cm}|}
-      \hline
-      \textbf{Medida} & \textbf{Fórmula do Cálculo} \\ \hline
-      Área / Volume & $A = \iint_D 1\,dA$ \ \  / \ \  $V = \iiint_S 1\,dV$ \\ \hline
-      Massa & $M = \iint_D d(x,y)\,dA$ \ \  / \ \  $M = \iiint_S d(x,y,z)\,dV$ \\ \hline
-      Centro de Massa & $\bar{x} = \frac{1}{M}\iint_D x d\,dA$, \ $\bar{y} = \frac{1}{M}\iint_D y d\,dA$ \newline
-      $\bar{z} = \frac{1}{M}\iiint_S z d\,dV$ (e análogos para $\bar{x}, \bar{y}$) \\ \hline
-      Inércia (eixo $Oz$) & $I_z = \iint_D (x^2+y^2)d\,dA$ \ \  / \ \  $I_z = \iiint_S (x^2+y^2)d\,dV$ \\ \hline
-    \end{tabular}
-  \end{definitionbox}
+  \newpage
 
-\end{multicols}
+  \vspace{6pt}
+  \textbf{Aplicações Geométricas e Físicas ($d(X)$ é a densidade do corpo):} \par
+  \vspace{2pt}
+  \begin{tabular}{|p{2.5cm}|p{14.1cm}|}
+    \hline
+    \textbf{Medida} & \textbf{Fórmula do Cálculo} \\ \hline
+    Área / Volume & $A = \iint_D 1\,dA$ \ \  / \ \  $V = \iiint_S 1\,dV$ \\ \hline
+    Massa & $M = \iint_D d(x,y)\,dA$ \ \  / \ \  $M = \iiint_S d(x,y,z)\,dV$ \\ \hline
+    Centro de Massa & $\bar{x} = \frac{1}{M}\iint_D x d\,dA$, \ $\bar{y} = \frac{1}{M}\iint_D y d\,dA$ \  / \  $\bar{z} = \frac{1}{M}\iiint_S z d\,dV$ (e análogos para $\bar{x}, \bar{y}$) \\ \hline
+    Inércia (eixo $Oz$) & $I_z = \iint_D (x^2+y^2)d(x,y)\,dA$ \ \  / \ \  $I_z = \iiint_S (x^2+y^2)d(x,y,z)\,dV$ \\ \hline
+  \end{tabular}
+\end{definitionbox}
 
 \end{document}
