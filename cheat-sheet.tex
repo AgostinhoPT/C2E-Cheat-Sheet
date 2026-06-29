@@ -1544,12 +1544,27 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   \end{itemize}
 \end{definitionbox}
 
-\noindent\begin{theorembox}{Teorema de Taylor em Várias Variáveis}
-  Seja $A \subseteq \R^n$ aberto, $f \in C^m(A)$ e $a \in A$. O desenvolvimento de Taylor de ordem $m$ de $f$ em torno de $a$ é:
-  \[ f(a+h) = \sum_{0 \leq i_1 + \dots + i_n \leq m} \frac{D_1^{i_1} \dots D_n^{i_n} f(a)}{i_1! \dots i_n!} h_1^{i_1} \dots h_n^{i_n} + \|h\|^m \epsilon(h) \]
-  com $\lim_{h\to\vec{0}} \epsilon(h) = 0$. Em forma compacta vetorial (ordem $m=2$):
-  \[ f(a+h) = f(a) + \nabla f(a)^T h + \frac{1}{2} h^T \text{Hess}\,f(a) h + \|h\|^2 \epsilon(h) \]
-  Se $a$ é estacionário ($\nabla f(a)=\vec{0}$), a diferença é aproximada por $f(a+h) - f(a) \approx \frac{1}{2} h^T \text{Hess}\,f(a) h$.
+\noindent\begin{theorembox}{Teorema de Taylor -- funções de uma variável}
+  Seja $A$ um intervalo aberto, $f \in \mathcal{C}^m(A)$ e $a \in A$. Então:
+  \[ f(a+h) = f(a) + hf'(a) + \frac{h^2}{2!}f''(a) + \dots + \frac{h^m}{m!}f^{(m)}(a) + h^m\epsilon(h), \]
+  com $\lim_{h\to0} \epsilon(h) = 0$.
+\end{theorembox}
+
+\noindent\begin{theorembox}{Fórmula de Taylor em $\R^2$ (Ordem 2)}
+  Seja $f$ uma função de classe $C^2$ numa vizinhança de $(x_0, y_0)$. A aproximação de Taylor de ordem 2 é dada por:
+  \[ f(x, y) = P_2(x, y) + E_2(x, y) \]
+  onde o \textbf{Polinómio de Taylor de Ordem 2} é:
+  \[ \begin{aligned}
+    P_2(x, y) = {} & f(x_0, y_0) + \left[ f_x(x_0,y_0)(x-x_0) + f_y(x_0,y_0)(y-y_0) \right] \\
+    & + \frac{1}{2} \left[ f_{xx}(x_0,y_0)(x-x_0)^2 + 2f_{xy}(x_0,y_0)(x-x_0)(y-y_0) + f_{yy}(x_0,y_0)(y-y_0)^2 \right]
+  \end{aligned} \]
+  e o erro $E_2(x, y)$ satisfaz $\lim_{(x,y) \to (x_0,y_0)} \frac{E_2(x,y)}{(x-x_0)^2 + (y-y_0)^2} = 0$.
+  
+  \vspace{3pt}
+  \textbf{Forma Vetorial Compacta (em $\R^n$, Ordem 2):} Com $h = x - a$,
+  \[ f(a+h) = f(a) + \nabla f(a)^T h + \frac{1}{2} h^T \text{Hess}\,f(a) h + \|h\|^2\epsilon(h) \]
+  Se $a$ é ponto crítico ($\nabla f(a) = \vec{0}$), a diferença é aproximada pela forma quadrática:
+  \[ f(a+h) - f(a) \approx \frac{1}{2} h^T \text{Hess}\,f(a) h \]
 \end{theorembox}
 
 \noindent\begin{formulabox}{Classificação de Pontos Críticos em $\R^2$}
@@ -1575,7 +1590,7 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
 
 \subsection{Extremos Condicionados (Multiplicadores de Lagrange)}
 
-\noindent\begin{minipage}[t]{0.65\textwidth}
+\noindent\begin{minipage}[t]{\textwidth}
   \begin{definitionbox}{Geometria dos Extremos Condicionados}
     Ao percorrer a restrição $c(x, y) = 0$, o valor de $f(x, y)$ varia a menos que a curva de restrição intersete tangencialmente uma das curvas de nível de $f$.
     \begin{itemize}
@@ -1591,44 +1606,15 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
     \[ \begin{cases} \nabla f(a) = \lambda \nabla c(a) \\ c(a) = 0 \end{cases} \]
     \textbf{Função Lagrangeana:} As soluções do sistema são pontos críticos de:
     \[ \mathcal{L}(x, \lambda) = f(x) - \lambda c(x), \quad \lambda \in \R \]
+
+    \vspace{1cm}
+
+
+    *Se alguém está a ler isto, foi mais ou menos nesta secção que comecei a repensar a minha escolha de curso.
+    Pelo menos se passares a isto já despachaste a pior cadeira da licenciatura. \\
+    Como és informático e não vais á rua, usa este momento para reconectar com a natureza: \\ \url{https://www.youtube.com/watch?v=CNNBZx5I4oo}
   \end{theorembox}
 \end{minipage}%
-\hfill
-\begin{minipage}[t]{0.33\textwidth}
-  \centering
-  \vspace{8pt}
-  \begin{tikzpicture}[scale=1.0]
-    % Draw level curves of f (concentric arcs or circles)
-    \draw[gray, thick, domain=0:90] plot ({1.1*cos(\x)}, {1.1*sin(\x)});
-    \node[gray, right] at (1.1, 0.1) {\tiny $f=c_1$};
-    
-    \draw[gray, thick, domain=0:90] plot ({1.7*cos(\x)}, {1.7*sin(\x)});
-    \node[gray, right] at (1.7, 0.1) {\tiny $f=c_2$};
-    
-    \draw[gray, thick, domain=0:90] plot ({2.3*cos(\x)}, {2.3*sin(\x)});
-    \node[gray, right] at (2.3, 0.1) {\tiny $f=c_3$};
-    
-    % Draw constraint g(x,y) = 0 (say, y = -1.19*x + 2.7)
-    \draw[thick, secondaryColor, domain=0.3:2.1] plot (\x, {-1.19*\x + 2.7}) node[right] {\tiny $c(x,y)=0$};
-    
-    % Point of tangency
-    \coordinate (P) at (1.33, 1.12);
-    \fill[accentColor] (P) circle (1.8pt) node[below left, black] {\tiny $a$};
-    
-    % Gradient of f
-    \draw[-stealth, thick, primaryColor] (P) -- ++(0.55, 0.46) node[above right] {\tiny $\nabla f(a)$};
-    
-    % Gradient of c
-    \draw[-stealth, thick, accentColor] (P) -- ++(-0.42, -0.35) node[below left] {\tiny $\nabla c(a)$};
-    
-    \node[draw, fill=white, font=\tiny, align=center] at (1.2, 2.1) {Tangência: \\ $\nabla f = \lambda \nabla c$};
-  \end{tikzpicture}
-  \vspace{4pt}
-  \begin{center}
-    \small \textbf{Multiplicadores:} A restrição é tangente à curva de nível no extremo.
-  \end{center}
-\end{minipage}
-
 \newpage
 
 % ==========================================
@@ -1724,13 +1710,13 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
 
 \subsection{Teoremas de Integrabilidade e Teorema de Fubini}
 
-\begin{theorembox}{Existência do Integral}
+\noindent\begin{theorembox}{Existência do Integral}
   Se $f : D \subseteq \R^2 \to \R$ é contínua num conjunto contendo o retângulo $R$, então $f$ é integrável em $R$.
   
   \textit{Nota:} Esta propriedade mantém-se mesmo que a continuidade falhe, desde que o conjunto de descontinuidades tenha \textbf{medida nula}.
 \end{theorembox}
 
-\begin{theorembox}{Teorema de Fubini}
+\noindent\begin{theorembox}{Teorema de Fubini}
   Se $f : [a, b] \times [c, d] \to \R$ é contínua, então o integral duplo pode ser calculado por \textbf{integrais iterados}:
   \[ \iint_R f(x, y) \, dx \, dy = \int_c^d \int_a^b f(x, y) \, dx \, dy = \int_a^b \int_c^d f(x, y) \, dy \, dx \]
 \end{theorembox}
@@ -1883,7 +1869,7 @@ Uma \textbf{superfície quádrica} é definida analiticamente por uma equação 
   \end{tikzpicture}
 \end{minipage}
 
-\begin{theorembox}{Limites de Integração em Coordenadas Polares}
+\noindent\begin{theorembox}{Limites de Integração em Coordenadas Polares}
   Para passar de um integral duplo a dois integrais iterados em coordenadas polares:
   \begin{itemize}
     \item \textbf{Região $\theta$-simples (Simetria angular):} Se $R = \{(r, \theta) \in \R^+ \times [0, 2\pi[ \ : \ \alpha \le \theta \le \beta \land g_1(\theta) \le r \le g_2(\theta)\}$:
